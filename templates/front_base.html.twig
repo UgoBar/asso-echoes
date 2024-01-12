@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Echoes - {% block title %}{% endblock %}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400;500;700&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap" rel="stylesheet">
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/lib/burger.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/lib/player.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+            <style>
+                @font-face {
+                    font-family: 'icomoon';
+                    src:  url('{{ asset("fonts/icomoon.eot?v1uksa") }}');
+                    src:  url('{{ asset("fonts/icomoon.eot?v1uksa#iefix") }}') format('embedded-opentype'),
+                    url('{{ asset("fonts/icomoon.ttf?v1uksa") }}') format('truetype'),
+                    url('{{ asset("fonts/icomoon.woff?v1uksa") }}') format('woff'),
+                    url('{{ asset("fonts/icomoon.svg?v1uksa#icomoon") }}') format('svg');
+                    font-weight: normal;
+                    font-style: normal;
+                    font-display: block;
+                }
+
+                [class^="icon-"], [class*=" icon-"] {
+                    /* use !important to prevent issues with browser extensions that change fonts */
+                    font-family: 'icomoon' !important;
+                    speak: never;
+                    font-style: normal;
+                    font-weight: normal;
+                    font-variant: normal;
+                    text-transform: none;
+                    line-height: 1;
+
+                    /* Better Font Rendering =========== */
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                }
+                .icon-radio:before {
+                    content: "\e900";
+                }
+            </style>
+        {% endblock %}
+        <script src="https://kit.fontawesome.com/73ab01ebea.js" crossorigin="anonymous"></script>
+
+    </head>
+    <body>
+
+        <header>
+            <div id="echoes-logo">
+                <img src="{{ asset('img/logo-asso-echoes.png') }}" alt="Logo de Echoes">
+            </div>
+            <div class="toggle-menu">
+                <div id="burger" class="burger">
+                    <div class="burger-icon">
+                        <div class="burger-container">
+                            <span class="burger-bun-top"></span>
+                            <span class="burger-filling"></span>
+                            <span class="burger-bun-bot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-btn donate-wrapper" onmouseenter="fillHeart()" onmouseleave="unFillHeart()">
+                <i class="far fa-heart" aria-hidden="true"></i>
+                <span class="fw-bold josefin">Faire un don</span>
+            </div>
+            <div class="header-btn podcast-wrapper">
+                <i class="icon-radio" aria-hidden="true"></i>
+                <span class="fw-bold josefin">Les podcast</span>
+            </div>
+            <div class="header-player">
+                <div id="album-art">
+                    <img src="{{ asset('img/podcast/echoes-podcast-1.png') }}" class="active" id="_1">
+                    <img src="{{ asset('img/podcast/echoes-podcast-2.png') }}" id="_2">
+                    <img src="{{ asset('img/podcast/echoes-podcast-3.png') }}" id="_3">
+                    <div id="buffer-box">Buffering ...</div>
+                </div>
+                <div id="player-controls">
+                    <div class="controls">
+                        <div class="control">
+                            <div class="button" id="play-previous">
+                                <i class="fas fa-backward"></i>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <div class="button" id="play-pause-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <div class="button" id="play-next">
+                                <i class="fas fa-forward"></i>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <div class="button" id="volume">
+                                <i class="fas fa-volume-up"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="player-track">
+                    <div id="track-name"></div>
+                    <div id="album-name"></div>
+                    <div id="track-time">
+                        <div id="current-time"></div>
+                        <div id="track-length"></div>
+                    </div>
+                    <div id="s-area">
+                        <div id="ins-time"></div>
+                        <div id="s-hover"></div>
+                        <div id="seek-bar"></div>
+                    </div>
+                    <div id="volume-container">
+                        <div class="hidden-input">
+                            <input id="volume-input" type="range" min="0" max="100" value="100">
+                        </div>
+                        <div id="volume-range-icon">
+                            <div id="volume-off" class="active"><i class="fas fa-volume-off"></i></div>
+                            <div id="volume-on" class="active"><i class="fas fa-volume-up"></i></div>
+                        </div>
+                        <div id="fake-input-area">
+                            <div id="volume-area"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div id="menu" class="">
+            <div id="menu-top">
+                <nav>
+                    <div class="menu-list">
+                        <img src="{{ asset('img/logo-asso-echoes.png') }}" alt="Logo de Echoes">
+                    </div>
+                    <div class="menu-list-wrapper">
+                        <div class="menu-list">
+                            <span class="menu-title">Accueil</span>
+                            <div class="nav-links">
+                                <div class="go-back-mobile-nav">
+                                    <span><i class="fas fa-long-arrow-alt-left"></i> Retour</span>
+                                    <span class="ariane">Accueil</span>
+                                </div>
+                                <a href="#">Retour à la case départ</a>
+                            </div>
+                        </div>
+                        <div class="menu-list">
+                            <span class="menu-title">Echoes</span>
+                            <div class="nav-links">
+                                <div class="go-back-mobile-nav">
+                                    <span><i class="fas fa-long-arrow-alt-left"></i> Retour</span>
+                                    <span class="ariane">Echoes</span>
+                                </div>
+                                <a href="#">L'association</a>
+                                <a href="#">L’équipe</a>
+                                <a href="#">La radiobox</a>
+                            </div>
+                        </div>
+                        <div class="menu-list">
+                            <span class="menu-title">Les ateliers</span>
+                            <div class="nav-links">
+                                <div class="go-back-mobile-nav">
+                                    <span><i class="fas fa-long-arrow-alt-left"></i> Retour</span>
+                                    <span class="ariane">Les Ateliers</span>
+                                </div>
+                                <a href="#">La Boîte à souvenirs</a>
+                                <a href="#">Actualités</a>
+                                <a href="#">Galerie Photo</a>
+                            </div>
+                        </div>
+                        <div class="menu-list">
+                            <span class="menu-title">Espace Pro</span>
+                            <div class="nav-links">
+                                <div class="go-back-mobile-nav">
+                                    <span><i class="fas fa-long-arrow-alt-left"></i> Retour</span>
+                                    <span class="ariane">Espace Pro</span>
+                                </div>
+                                <a href="#">Revue de presse</a>
+                                <a href="#">Louer notre radiobox</a>
+                                <a href="#">Organiser un atelier</a>
+                                <a href="#">Nos partenaires</a>
+                            </div>
+                        </div>
+                        <div class="menu-list">
+                            <span class="menu-title">Contact</span>
+                            <div class="nav-links">
+                                <div class="go-back-mobile-nav">
+                                    <span><i class="fas fa-long-arrow-alt-left"></i> Retour</span>
+                                    <span class="ariane">Contact</span>
+                                </div>
+                                <a href="#">Envoyez nous un mail</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <aside>
+                    <button class="btn btn-rect btn-black"><i class="fas fa-hand-holding-heart"></i> Devenir adhérent</button>
+                    <button class="btn btn-rect btn-black"><i class="fas fa-podcast"></i> Inscription newsletter</button>
+                    <button class="btn btn-rect btn-black"><i class="fas fa-headphones"></i> Organiser un atelier</button>
+                    <button class="btn btn-rect btn-black"><i class="icon-radio" aria-hidden="true"></i> Louer notre radiobox</button>
+                </aside>
+            </div>
+        </div>
+
+        <div id="hello-asso-modal">
+            <div class="modal-content">
+                <span class="close-hello-asso-modal">&times;</span>
+                <iframe id="haWidget" allowtransparency="true" scrolling="auto" src="https://www.helloasso.com/associations/echoes/formulaires/1/widget" style="width: 100%; height: 750px; border: none;"></iframe>
+            </div>
+        </div>
+
+        <main>
+            <div class="overlay "></div>
+            <div class="mobile-header-btn">
+                <div class="header-btn donate-wrapper" onmouseenter="fillHeart()" onmouseleave="unFillHeart()">
+                    <i class="far fa-heart" aria-hidden="true"></i>
+                    <span class="fw-bold josefin">Faire un don</span>
+                </div>
+                <div class="header-btn podcast-wrapper">
+                    <i class="icon-radio" aria-hidden="true"></i>
+                    <span class="fw-bold josefin">Les podcast</span>
+                </div>
+            </div>
+            {% block main %}{% endblock %}
+        </main>
+
+        {% block javascripts %}
+            <script>
+                const albums = [
+                    "La boite à souvenir",
+                    "Rencontre avec l'Ephad Roger Duquesne",
+                    "Rencontre avec l'Ephad Roger Duquesne",
+                ];
+                const trackNames = [
+                    "Bienvenue à l'Ephad",
+                    "Le rêve de la sirène",
+                    "Les princes du rap",
+                ];
+                const albumArtworks = ["_1", "_2", "_3"];
+                const trackUrl = [
+                    "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/1.mp3",
+                    "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/2.mp3",
+                    "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/3.mp3",
+                ];
+            </script>
+            <script src="{{ asset('js/script.js') }}"></script>
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </body>
+</html>

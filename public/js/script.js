@@ -41,6 +41,39 @@ document.addEventListener("turbo:load", function () {
 
     let audio;
 
+    function revealElem(init, elem, forSvg) {
+
+        console.log(typeof init);
+
+        if (typeof init === "object") {
+            let windowHeight = window.innerHeight;
+            let elementTop = elem.getBoundingClientRect().top;
+            let elementVisible = 50;
+            if (elementTop < windowHeight - elementVisible) {
+                elem.classList.add(forSvg ? "animated" : "active");
+            } else {
+                elem.classList.remove(forSvg ? "animated" : "active");
+            }
+        }
+
+        if (init === true && window.innerHeight - elem.getBoundingClientRect().top > 150) {
+            elem.classList.add(forSvg ? "animated" : "active");
+        }
+    }
+
+    function reveal(init = false) {
+
+        // Animate svg
+        document.querySelectorAll('.animated-svg').forEach(svg => {
+            revealElem(init, svg, true)
+        });
+
+        // Animate .reveal-type
+        document.querySelectorAll(".reveal-type").forEach(reveal => {
+            revealElem(init, reveal, false)
+        });
+    }
+
     function playPause() {
         setTimeout(function () {
             if (audio.paused) {
@@ -150,27 +183,13 @@ document.addEventListener("turbo:load", function () {
         }
     }
 
-    function checkBuffering() {
-        // clearInterval(buffInterval);
-        // buffInterval = setInterval(function () {
-        //     if (nTime === 0 || bTime - nTime > 1000) albumArt.classList.add("buffering");
-        //     else albumArt.classList.remove("buffering");
-        //
-        //     bTime = new Date();
-        //     bTime = bTime.getTime();
-        // }, 100);
-    }
-
     function selectTrack(flag) {
         if (flag == 0 || flag == 1) ++currIndex;
         else --currIndex;
 
         if (currIndex > -1 && currIndex < albumArtworks.length) {
-            // if (flag == 0) i.className = "fa fa-play";
-            // else {
-                albumArt.classList.remove("buffering");
-                // i.className = "fa fa-pause";
-            // }
+
+            albumArt.classList.remove("buffering");
 
             seekBar.style.width = "0";
             trackTime.classList.remove("active");
@@ -188,10 +207,7 @@ document.addEventListener("turbo:load", function () {
             bTime = bTime.getTime();
 
             if (flag != 0) {
-                // audio.play();
-                // playerTrack.classList.add("active");
                 clearInterval(buffInterval);
-                checkBuffering();
             }
 
             albumName.textContent = currAlbum;
@@ -275,11 +291,11 @@ document.addEventListener("turbo:load", function () {
 
         audio.src = currAudio;
         playPause();
-
-        console.log(currTitle, currAlbum, currAudio, currentImg);
     }
 
-    function initPlayer() {
+    function initApp() {
+
+        reveal(true);
 
         audio = new Audio();
 
@@ -292,6 +308,8 @@ document.addEventListener("turbo:load", function () {
         sArea.addEventListener("mousemove", function (event) {
             showHover(event);
         });
+
+        window.addEventListener("scroll", reveal);
 
         sArea.addEventListener("mouseout", hideHover);
 
@@ -318,7 +336,7 @@ document.addEventListener("turbo:load", function () {
         volumeInput.value = audio.volume * 100;
     }
 
-    initPlayer();
+    initApp();
 
     //-- [BEGIN] BURGER MENU ANIMATION
     let trigger = document.querySelector('#burger'),
@@ -489,18 +507,8 @@ document.addEventListener('turbo:visit', function (event) {
         burgerTime();
     }
 });
-// fade out the old body
-document.addEventListener('turbo:visit', () => {
-    document.querySelector('.page-transition').classList.add('turbo-loading');
-});
+
 // when we are *about* to render, start us faded out
 document.addEventListener('turbo:before-render', (event) => {
     event.detail.newBody.classList.add('turbo-loading');
-});
-document.addEventListener('turbo:render', () => {
-    // after rendering, we first allow the .turbo-loaded to set the low opacity
-    // THEN, 500ms later, we remove the turbo-loaded class, which allows the fade in
-    setTimeout(() => {
-        document.querySelector('.page-transition').classList.remove('turbo-loading');
-    }, 500);
 });

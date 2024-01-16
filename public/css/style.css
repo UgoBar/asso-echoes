@@ -6,13 +6,16 @@
 }
 
 html, * {
-
+    scrollbar-width: thin;
 }
 
 body {
     font-family: 'Nunito', sans-serif;
     min-height: 100vh;
     position: relative;
+    background-image: url("../img/background.jpg");
+    background-repeat: repeat;
+    background-size: 500px 300px;
 }
 
 main {
@@ -24,11 +27,19 @@ a {
 }
 
 h1 {
-
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 40px;
+    text-transform: uppercase;
+    font-weight: 900;
 }
 
 img {
     max-width: 100%;
+}
+
+p {
+    font-size: 16px;
+    line-height: 26px;
 }
 
 a {
@@ -55,6 +66,9 @@ a:hover {
 .flex {
     display: flex;
 }
+.mt-0 {
+    margin-top: 0;
+}
 .d-none {
     display: none;
 }
@@ -63,6 +77,15 @@ a:hover {
 }
 .rotate-right {
     transform: rotate(-270deg);
+}
+.no-scroll {
+    overflow: hidden;
+}
+
+.container {
+    width: 1100px;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
 header {
@@ -74,8 +97,9 @@ header {
     top: 0;
     padding-left: 1em;
     border-bottom: 2px solid #d0d0d0;
-    z-index: 3;
+    z-index: 5;
     background-color: #fff;
+    transition: transform 0.3s ease-in-out;
 }
 
 header #echoes-logo {
@@ -131,8 +155,10 @@ header .toggle-menu {
     position: absolute;
     width: 100%;
     top: -300px;
-    z-index: 2;
+    z-index: 4;
     transition: .5s cubic-bezier(.74,.08,.51,.95);
+    overflow-y: auto;
+    max-height: calc(100vh - 87px);
 }
 #menu.active {
     top: 87px;
@@ -174,7 +200,7 @@ header .toggle-menu {
 }
 
 #menu-top nav a {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 #menu-top nav a:hover {
 
@@ -252,7 +278,7 @@ header .toggle-menu {
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
-    z-index: 1;
+    z-index: 2;
 }
 
 #hello-asso-modal {
@@ -305,16 +331,8 @@ header .toggle-menu {
 
 .mobile-header-btn {
     display: none;
+    transition: transform 0.3s ease-in-out;
 }
-
-/*@keyframes slideDownAndUp {*/
-/*    0%, 100% {*/
-/*        transform: translateY(0);*/
-/*    }*/
-/*    50% {*/
-/*        transform: translateY(20px); !* Ajuste cette valeur pour contrôler la distance du glissement *!*/
-/*    }*/
-/*}*/
 
 @keyframes slideDownAndUp {
     0%, 20%, 100% {
@@ -329,7 +347,73 @@ header .toggle-menu {
     display: none;
 }
 
+.hero-banner {
+    width: 100%;
+    height: 450px;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.hero-banner.got-title:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.hero-banner h1 {
+    position: relative;
+    z-index: 2;
+    color: white;
+    font-size: 60px;
+    mix-blend-mode: overlay;
+}
+
+.article-svg-animated {
+    display: flex;
+    justify-content: space-between;
+}
+.article-svg-animated > * {
+    width: 50%;
+}
+
+.article-svg-animated section {
+    padding-top: 2em;
+}
+
+article p {
+    text-align: justify;
+    font-size: 17px;
+}
+
+.page-transition {
+    transition: opacity 1000ms;
+}
+.page-transition.turbo-loading, .page-transition.turbo-loaded {
+    opacity: .2;
+}
+
+@media screen and (max-width: 1100px) {
+    .container {
+        width: 900px;
+    }
+}
+
 @media screen and (max-width: 900px) {
+
+    main {
+        padding-top: 125px;
+    }
+
+    @media screen and (max-width: 900px) {
+        .container {
+            width: 90%;
+        }
+    }
 
     header .donate-wrapper,
     header .podcast-wrapper {
@@ -338,6 +422,11 @@ header .toggle-menu {
 
     .mobile-header-btn {
         display: flex;
+        position: fixed;
+        top: 85px;
+        left: 0;
+        width: 100%;
+        z-index: 3;
     }
 
     .header-btn {
@@ -385,10 +474,22 @@ header .toggle-menu {
         width: 18%;
         padding: 0 5px;
     }
+
+    .hero-banner h1 {
+        mix-blend-mode: unset;
+        text-align: center;
+        font-size: 50px;
+    }
+    .article-svg-animated > * {
+        width: initial;
+    }
 }
 
 @media screen and (max-width: 600px) {
 
+    main {
+        padding-top: 135px;
+    }
     header {
         padding-left: 0;
     }
@@ -414,6 +515,9 @@ header .toggle-menu {
     }
     #menu-top nav > .menu-list:nth-of-type(1) img {
         width: 45%;
+    }
+    #menu-top nav > .menu-list:nth-of-type(1) a {
+        border-bottom: unset;
     }
     #menu-top nav .menu-list {
         padding: 5px 0;
@@ -505,7 +609,16 @@ header .toggle-menu {
     }
 
     #player-track.active {
-        top: 150px !important;
-        left: -8px;
+        top: 149px !important;
+        left: unset;
+        right: 9px;
+    }
+
+    .hero-banner {
+        height: 250px;
+    }
+    .article-svg-animated section {
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
     }
 }

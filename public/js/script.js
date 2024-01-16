@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("turbo:load", function () {
     let playerTrack = document.getElementById("player-track"),
         albumName = document.getElementById("album-name"),
         trackName = document.getElementById("track-name"),
@@ -226,6 +226,7 @@ document.addEventListener("DOMContentLoaded", function () {
             albumArt.classList.remove('bounce-animation');
         }
         isPlayerActive = !isPlayerActive;
+
         playerTrack.classList.toggle('active');
         albumArt.classList.toggle('active');
     }
@@ -250,11 +251,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Play one of the slider's podcast
     function playSliderPodcast() {
-        let currentInfoEl = cardInfosContainerEl.querySelector(".current--info");
-        let currTitle = currentInfoEl.querySelector('h1').innerText;
-        let currAlbum = currentInfoEl.querySelector('p').innerText;
-        let currAudio = currentInfoEl.querySelector('audio').src;
-        let currentImg = document.querySelector(".app__bg .current--image img").src;
+        let cardInfosContainerEl = document.querySelector(".info__wrapper"),
+            albumArts = document.querySelectorAll('#album-art img'),
+            currentInfoEl = cardInfosContainerEl.querySelector(".current--info"),
+            currTitle = currentInfoEl.querySelector('h1').innerText,
+            currAlbum = currentInfoEl.querySelector('p').innerText,
+            currAudio = currentInfoEl.querySelector('audio').src,
+            currentImg = document.querySelector(".app__bg .current--image img").src;
 
         // Update player album art
         albumArts.forEach(albumArt => {
@@ -271,7 +274,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('album-name').innerText = currAlbum;
 
         audio.src = currAudio;
-        playPause();r
+        playPause();
 
         console.log(currTitle, currAlbum, currAudio, currentImg);
     }
@@ -296,9 +299,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         audio.addEventListener("timeupdate", updateCurrTime);
 
-        albumArt.addEventListener('click', togglePlayerTrack)
+        albumArt.addEventListener('click', togglePlayerTrack);
 
-        document.querySelector('.app .play-icon').addEventListener('click', playSliderPodcast);
+        if (document.querySelector('.app .play-icon') !== null)
+            document.querySelector('.app .play-icon').addEventListener('click', playSliderPodcast);
 
         playPreviousTrackButton.addEventListener("click", function () {
             selectTrack(-1);
@@ -326,7 +330,7 @@ document.addEventListener("DOMContentLoaded", function () {
         burgerTime();
     });
 
-    function burgerTime() {
+    window.burgerTime = () => {
         menuOpen = !menuOpen;
         // Hide or show menu
         overlay.classList.toggle('active');
@@ -343,11 +347,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (menuOpen) {
+            // When open
             trigger.classList.remove('is-closed');
             trigger.classList.add('is-open');
+            document.body.classList.add("no-scroll");
+            menu.style.position = "fixed";
         } else {
+            // When close
             trigger.classList.remove('is-open');
             trigger.classList.add('is-closed');
+            document.body.classList.remove("no-scroll");
+
+            // 500ms match menu animation time in style.css under #menu : transition: .5s cubic-bezier(.74,.08,.51,.95);
+            setTimeout(() => {
+                menu.style.position = "absolute";
+            }, 500)
         }
     }
 
@@ -391,7 +405,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // [END] - Hello Asso Modal
 
     if (window.innerWidth > 900) {
-        togglePlayerTrack();
+        if (Turbo.navigator.currentVisit === undefined)
+            togglePlayerTrack();
     }
     // When Tablet
     if (window.innerWidth < 900) {
@@ -437,6 +452,55 @@ function unFillHeart() {
     heartIcons.forEach(heartIcon => {
         heartIcon.classList.replace('fas', 'far');
     });
-
 }
 //-- [END] HEART ICON HOVER
+
+let lastScrollTop = 0;
+window.addEventListener("scroll", function() {
+
+    if (document.getElementById('menu').classList.contains('active')) {
+        return;
+    }
+
+    let currentScrollTop = window.scrollY;
+
+    if (currentScrollTop > lastScrollTop) {
+        // Scrolling down, hide the header
+        document.querySelector("header").style.transform = "translateY(-100%)";
+        document.querySelector(".mobile-header-btn").style.transform = "translateY(-300%)";
+    } else {
+        // Scrolling up, show the header
+        document.querySelector("header").style.transform = "translateY(0)";
+        document.querySelector(".mobile-header-btn").style.transform = "translateY(0)";
+    }
+
+    lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+});
+
+// Trigger the exit animation before page change
+document.addEventListener('turbo:before-visit', function (event) {
+    if (document.getElementById('menu').classList.contains('active')) {
+        burgerTime();
+    }
+});
+// Trigger the entrance animation after page change
+document.addEventListener('turbo:visit', function (event) {
+    if (document.getElementById('menu').classList.contains('active')) {
+        burgerTime();
+    }
+});
+// fade out the old body
+document.addEventListener('turbo:visit', () => {
+    document.querySelector('.page-transition').classList.add('turbo-loading');
+});
+// when we are *about* to render, start us faded out
+document.addEventListener('turbo:before-render', (event) => {
+    event.detail.newBody.classList.add('turbo-loading');
+});
+document.addEventListener('turbo:render', () => {
+    // after rendering, we first allow the .turbo-loaded to set the low opacity
+    // THEN, 500ms later, we remove the turbo-loaded class, which allows the fade in
+    setTimeout(() => {
+        document.querySelector('.page-transition').classList.remove('turbo-loading');
+    }, 500);
+});

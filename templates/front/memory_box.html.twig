@@ -8,9 +8,9 @@
 
 {% block main %}
 
-    <turbo-frame id="content" data-controller="memory">
+    <navigate-js>
 
-        <div id="memory" class="reveal-type">
+        <div id="memory">
 
             <div class="hero-banner got-title" style="background-image: url('{{ asset('img/asso-echoes-photo-radiobox.jpg') }}')">
                 <img src="{{ asset('img/asso-echoes-photo-radiobox.jpg') }}" alt="Photo de la radiobox" class="d-none">
@@ -31,7 +31,21 @@
 
         </div>
 
-    </turbo-frame>
+        <script data-njs>
+
+            document.addEventListener('njs:animation-end', () => {
+                console.log('page memory loaded');
+
+                if (window.innerWidth < 900) {
+                    const svg = document.querySelector('.article-svg-animated svg');
+                    const firstParagraph = document.querySelector(".article-svg-animated section p:first-of-type");
+
+                    firstParagraph.after(svg);
+                }
+            });
+        </script>
+
+    </navigate-js>
 
 {% endblock %}
 

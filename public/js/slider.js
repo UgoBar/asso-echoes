@@ -1,4 +1,4 @@
-document.addEventListener('turbo:load', () => {
+document.addEventListener('DOMContentLoaded', () => {
     //console.clear();
 
     if (document.querySelector(".btn--left") !== null) {
@@ -8,6 +8,9 @@ document.addEventListener('turbo:load', () => {
 });
 
 function initSlider() {
+
+    console.log('init slider');
+
     const { gsap, imagesLoaded } = window;
 
     const buttons = {

@@ -48,33 +48,6 @@
             </style>
         {% endblock %}
 
-        {% block javascripts %}
-            <script>
-                const albums = [
-                    "La boite à souvenir",
-                    "Rencontre avec l'Ephad Roger Duquesne",
-                    "Rencontre avec l'Ephad Roger Duquesne",
-                ];
-                const trackNames = [
-                    "Bienvenue à l'Ephad",
-                    "Le rêve de la sirène",
-                    "Les princes du rap",
-                ];
-                const albumArtworks = ["_1", "_2", "_3"];
-                const trackUrl = [
-                    "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/1.mp3",
-                    "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/2.mp3",
-                    "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/3.mp3",
-                ];
-            </script>
-            <script src="{{ asset('js/script.js') }}"></script>
-            <script src="https://kit.fontawesome.com/73ab01ebea.js" crossorigin="anonymous"></script>
-            <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.3/gsap.min.js"></script>
-            <script src="{{ asset('js/slider.js') }}"></script>
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-
     </head>
     <body>
 
@@ -164,7 +137,7 @@
             <div id="menu-top">
                 <nav>
                     <div class="menu-list logo">
-                        <a href="{{ path('front_home') }}"><img src="{{ asset('img/logo-asso-echoes.png') }}" alt="Logo de Echoes"></a>
+                        <a href="{{ path('front_home') }}" data-njs-href="{{ path('front_home') }}"><img src="{{ asset('img/logo-asso-echoes.png') }}" alt="Logo de Echoes"></a>
                     </div>
                     <div class="menu-list-wrapper">
                         <div class="menu-list">
@@ -174,7 +147,7 @@
                                     <span><i class="fas fa-long-arrow-alt-left"></i> Retour</span>
                                     <span class="ariane">Accueil</span>
                                 </div>
-                                <a href="{{ path('front_home') }}">Retour à la case départ</a>
+                                <a href="{{ path('front_home') }}" data-njs-href="{{ path('front_home') }}">Retour à la case départ</a>
                             </div>
                         </div>
                         <div class="menu-list">
@@ -186,7 +159,7 @@
                                 </div>
                                 <a href="#">L'association</a>
                                 <a href="#">L’équipe</a>
-                                <a href="{{ path('front_radiobox') }}">La radiobox</a>
+                                <a href="{{ path('front_radiobox') }}" data-njs-href="{{ path('front_radiobox') }}">La radiobox</a>
                             </div>
                         </div>
                         <div class="menu-list">
@@ -196,8 +169,8 @@
                                     <span><i class="fas fa-long-arrow-alt-left"></i> Retour</span>
                                     <span class="ariane">Les Ateliers</span>
                                 </div>
-                                <a href="{{ path('front_memory_box') }}">La Boîte à souvenirs</a>
-                                <a href="{{ path('front_news') }}">Actualités</a>
+                                <a href="{{ path('front_memory_box') }}" data-njs-href="{{ path('front_memory_box') }}">La Boîte à souvenirs</a>
+                                <a href="{{ path('front_news') }}" data-njs-href="{{ path('front_news') }}">Actualités</a>
                                 <a href="#">Galerie Photo</a>
                             </div>
                         </div>
@@ -260,5 +233,31 @@
                 {% block main %}{% endblock %}
             </section>
         </main>
+
+        {% block javascripts %}
+            <script>
+                const albums = [
+                    "La boite à souvenir",
+                    "Rencontre avec l'Ephad Roger Duquesne",
+                    "Rencontre avec l'Ephad Roger Duquesne",
+                ];
+                const trackNames = [
+                    "Bienvenue à l'Ephad",
+                    "Le rêve de la sirène",
+                    "Les princes du rap",
+                ];
+                const albumArtworks = ["_1", "_2", "_3"];
+                const trackUrl = [
+                    "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/1.mp3",
+                    "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/2.mp3",
+                    "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/3.mp3",
+                ];
+            </script>
+            <script src="{{ asset('js/script.js') }}" type="module"></script>
+            <script src="https://kit.fontawesome.com/73ab01ebea.js" crossorigin="anonymous"></script>
+            <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.3/gsap.min.js"></script>
+            <script src="{{ asset('js/slider.js') }}"></script>
+        {% endblock %}
     </body>
 </html>

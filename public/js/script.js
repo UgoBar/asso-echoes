@@ -1,4 +1,6 @@
-document.addEventListener("turbo:load", function () {
+import { NavigateJs } from './Navigate.js';
+
+document.addEventListener("DOMContentLoaded", function () {
     let playerTrack = document.getElementById("player-track"),
         albumName = document.getElementById("album-name"),
         trackName = document.getElementById("track-name"),
@@ -14,6 +16,7 @@ document.addEventListener("turbo:load", function () {
         tTime = document.getElementById("track-length"),
         volumeArea = document.getElementById('volume-area'),
         hasBounceAnimation = false,
+        lastScrollTop = 0,
         seekT,
         seekLoc,
         seekBarPos,
@@ -43,8 +46,6 @@ document.addEventListener("turbo:load", function () {
 
     function revealElem(init, elem, forSvg) {
 
-        console.log(typeof init);
-
         if (typeof init === "object") {
             let windowHeight = window.innerHeight;
             let elementTop = elem.getBoundingClientRect().top;
@@ -61,17 +62,40 @@ document.addEventListener("turbo:load", function () {
         }
     }
 
-    function reveal(init = false) {
+    function scrollEvents(init = false) {
+        reveal(init);
+        showOrHideHeader();
+    }
 
+    function reveal(init = false) {
         // Animate svg
         document.querySelectorAll('.animated-svg').forEach(svg => {
             revealElem(init, svg, true)
         });
-
         // Animate .reveal-type
         document.querySelectorAll(".reveal-type").forEach(reveal => {
             revealElem(init, reveal, false)
         });
+    }
+
+    function showOrHideHeader() {
+        if (document.getElementById('menu').classList.contains('active')) {
+            return;
+        }
+
+        let currentScrollTop = window.scrollY;
+
+        if (currentScrollTop > lastScrollTop) {
+            // Scrolling down, hide the header
+            document.querySelector("header").style.transform = "translateY(-100%)";
+            document.querySelector(".mobile-header-btn").style.transform = "translateY(-300%)";
+        } else {
+            // Scrolling up, show the header
+            document.querySelector("header").style.transform = "translateY(0)";
+            document.querySelector(".mobile-header-btn").style.transform = "translateY(0)";
+        }
+
+        lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
     }
 
     function playPause() {
@@ -295,7 +319,18 @@ document.addEventListener("turbo:load", function () {
 
     function initApp() {
 
-        reveal(true);
+        new NavigateJs({
+            animationType: 'slide',
+            animationDuration: 500,
+            navigateJsCss: {
+                'position': 'relative',
+                'width': '100%',
+                'height': 'calc(100vh - 85px)',
+                'display': 'block',
+            }
+        });
+
+        scrollEvents(true);
 
         audio = new Audio();
 
@@ -309,7 +344,7 @@ document.addEventListener("turbo:load", function () {
             showHover(event);
         });
 
-        window.addEventListener("scroll", reveal);
+        window.addEventListener("scroll", scrollEvents);
 
         sArea.addEventListener("mouseout", hideHover);
 
@@ -327,6 +362,16 @@ document.addEventListener("turbo:load", function () {
         });
         playNextTrackButton.addEventListener("click", function () {
             selectTrack(1);
+        });
+
+        document.addEventListener('njs:start', function (event) {
+            if (document.getElementById('menu').classList.contains('active')) {
+                burgerTime();
+            }
+        });
+
+        document.addEventListener('njs:animation-end', function (event) {
+            scrollEvents(true);
         });
 
         // Mute / Unmute
@@ -422,10 +467,10 @@ document.addEventListener("turbo:load", function () {
 
     // [END] - Hello Asso Modal
 
-    if (window.innerWidth > 900) {
-        if (Turbo.navigator.currentVisit === undefined)
-            togglePlayerTrack();
-    }
+    // if (window.innerWidth > 900) {
+    //     if (Turbo.navigator.currentVisit === undefined)
+    //         togglePlayerTrack();
+    // }
     // When Tablet
     if (window.innerWidth < 900) {
         albumArt.classList.add('bounce-animation');
@@ -455,60 +500,32 @@ document.addEventListener("turbo:load", function () {
             });
         });
     }
+
+    //-- [BEGIN] HEART ICON HOVER
+    const heartIcons = document.querySelectorAll('.donate-wrapper i');
+    window.fillHeart = () => {
+        heartIcons.forEach(heartIcon => {
+            heartIcon.classList.replace('far', 'fas');
+        });
+    }
+    window.unFillHeart = () => {
+        heartIcons.forEach(heartIcon => {
+            heartIcon.classList.replace('fas', 'far');
+        });
+    }
+//-- [END] HEART ICON HOVER
 });
 // -- [END] DOM CONTENT LOADED
 
-
-//-- [BEGIN] HEART ICON HOVER
-const heartIcons = document.querySelectorAll('.donate-wrapper i');
-function fillHeart() {
-    heartIcons.forEach(heartIcon => {
-        heartIcon.classList.replace('far', 'fas');
-    });
-}
-function unFillHeart() {
-    heartIcons.forEach(heartIcon => {
-        heartIcon.classList.replace('fas', 'far');
-    });
-}
-//-- [END] HEART ICON HOVER
-
-let lastScrollTop = 0;
-window.addEventListener("scroll", function() {
-
-    if (document.getElementById('menu').classList.contains('active')) {
-        return;
-    }
-
-    let currentScrollTop = window.scrollY;
-
-    if (currentScrollTop > lastScrollTop) {
-        // Scrolling down, hide the header
-        document.querySelector("header").style.transform = "translateY(-100%)";
-        document.querySelector(".mobile-header-btn").style.transform = "translateY(-300%)";
-    } else {
-        // Scrolling up, show the header
-        document.querySelector("header").style.transform = "translateY(0)";
-        document.querySelector(".mobile-header-btn").style.transform = "translateY(0)";
-    }
-
-    lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
-});
-
-// Trigger the exit animation before page change
-document.addEventListener('turbo:before-visit', function (event) {
-    if (document.getElementById('menu').classList.contains('active')) {
-        burgerTime();
-    }
-});
-// Trigger the entrance animation after page change
-document.addEventListener('turbo:visit', function (event) {
-    if (document.getElementById('menu').classList.contains('active')) {
-        burgerTime();
-    }
-});
-
-// when we are *about* to render, start us faded out
-document.addEventListener('turbo:before-render', (event) => {
-    event.detail.newBody.classList.add('turbo-loading');
-});
+// // Trigger the exit animation before page change
+// document.addEventListener('turbo:before-visit', function (event) {
+//     if (document.getElementById('menu').classList.contains('active')) {
+//         burgerTime();
+//     }
+// });
+// // Trigger the entrance animation after page change
+// document.addEventListener('turbo:visit', function (event) {
+//     if (document.getElementById('menu').classList.contains('active')) {
+//         burgerTime();
+//     }
+// });

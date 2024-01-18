@@ -27,7 +27,7 @@ a {
 }
 
 h1 {
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 40px;
     text-transform: uppercase;
     font-weight: 900;
@@ -396,6 +396,7 @@ header .toggle-menu {
     color: white;
     font-size: 60px;
     margin-bottom: 0;
+    letter-spacing: 7px;
 }
 
 .article-svg-animated {
@@ -548,6 +549,10 @@ article p {
 }
 
 @media screen and (max-width: 600px) {
+
+    #memory, #radiobox {
+        padding-top: unset;
+    }
 
     main {
         padding-top: 135px;

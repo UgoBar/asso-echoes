@@ -102,11 +102,9 @@
         </svg>
 
         <script data-njs>
-            // CA VA PAS PARCE QUE EN FAIT CA SE RELANCE A CHAQUE FOIS CA LE GARDE EN MEMOIRE C'EST CHIANT
-            document.addEventListener('njs:animation-end', () => {
-                console.log()
+            if (document.querySelector('navigate-js').classList.contains('njs-page-loaded')) {
                 initSlider();
-            });
+            }
         </script>
 
     </navigate-js>

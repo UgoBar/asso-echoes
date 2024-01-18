@@ -370,7 +370,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        document.addEventListener('njs:animation-end', function (event) {
+        document.addEventListener('njs:done', function (event) {
             scrollEvents(true);
         });
 

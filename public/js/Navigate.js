@@ -93,6 +93,7 @@ export class NavigateJs {
 
     async navigate(url) {
         try {
+
             // Emit the "njs:start" event
             this.emitEvent('njs:start');
 
@@ -111,22 +112,13 @@ export class NavigateJs {
             const newContent = newPageDOM.querySelector(this.customTag).innerHTML;
 
             // Apply animation before replacing the content
-            this.replaceContentAndAnimate(newContent);
+            await this.replaceContentAndAnimate(newContent);
 
-            // Check if there is JavaScript to execute on the new page
-            setTimeout( () => {
+            // Add to custom tag the .njs-page-load class
+            this.currentPage.classList.add('njs-page-loaded');
 
-                // Clean all event
-                // need to remove all listeners on 'njs:load-script' event;
-
-                const scriptTag = newPageDOM.querySelector('script[data-njs]');
-                const scriptContent = scriptTag.textContent;
-                const initFunction = new Function(scriptContent);
-                initFunction();
-
-                this.emitEvent('njs:load-script');
-
-            }, this.animationDuration);
+            // Execute scripts and styles after the animation
+            this.executeScriptsAndStyles(newContent);
 
             this.emitEvent('njs:done');
 
@@ -136,6 +128,9 @@ export class NavigateJs {
     }
 
     replaceContainerHtml(container, newContent) {
+        // CLean up previous page style and script
+        this.cleanupPreviousPage();
+        // replace HTML
         container.innerHTML = '';
         container.insertAdjacentHTML('beforeend', newContent);
     }
@@ -145,8 +140,10 @@ export class NavigateJs {
         const container = this.currentPage.querySelector('.njs-container');
 
         if (this.withAnimation === false) {
+            // Replace HTML
             this.replaceContainerHtml(container, newContent);
         } else {
+
             // Emit the "njs:animation-begin" event
             this.emitEvent('njs:animation-begin');
 
@@ -184,9 +181,52 @@ export class NavigateJs {
             }
         }
 
-        setTimeout(() => {
-            this.emitEvent('njs:animation-end'); // Emit the "njs:animation-end" event
-        }, this.animationDuration);
+        return new Promise(resolve => {
+            setTimeout(() => {
+                this.emitEvent('njs:animation-end'); // Emit the "njs:animation-end" event
+                resolve();
+            }, this.animationDuration);
+        });
 
+
+
+    }
+
+    executeScriptsAndStyles(newContent) {
+        // Execute scripts and add styles only if the page has been loaded with animation
+        if (this.currentPage.classList.contains('njs-page-loaded')) {
+            const scripts = this.currentPage.querySelectorAll('script[data-njs]');
+            const styles = Array.from(newContent.matchAll(/<style data-njs>([\s\S]*?)<\/style>/g)).map(match => match[1]);
+
+            // Add styles
+            styles.forEach(styleContent => {
+                const style = document.createElement('style');
+                style.textContent = styleContent;
+                document.head.appendChild(style);
+            });
+
+            // Execute scripts
+            scripts.forEach(script => {
+                try {
+                    // Use eval() to execute the script content
+                    eval(script.textContent);
+                } catch (error) {
+                    console.error('Error executing script:', error);
+                }
+            });
+        }
+    }
+
+    cleanupPreviousPage() {
+        const scripts = document.querySelectorAll('script[data-njs]');
+        const styles = document.querySelectorAll('style[data-njs]');
+
+        scripts.forEach(script => {
+            script.parentNode.removeChild(script);
+        });
+
+        styles.forEach(style => {
+            style.parentNode.removeChild(style);
+        });
     }
 }

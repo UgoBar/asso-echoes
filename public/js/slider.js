@@ -9,8 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initSlider() {
 
-    console.log('init slider');
-
     const { gsap, imagesLoaded } = window;
 
     const buttons = {

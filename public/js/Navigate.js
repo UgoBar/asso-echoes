@@ -41,10 +41,18 @@ export class NavigateJs {
         // Apply required style to animation
         this.initStyles();
 
+        // Listen popstate to detect historic change
+        window.addEventListener('popstate', (event) => {
+            if (event.state && event.state.path) {
+                const newUrl = event.state.path;
+                this.navigate(newUrl);
+            }
+        });
+
         // Attach click event listener to all links with data-njs-href attribute
         if (this.links.length > 0) {
             this.links.forEach(link => {
-                link.addEventListener('click', (event) => this.handleLinkClick(event));
+                link.addEventListener('click', (event) => this.handleNavLinkClick(event));
             });
 
             // Emit the "njs:init" event
@@ -79,10 +87,17 @@ export class NavigateJs {
         this.currentPage.appendChild(container);
     }
 
-    handleLinkClick(e) {
+    async handleNavLinkClick(e) {
         e.preventDefault();
         const targetUrl = e.target.getAttribute('data-njs-href');
-        this.navigate(targetUrl);
+        await this.navigate(targetUrl);
+
+        // Construct the full URL by appending the target URL to the base URL
+        const baseUrl = window.location.protocol + '//' + window.location.host;
+        const fullUrl = baseUrl + targetUrl;
+
+        // Change the URL in the browser's address bar
+        window.history.pushState({ path: fullUrl }, '', fullUrl);
     }
 
     // Emit a custom event

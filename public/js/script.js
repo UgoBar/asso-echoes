@@ -467,10 +467,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // [END] - Hello Asso Modal
 
-    // if (window.innerWidth > 900) {
-    //     if (Turbo.navigator.currentVisit === undefined)
-    //         togglePlayerTrack();
-    // }
     // When Tablet
     if (window.innerWidth < 900) {
         albumArt.classList.add('bounce-animation');
@@ -516,16 +512,3 @@ document.addEventListener("DOMContentLoaded", function () {
 //-- [END] HEART ICON HOVER
 });
 // -- [END] DOM CONTENT LOADED
-
-// // Trigger the exit animation before page change
-// document.addEventListener('turbo:before-visit', function (event) {
-//     if (document.getElementById('menu').classList.contains('active')) {
-//         burgerTime();
-//     }
-// });
-// // Trigger the entrance animation after page change
-// document.addEventListener('turbo:visit', function (event) {
-//     if (document.getElementById('menu').classList.contains('active')) {
-//         burgerTime();
-//     }
-// });

@@ -437,33 +437,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // [BEGIN] - Hello Asso Modal
     let modal = document.getElementById("hello-asso-modal");
-    let btnFermer = document.querySelector(".close-hello-asso-modal");
+    let closeBtn = document.querySelector(".close-hello-asso-modal");
 
     // Close modal btn
-    btnFermer.onclick = function() {
-        overlay.classList.toggle('active');
-        modal.className = "";
-        modal.querySelector('.modal-content').classList.toggle('active');
+    closeBtn.onclick = function() {
+        openCloseModal(modal, overlay)
     }
 
     // Click outside ? close modal
     window.onclick = function(event) {
         if (event.target === modal) {
-            modal.className = "";
-            overlay.classList.toggle('active');
-            modal.querySelector('.modal-content').classList.toggle('active');
+            openCloseModal(modal, overlay)
         }
     }
 
     // Open Modal
     document.querySelectorAll('.donate-wrapper').forEach(wrapper => {
         wrapper.addEventListener('click', () => {
-            modal.className = 'active';
-            overlay.classList.toggle('active');
-            modal.querySelector('.modal-content').classList.toggle('active');
+            openCloseModal(modal, overlay)
         });
-    })
+    });
 
+    window.openCloseModal = (modal, overlay) => {
+        modal.classList.toggle('active');
+        overlay.classList.toggle('active');
+        modal.querySelector('.modal-content').classList.toggle('active');
+    }
     // [END] - Hello Asso Modal
 
     // When Tablet

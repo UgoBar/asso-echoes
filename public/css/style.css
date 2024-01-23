@@ -16,10 +16,13 @@ body {
     background-image: url("../img/background.jpg");
     background-repeat: repeat;
     background-size: 500px 300px;
+    display: flex;
+    flex-direction: column;
 }
 
 main {
     padding-top: 85px;
+    flex: 1;
 }
 
 a {
@@ -411,7 +414,7 @@ footer .credits a:hover {
     z-index: 2;
 }
 
-#hello-asso-modal {
+#hello-asso-modal, .gallery-modal {
     position: fixed;
     z-index: 100;
     left: 0;
@@ -426,7 +429,7 @@ footer .credits a:hover {
     transition: .5s ease-in-out all;
 }
 
-#hello-asso-modal.active {
+#hello-asso-modal.active, .gallery-modal.active {
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
@@ -451,9 +454,10 @@ footer .credits a:hover {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    transition: .2s ease-in-out;
 }
-.close-hello-asso-modal:hover,
-.close-hello-asso-modal:focus {
+.close-hello-asso-modal:hover, .close-gallery-modal:hover,
+.close-hello-asso-modal:focus  .close-gallery-modal:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;

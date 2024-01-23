@@ -136,7 +136,7 @@ export class NavigateJs {
             this.currentPage.classList.add('njs-page-loaded');
 
             // Execute scripts and styles after the animation
-            this.executeScriptsAndStyles(newContent);
+            this.executeScripts(newContent);
 
             this.emitEvent('njs:done');
 
@@ -152,6 +152,8 @@ export class NavigateJs {
         // replace HTML
         container.innerHTML = '';
         container.insertAdjacentHTML('beforeend', newContent);
+
+        this.executeStyles(newContent);
 
         // <navigate-js> height must match height of <div clas="njs-container">
         container.parentNode.style.height = container.clientHeight + 'px';
@@ -213,24 +215,11 @@ export class NavigateJs {
                 resolve();
             }, this.animationDuration);
         });
-
-
-
     }
 
-    executeScriptsAndStyles(newContent) {
-        // Execute scripts and add styles only if the page has been loaded with animation
+    executeScripts(newContent) {
         if (this.currentPage.classList.contains('njs-page-loaded')) {
             const scripts = this.currentPage.querySelectorAll('script[data-njs]');
-            const styles = Array.from(newContent.matchAll(/<style data-njs>([\s\S]*?)<\/style>/g)).map(match => match[1]);
-
-            // Add styles
-            styles.forEach(styleContent => {
-                const style = document.createElement('style');
-                style.textContent = styleContent;
-                document.head.appendChild(style);
-            });
-
             // Execute scripts
             scripts.forEach(script => {
                 try {
@@ -239,6 +228,18 @@ export class NavigateJs {
                 } catch (error) {
                     console.error('Error executing script:', error);
                 }
+            });
+        }
+    }
+
+    executeStyles(newContent) {
+        if (this.currentPage.classList.contains('njs-page-loaded')) {
+            const styles = Array.from(newContent.matchAll(/<style data-njs>([\s\S]*?)<\/style>/g)).map(match => match[1]);
+            // Add styles
+            styles.forEach(styleContent => {
+                const style = document.createElement('style');
+                style.textContent = styleContent;
+                document.head.appendChild(style);
             });
         }
     }

@@ -325,7 +325,6 @@ document.addEventListener("DOMContentLoaded", function () {
             navigateJsCss: {
                 'position': 'relative',
                 'width': '100%',
-                'height': 'calc(100vh - 85px)',
                 'display': 'block',
             }
         });

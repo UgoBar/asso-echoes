@@ -10,7 +10,6 @@ export class NavigateJs {
         this.navigateJsCss = options.navigateJsCss || {
             'position': 'relative',
             'width': '100%',
-            'height': '100vh',
             'display': 'block',
         };
         this.njsContainerCss = options.njsContainerCss ||{
@@ -20,6 +19,7 @@ export class NavigateJs {
             'transition': `${this.animationDuration}ms cubic-bezier(.74,.08,.51,.95)`,
             'width': '100%'
         };
+        this.scrollToTop = options.scrollToTop || true;
 
         // Initialize the library
         this.init();
@@ -85,6 +85,9 @@ export class NavigateJs {
 
         // Append the new container div to this.currentPage
         this.currentPage.appendChild(container);
+
+        // <navigate-js> height must match height of <div clas="njs-container">
+        this.currentPage.style.height = `${container.clientHeight}px`;
     }
 
     async handleNavLinkClick(e) {
@@ -145,14 +148,22 @@ export class NavigateJs {
     replaceContainerHtml(container, newContent) {
         // CLean up previous page style and script
         this.cleanupPreviousPage();
+
         // replace HTML
         container.innerHTML = '';
         container.insertAdjacentHTML('beforeend', newContent);
+
+        // <navigate-js> height must match height of <div clas="njs-container">
+        container.parentNode.style.height = container.clientHeight + 'px';
     }
 
     // Animation logic based on the configured animation type
     replaceContentAndAnimate(newContent) {
         const container = this.currentPage.querySelector('.njs-container');
+
+        if (this.scrollToTop) {
+            window.scroll({top: 0, behavior: "smooth"});
+        }
 
         if (this.withAnimation === false) {
             // Replace HTML

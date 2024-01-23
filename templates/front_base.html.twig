@@ -137,7 +137,7 @@
             <div id="menu-top">
                 <nav>
                     <div class="menu-list logo">
-                        <a href="{{ path('front_home') }}" data-njs-href="{{ path('front_home') }}"><img src="{{ asset('img/logo-asso-echoes.png') }}" alt="Logo de Echoes"></a>
+                        <a href="{{ path('front_home') }}"><img src="{{ asset('img/logo-asso-echoes.png') }}" alt="Logo de Echoes"></a>
                     </div>
                     <div class="menu-list-wrapper">
                         <div class="menu-list">
@@ -229,10 +229,31 @@
         <main>
             <div class="overlay"></div>
             <a class="d-none" href="https://storyset.com/people">People illustrations by Storyset</a>
-            <section class="page-transition">
-                {% block main %}{% endblock %}
-            </section>
+            {% block main %}{% endblock %}
         </main>
+
+        <footer>
+            <div class="container">
+                <section class="double">
+                    <div class="footer-left">
+                        <img src="{{ asset('img/logo-asso-echoes-blanc.png') }}" alt="Logo de l'association echoes">
+                        <div class="social-icons icon-circle icon-rotate">
+                            <a target="_blank" href="https://www.facebook.com/associationechoes" class="footer-social-link"><i class="fab fa-facebook-f facebook"></i></a>
+                            <a target="_blank" href="https://www.instagram.com/association_echoes/" class="footer-social-link"><i class="fab fa-instagram instagram"></i></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/association-echoes/" class="footer-social-link"><i class="fab fa-linkedin-in linkedin"></i></a>
+                            <a href="mailto:association.echoes@gmail.com" class="footer-social-link"><i class="fas fa-paper-plane gmail"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-right">
+                        <p>Association loi 1901</p>
+                        <p>SIRET : 793032103 00038</p>
+                        <p>Ancien Chemin du Coton Rouge, 13100 Aix-en-Provence</p>
+                        <a href="#" class="footer-btn">Contactez nous</a>
+                    </div>
+                </section>
+            </div>
+            <div class="credits"><em>Site réalisé par <a href="https://ugo-barathe.com" class="credit-link">Ugo Barathe</a></em></div>
+        </footer>
 
         {% block javascripts %}
             <script>

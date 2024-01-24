@@ -1,4 +1,5 @@
 import { NavigateJs } from './Navigate.js';
+import { CountUp } from './CountUp.js';
 
 document.addEventListener("DOMContentLoaded", function () {
     let playerTrack = document.getElementById("player-track"),
@@ -37,7 +38,6 @@ document.addEventListener("DOMContentLoaded", function () {
         playNextTrackButton = document.getElementById("play-next"),
         currIndex = -1,
         volumeInput = document.getElementById("volume-input"),
-        // circle = document.querySelector('.circle-2'),
         rememberVolume = 100,
         isVolumeOn = true,
         volumeIcon = document.querySelector('.control #volume i');
@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let elementTop = elem.getBoundingClientRect().top;
             let elementVisible = 50;
             if (elementTop < windowHeight - elementVisible) {
+
                 elem.classList.add(forSvg ? "animated" : "active");
             } else {
                 elem.classList.remove(forSvg ? "animated" : "active");
@@ -70,11 +71,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function reveal(init = false) {
         // Animate svg
         document.querySelectorAll('.animated-svg').forEach(svg => {
-            revealElem(init, svg, true)
+            revealElem(init, svg, true);
         });
         // Animate .reveal-type
         document.querySelectorAll(".reveal-type").forEach(reveal => {
-            revealElem(init, reveal, false)
+            revealElem(init, reveal, false);
         });
     }
 
@@ -96,6 +97,32 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+    }
+
+    function counterUp() {
+
+        document.querySelectorAll('.count').forEach(countUpEl => {
+            const endVal = +countUpEl.getAttribute('data-end');
+            const timeData = +countUpEl.getAttribute('data-second-duration');
+
+            if (isNaN(endVal) || isNaN(timeData)) {
+                console.error('data-count or data-second-duration is null');
+                return;
+            }
+
+            const countUp = new CountUp(countUpEl, endVal, {
+                useEasing: true,
+                enableScrollSpy: true,
+                duration: timeData,
+            });
+
+            if (!countUp.error) {
+                countUp.start();
+            } else {
+                console.error(countUp.error);
+            }
+        });
+
     }
 
     function playPause() {
@@ -330,6 +357,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         scrollEvents(true);
+        counterUp();
 
         audio = new Audio();
 
@@ -371,6 +399,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         document.addEventListener('njs:done', function (event) {
             scrollEvents(true);
+            counterUp();
         });
 
         // Mute / Unmute

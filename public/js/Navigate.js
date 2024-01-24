@@ -155,8 +155,11 @@ export class NavigateJs {
 
         this.executeStyles(newContent);
 
-        // <navigate-js> height must match height of <div clas="njs-container">
-        container.parentNode.style.height = container.clientHeight + 'px';
+        // Use requestAnimationFrame to ensure styles are applied before getting the height
+        setTimeout(() => {
+            console.log(container, container.clientHeight);
+            container.parentNode.style.height = container.clientHeight + 'px';
+        }, 200);
     }
 
     // Animation logic based on the configured animation type

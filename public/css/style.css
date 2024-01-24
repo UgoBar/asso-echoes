@@ -112,6 +112,10 @@ a:hover {
     clip-path: polygon(0 0, 91% 0, 24% 84vh, 0 100%);
 }
 
+.screen-height {
+    min-height: calc(100vh - 85px);
+}
+
 article {
     padding: 1em 0;
 }
@@ -662,6 +666,10 @@ article p {
     #memory, #radiobox {
         padding-top: unset;
     }
+
+    /*.screen-height {*/
+    /*    height: calc(100vh - 135px);*/
+    /*}*/
 
     main {
         padding-top: 135px;

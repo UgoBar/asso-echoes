@@ -391,6 +391,9 @@ document.addEventListener("DOMContentLoaded", function () {
             selectTrack(1);
         });
 
+        document.querySelector('header .donate-wrapper').addEventListener('mouseenter', fillHeart);
+        document.querySelector('header .donate-wrapper').addEventListener('mouseleave', unFillHeart);
+
         document.addEventListener('njs:start', function (event) {
             if (document.getElementById('menu').classList.contains('active')) {
                 burgerTime();
@@ -410,6 +413,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     initApp();
+
+    function fillHeart() {
+        this.querySelector('i').classList.replace('far', 'fas');
+    }
+    function unFillHeart() {
+        this.querySelector('i').classList.replace('fas', 'far');
+    }
 
     //-- [BEGIN] BURGER MENU ANIMATION
     let trigger = document.querySelector('#burger'),
@@ -523,19 +533,5 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     }
-
-    //-- [BEGIN] HEART ICON HOVER
-    const heartIcons = document.querySelectorAll('.donate-wrapper i');
-    window.fillHeart = () => {
-        heartIcons.forEach(heartIcon => {
-            heartIcon.classList.replace('far', 'fas');
-        });
-    }
-    window.unFillHeart = () => {
-        heartIcons.forEach(heartIcon => {
-            heartIcon.classList.replace('fas', 'far');
-        });
-    }
-//-- [END] HEART ICON HOVER
 });
 // -- [END] DOM CONTENT LOADED

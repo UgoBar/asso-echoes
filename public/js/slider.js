@@ -1,11 +1,8 @@
-document.addEventListener('DOMContentLoaded', () => {
-    //console.clear();
+document.addEventListener('DOMContentLoaded', initSlider);
 
-    if (document.querySelector(".btn--left") !== null) {
-        initSlider();
-    }
-
-});
+if (document.querySelector('navigate-js').classList.contains('njs-page-loaded')) {
+    initSlider();
+}
 
 function initSlider() {
 

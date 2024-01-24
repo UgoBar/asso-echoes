@@ -104,11 +104,9 @@
             </symbol>
         </svg>
 
-        <script data-njs>
-            if (document.querySelector('navigate-js').classList.contains('njs-page-loaded')) {
-                initSlider();
-            }
-        </script>
+        <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js" data-njs></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.3/gsap.min.js" data-njs></script>
+        <script src="{{ asset('js/slider.js') }}" data-njs></script>
 
     </navigate-js>
 

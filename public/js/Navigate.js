@@ -39,7 +39,7 @@ export class NavigateJs {
         this.currentPage = customTagElements[0];
 
         // Apply required style to animation
-        this.initStyles();
+        this.initNavigateStyles();
 
         // Listen popstate to detect historic change
         window.addEventListener('popstate', (event) => {
@@ -63,7 +63,7 @@ export class NavigateJs {
         }
     }
 
-    initStyles() {
+    initNavigateStyles() {
         // Initialize the styles for the custom tag and njs-container
         const container = document.createElement('div');
         container.className = 'njs-container';
@@ -136,7 +136,7 @@ export class NavigateJs {
             this.currentPage.classList.add('njs-page-loaded');
 
             // Execute scripts and styles after the animation
-            this.executeScripts(newContent);
+            await this.executeScripts();
 
             this.emitEvent('njs:done');
 
@@ -217,18 +217,41 @@ export class NavigateJs {
         });
     }
 
-    executeScripts(newContent) {
+    async executeScripts() {
         if (this.currentPage.classList.contains('njs-page-loaded')) {
-            const scripts = this.currentPage.querySelectorAll('script[data-njs]');
-            // Execute scripts
-            scripts.forEach(script => {
+            const scriptElements = this.currentPage.querySelectorAll('script[data-njs]');
+
+            // Load external scripts
+            const scriptPromises = [];
+
+            const loadScriptFromUrl = async (scriptUrl) => {
+                const response = await fetch(scriptUrl);
+                const scriptContent = await response.text();
+
                 try {
-                    // Use eval() to execute the script content
-                    eval(script.textContent);
+                    eval(scriptContent);
                 } catch (error) {
                     console.error('Error executing script:', error);
                 }
+            };
+
+            scriptElements.forEach(scriptElement => {
+                const scriptUrl = scriptElement.src;
+                if (scriptUrl) {
+                    // If script come from an external source, load it
+                    scriptPromises.push(loadScriptFromUrl(scriptUrl));
+                } else {
+                    // Otherwise, execute the inline script
+                    try {
+                        eval(scriptElement.textContent);
+                    } catch (error) {
+                        console.error('Error executing script:', error);
+                    }
+                }
             });
+
+            // Wait for all scripts to be loaded
+            await Promise.all(scriptPromises);
         }
     }
 
@@ -244,16 +267,18 @@ export class NavigateJs {
         }
     }
 
+    // Remove previous page style and script
     cleanupPreviousPage() {
-        const scripts = document.querySelectorAll('script[data-njs]');
-        const styles = document.querySelectorAll('style[data-njs]');
+
+        const scripts = Array.from(this.currentPage.querySelectorAll('script[data-njs]'));
+        const styles = Array.from(this.currentPage.querySelectorAll('style[data-njs]'));
 
         scripts.forEach(script => {
-            script.parentNode.removeChild(script);
+            script.remove();
         });
 
         styles.forEach(style => {
-            style.parentNode.removeChild(style);
+            style.remove();
         });
     }
 }

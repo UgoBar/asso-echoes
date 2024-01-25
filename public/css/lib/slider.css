@@ -341,6 +341,7 @@ button {
 #insights {
     display: flex;
     align-items: center;
+    background: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(167,167,167,0.5130252784707633) 100%);
 }
 
 #insights .container {
@@ -361,10 +362,9 @@ button {
     background-color: var(--primary);
     color: white;
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
     text-align: center;
-    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -379,9 +379,9 @@ button {
 }
 
 .count {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Josefin sans', sans-serif;
     font-weight: bold;
-    font-size: 70px;
+    font-size: 95px;
     color: var(--primary);
 }
 
@@ -410,25 +410,39 @@ button {
     .app {
         height: calc(100vh - 135px);
     }
+    #insights {
+        background: unset;
+    }
+    .insight {
+        margin-bottom: 2em;
+    }
+    .insight-icon {
+        font-size: 41px;
+        width: 100px;
+        height: 100px;
+    }
+    .count {
+        font-size: 70px;
+    }
 }
 
-.support {
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-    padding: 10px;
-    display: flex;
-}
-.support a {
-    margin: 0 10px;
-    color: #fff;
-    font-size: 1.8rem;
-    backface-visibility: hidden;
-    transition: all 150ms ease;
-}
-.support a:hover {
-    transform: scale(1.1);
-}
+/*.support {*/
+/*    position: absolute;*/
+/*    right: 10px;*/
+/*    bottom: 10px;*/
+/*    padding: 10px;*/
+/*    display: flex;*/
+/*}*/
+/*.support a {*/
+/*    margin: 0 10px;*/
+/*    color: #fff;*/
+/*    font-size: 1.8rem;*/
+/*    backface-visibility: hidden;*/
+/*    transition: all 150ms ease;*/
+/*}*/
+/*.support a:hover {*/
+/*    transform: scale(1.1);*/
+/*}*/
 
 .btn.play-icon {
     position: absolute;

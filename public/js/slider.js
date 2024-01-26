@@ -19,6 +19,25 @@ function initSlider() {
         }
     });
 
+    new Swiper(".sessions-swiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        mousewheel: {
+            invert: false,
+        },
+        pagination: {
+            el: ".sessions-pagination",
+            clickable: true,
+        },
+        breakpoints: {
+            810: {
+                slidesPerView: 2
+            },
+            910: {
+                slidesPerView: 3
+            },
+        }
+    });
 
     const { gsap, imagesLoaded } = window;
 

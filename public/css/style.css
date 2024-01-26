@@ -13,7 +13,7 @@ body {
     font-family: 'Nunito', sans-serif;
     min-height: 100vh;
     position: relative;
-    background-image: url("../img/background-2.jpg");
+    background-image: url("../img/background.jpg");
     background-repeat: repeat;
     background-size: 500px 300px;
     display: flex;
@@ -112,8 +112,11 @@ a:hover {
     clip-path: polygon(0 0, 91% 0, 24% 84vh, 0 100%);
 }
 
-.screen-height {
-    min-height: calc(100vh - 85px);
+.height-section {
+    margin-top: 10em;
+}
+.height-section:last-of-type {
+    margin-bottom: 10em;
 }
 
 article {
@@ -667,7 +670,7 @@ article p {
         padding-top: unset;
     }
 
-    /*.screen-height {*/
+    /*.height-section {*/
     /*    height: calc(100vh - 135px);*/
     /*}*/
 

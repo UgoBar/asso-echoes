@@ -8,105 +8,103 @@
 
         <link rel="stylesheet" href="{{ asset('css/lib/slider.css') }}" data-njs>
 
-        <section class="screen-height">
-            <div class="app">
+        <div class="app">
 
-                <div class="cardList">
-                    <button class="cardList__btn btn btn--left">
-                        <div class="icon">
-                            <i class="fas fa-caret-up rotate-left"></i>
-                        </div>
-                    </button>
+            <div class="cardList">
+                <button class="cardList__btn btn btn--left">
+                    <div class="icon">
+                        <i class="fas fa-caret-up rotate-left"></i>
+                    </div>
+                </button>
 
-                    <div class="cards__wrapper">
-                        <div class="btn play-icon">
-                            <i class="fas fa-play"></i>
-                        </div>
-                        <div class="card current--card">
-                            <div class="card__image">
-                                <img src="{{ asset('img/podcast/echoes-podcast-1.png') }}" alt="" />
-                            </div>
-                        </div>
-
-                        <div class="card next--card">
-                            <div class="card__image">
-                                <img src="{{ asset('img/podcast/echoes-podcast-2.png') }}" alt="" />
-                            </div>
-                        </div>
-
-                        <div class="card previous--card">
-                            <div class="card__image">
-                                <img src="{{ asset('img/podcast/echoes-podcast-3.png') }}" alt="" />
-                            </div>
+                <div class="cards__wrapper">
+                    <div class="btn play-icon">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <div class="card current--card">
+                        <div class="card__image">
+                            <img src="{{ asset('img/podcast/echoes-podcast-1.png') }}" alt="" />
                         </div>
                     </div>
 
-                    <button class="cardList__btn btn btn--right">
-                        <div class="icon">
-                            <i class="fas fa-caret-up rotate-right"></i>
+                    <div class="card next--card">
+                        <div class="card__image">
+                            <img src="{{ asset('img/podcast/echoes-podcast-2.png') }}" alt="" />
                         </div>
-                    </button>
-                </div>
+                    </div>
 
-                <div class="infoList">
-                    <div class="info__wrapper">
-                        <div class="info current--info">
-                            <h1 class="text name">Bienvenue à l'Ephad</h1>
-                            <p class="text description">La boite à souvenir</p>
-                            <audio class="d-none" src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/1.mp3"></audio>
-                        </div>
-
-                        <div class="info next--info">
-                            <h1 class="text name">Le rêve de la sirène</h1>
-                            <p class="text description">Rencontre avec l'Ephad Roger Duquesne</p>
-                            <audio class="d-none" src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/2.mp3"></audio>
-                        </div>
-
-                        <div class="info previous--info">
-                            <h1 class="text name">Les princes du rap</h1>
-                            <p class="text description">Rencontre avec l'Ephad Roger Duquesne</p>
-                            <audio class="d-none" src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/3.mp3"></audio>
+                    <div class="card previous--card">
+                        <div class="card__image">
+                            <img src="{{ asset('img/podcast/echoes-podcast-3.png') }}" alt="" />
                         </div>
                     </div>
                 </div>
 
-                <div class="app__bg">
-                    <div class="app__bg__image current--image">
-                        <img src="{{ asset('img/podcast/echoes-podcast-1.png') }}" alt="" />
+                <button class="cardList__btn btn btn--right">
+                    <div class="icon">
+                        <i class="fas fa-caret-up rotate-right"></i>
                     </div>
-                    <div class="app__bg__image next--image">
-                        <img src="{{ asset('img/podcast/echoes-podcast-2.png') }}" alt="" />
+                </button>
+            </div>
+
+            <div class="infoList">
+                <div class="info__wrapper">
+                    <div class="info current--info">
+                        <h1 class="text name">Bienvenue à l'Ephad</h1>
+                        <p class="text description">La boite à souvenir</p>
+                        <audio class="d-none" src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/1.mp3"></audio>
                     </div>
-                    <div class="app__bg__image previous--image">
-                        <img src="{{ asset('img/podcast/echoes-podcast-3.png') }}" alt="" />
+
+                    <div class="info next--info">
+                        <h1 class="text name">Le rêve de la sirène</h1>
+                        <p class="text description">Rencontre avec l'Ephad Roger Duquesne</p>
+                        <audio class="d-none" src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/2.mp3"></audio>
+                    </div>
+
+                    <div class="info previous--info">
+                        <h1 class="text name">Les princes du rap</h1>
+                        <p class="text description">Rencontre avec l'Ephad Roger Duquesne</p>
+                        <audio class="d-none" src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/3.mp3"></audio>
                     </div>
                 </div>
             </div>
 
-            {#        <div class="banner-text">#}
-            {#            <h2 class="pink">Ecoute nos podcast !</h2>#}
-            {#        </div>#}
-
-            <div class="loading__wrapper">
-                <div class="loader--text">Loading...</div>
-                <div class="loader">
-                    <span></span>
+            <div class="app__bg">
+                <div class="app__bg__image current--image">
+                    <img src="{{ asset('img/podcast/echoes-podcast-1.png') }}" alt="" />
+                </div>
+                <div class="app__bg__image next--image">
+                    <img src="{{ asset('img/podcast/echoes-podcast-2.png') }}" alt="" />
+                </div>
+                <div class="app__bg__image previous--image">
+                    <img src="{{ asset('img/podcast/echoes-podcast-3.png') }}" alt="" />
                 </div>
             </div>
+        </div>
 
-            <svg class="icons" style="display: none;">
-                <symbol id="arrow-left" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
-                    <polyline points='328 112 184 256 328 400'
-                              style='fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:48px' />
-                </symbol>
-                <symbol id="arrow-right" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
-                    <polyline points='184 112 328 256 184 400'
-                              style='fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:48px' />
-                </symbol>
-            </svg>
-        </section>
+        {#        <div class="banner-text">#}
+        {#            <h2 class="pink">Ecoute nos podcast !</h2>#}
+        {#        </div>#}
 
-        <section id="insights" class="screen-height">
+        <div class="loading__wrapper">
+            <div class="loader--text">Loading...</div>
+            <div class="loader">
+                <span></span>
+            </div>
+        </div>
+
+        <svg class="icons" style="display: none;">
+            <symbol id="arrow-left" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+                <polyline points='328 112 184 256 328 400'
+                          style='fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:48px' />
+            </symbol>
+            <symbol id="arrow-right" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+                <polyline points='184 112 328 256 184 400'
+                          style='fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:48px' />
+            </symbol>
+        </svg>
+
+        <section id="insights" class="height-section">
             <div class="container">
                 <div class="insight reveal-type">
                     <div class="insight-icon"><i class="icon-radiobox" aria-hidden="true"></i></div>
@@ -126,7 +124,52 @@
             </div>
         </section>
 
-        <script src="{{ asset('js/slider.js') }}" data-njs></script>
+        <section id="news" class="height-section reveal-type">
+            <h1>Actualités</h1>
+            <div class="blog-slider">
+                <div class="blog-slider__wrp swiper-wrapper">
+                    <div class="blog-slider__item swiper-slide">
+                        <div class="blog-slider__img">
+                            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp" alt="">
+                        </div>
+                        <div class="blog-slider__content">
+                            <span class="blog-slider__code">26 December 2019</span>
+                            <div class="blog-slider__title">Lorem Ipsum Dolor</div>
+                            <div class="blog-slider__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae voluptate repellendus magni illo ea animi? </div>
+                            <a href="#" class="footer-btn">READ MORE</a>
+                        </div>
+                    </div>
+                    <div class="blog-slider__item swiper-slide">
+                        <div class="blog-slider__img">
+                            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/jason-leung-798979-unsplash.webp" alt="">
+                        </div>
+                        <div class="blog-slider__content">
+                            <span class="blog-slider__code">26 December 2019</span>
+                            <div class="blog-slider__title">Lorem Ipsum Dolor2</div>
+                            <div class="blog-slider__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae voluptate repellendus magni illo ea animi?</div>
+                            <a href="#" class="footer-btn">READ MORE</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-slider__item swiper-slide">
+                        <div class="blog-slider__img">
+                            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt="">
+                        </div>
+                        <div class="blog-slider__content">
+                            <span class="blog-slider__code">26 December 2019</span>
+                            <div class="blog-slider__title">Lorem Ipsum Dolor</div>
+                            <div class="blog-slider__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae voluptate repellendus magni illo ea animi?</div>
+                            <a href="#" class="footer-btn">READ MORE</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="blog-slider__pagination"></div>
+            </div>
+        </section>
+
+
+        <script src="{{ asset('js/slider.js') }}" type="module" data-njs></script>
 
     </navigate-js>
 

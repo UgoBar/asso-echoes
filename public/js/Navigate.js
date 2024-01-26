@@ -86,8 +86,12 @@ export class NavigateJs {
         // Append the new container div to this.currentPage
         this.currentPage.appendChild(container);
 
+
         // <navigate-js> height must match height of <div clas="njs-container">
-        this.currentPage.style.height = `${container.clientHeight}px`;
+        setTimeout(() => {
+            // Throttle the height update to prevent layout thrashing
+            this.currentPage.style.height = container.clientHeight + 'px';
+        }, 200);
     }
 
     async handleNavLinkClick(e) {
@@ -155,9 +159,9 @@ export class NavigateJs {
 
         this.executeStyles(newContent);
 
-        // Use requestAnimationFrame to ensure styles are applied before getting the height
+        // <navigate-js> height must match height of <div clas="njs-container">
         setTimeout(() => {
-            console.log(container, container.clientHeight);
+            // Throttle the height update to prevent layout thrashing
             container.parentNode.style.height = container.clientHeight + 'px';
         }, 200);
     }

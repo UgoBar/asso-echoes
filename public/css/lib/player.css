@@ -20,7 +20,7 @@
 }
 
 #player-track {
-    padding: 14px 22px 11px 40px;
+    padding: 14px 22px 18px 40px;
     position: absolute;
     top: -150px;
     background-color: #fff;
@@ -29,6 +29,7 @@
     z-index: 0;
     width: 250px;
     left: -18px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 #player-track.active {

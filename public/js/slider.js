@@ -6,6 +6,21 @@ if (document.querySelector('navigate-js').classList.contains('njs-page-loaded'))
 
 function initSlider() {
 
+    var swiper = new Swiper('.blog-slider', {
+        spaceBetween: 30,
+        effect: 'fade',
+        loop: true,
+        mousewheel: {
+            invert: false,
+        },
+        // autoHeight: true,
+        pagination: {
+            el: '.blog-slider__pagination',
+            clickable: true,
+        }
+    });
+
+
     const { gsap, imagesLoaded } = window;
 
     const buttons = {

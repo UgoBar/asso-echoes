@@ -48,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
         let currentScrollTop = window.scrollY;
 
         let headerSize = isMobile ? 85 + 51 : 85;
-        console.log(headerSize)
 
         if (currentScrollTop > headerSize && currentScrollTop > lastScrollTop) {
             // Scrolling down, hide the header
@@ -228,7 +227,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.addEventListener('njs:done', function (event) {
             scrollEvents(true);
             counterUp();
-            initModalEvents();
         });
     }
 

@@ -220,23 +220,23 @@ button {
     height: var(--card-height);
     pointer-events: none;
     z-index: 1;
-    left: 3%;
+    left: 0;
     bottom: 7%;
+    width: 100%;
 }
 .infoList .info__wrapper {
     position: relative;
-    width: 100%;
     height: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
     perspective: 1000px;
     transform-style: preserve-3d;
+    transform: translateX(3%);
+    width: 94%;
 }
 
 .info {
-    /*margin-bottom: calc(var(--card-height) / 8);*/
-    /*margin-left: calc(var(--card-width) / 1.5);*/
     transform: translateZ(2rem);
     transition: transform var(--card-transition-duration) var(--card-transition-easing);
 }
@@ -244,7 +244,7 @@ button {
     position: relative;
     font-family: "Montserrat", sans-serif;
     font-size: calc(var(--card-width) * var(--text-size-offset, 0.2));
-    white-space: nowrap;
+    /*white-space: nowrap;*/
     color: #fff;
     width: fit-content;
 }
@@ -384,65 +384,6 @@ button {
     color: var(--primary);
 }
 
-@media screen and (max-width: 900px) {
-    :root {
-        --card-width: 250px;
-        --card-height: 250px;
-    }
-    .info .name, .info .location {
-        font-size: 2em;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    :root {
-        --card-width: 110px;
-        --card-height: 250px;
-    }
-    .info {
-        margin-left: unset;
-        margin-bottom: unset;
-    }
-    .info .name, .info .location {
-        font-size: 1.5em;
-    }
-    .app {
-        height: calc(100vh - 135px);
-    }
-    #insights {
-        background: unset;
-    }
-    .insight {
-        margin-bottom: 2em;
-    }
-    .insight-icon {
-        font-size: 41px;
-        width: 100px;
-        height: 100px;
-    }
-    .count {
-        font-size: 70px;
-    }
-}
-
-/*.support {*/
-/*    position: absolute;*/
-/*    right: 10px;*/
-/*    bottom: 10px;*/
-/*    padding: 10px;*/
-/*    display: flex;*/
-/*}*/
-/*.support a {*/
-/*    margin: 0 10px;*/
-/*    color: #fff;*/
-/*    font-size: 1.8rem;*/
-/*    backface-visibility: hidden;*/
-/*    transition: all 150ms ease;*/
-/*}*/
-/*.support a:hover {*/
-/*    transform: scale(1.1);*/
-/*}*/
-
 .btn.play-icon {
     position: absolute;
     left: calc(50% - 42px);
@@ -466,7 +407,6 @@ button {
     text-shadow: 4px 6px 19px #5f5757;
 }
 
-
 #news {
     display: flex;
     flex-direction: column;
@@ -477,6 +417,79 @@ button {
     max-width: 800px;
     margin: 0 auto 0.6em auto;
 }
+
+@media screen and (max-width: 900px) {
+    :root {
+        --card-width: 250px;
+        --card-height: 250px;
+    }
+    .info .name, .info .location {
+        font-size: 2em;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    :root {
+        --card-width: 110px;
+        --card-height: 200px;
+    }
+    .info {
+        margin-left: unset;
+        margin-bottom: unset;
+    }
+    .info .name, .info .location {
+        font-size: 1.5em;
+    }
+    .app {
+        height: calc(100vh - 135px);
+    }
+    .btn.play-icon {
+        top: -220px;
+    }
+
+    .cards__wrapper .card {
+        transform: translate(-50%, -100%) translateX(var(--card-translateX-offset)) translateY(var(--card-translateY-offset)) rotateY(var(--card-rotation-offset)) scale(var(--card-scale-offset));
+    }
+    .cardList__btn {
+        transform: translate(0%, -115px) !important;
+    }
+    #insights {
+        background: unset;
+    }
+    .insight {
+        margin-bottom: 2em;
+    }
+    .insight-icon {
+        font-size: 41px;
+        width: 100px;
+        height: 100px;
+    }
+    .count {
+        font-size: 70px;
+    }
+    #news h1 {
+        width: 90%;
+    }
+}
+
+/*.support {*/
+/*    position: absolute;*/
+/*    right: 10px;*/
+/*    bottom: 10px;*/
+/*    padding: 10px;*/
+/*    display: flex;*/
+/*}*/
+/*.support a {*/
+/*    margin: 0 10px;*/
+/*    color: #fff;*/
+/*    font-size: 1.8rem;*/
+/*    backface-visibility: hidden;*/
+/*    transition: all 150ms ease;*/
+/*}*/
+/*.support a:hover {*/
+/*    transform: scale(1.1);*/
+/*}*/
+
 .blog-slider {
     width: 95%;
     position: relative;

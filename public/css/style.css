@@ -119,6 +119,7 @@ a:hover {
     margin-bottom: 10em;
 }
 
+
 article {
     padding: 1em 0;
 }
@@ -421,7 +422,7 @@ footer .credits a:hover {
     z-index: 2;
 }
 
-#hello-asso-modal, .gallery-modal {
+.layout-modal, .gallery-modal {
     position: fixed;
     z-index: 100;
     left: 0;
@@ -436,7 +437,7 @@ footer .credits a:hover {
     transition: .5s ease-in-out all;
 }
 
-#hello-asso-modal.active, .gallery-modal.active {
+.layout-modal.active, .gallery-modal.active {
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
@@ -444,7 +445,7 @@ footer .credits a:hover {
 .modal-content {
     background-color: #fefefe;
     padding: 10px;
-    border: 1px solid #888;
+    /*border: 1px solid #888;*/
     width: 80%;
     border-radius: 1em;
     scrollbar-width: thin;
@@ -456,15 +457,19 @@ footer .credits a:hover {
     transform: scale(1);
 }
 
-.close-hello-asso-modal {
+.close-layout-modal {
     color: #aaa;
-    float: right;
-    font-size: 28px;
+    font-size: 41px;
     font-weight: bold;
     transition: .2s ease-in-out;
+    width: fit-content;
+    margin-left: auto;
+    margin-top: -11px;
+    padding-right: 5px;
+    display: block;
 }
-.close-hello-asso-modal:hover, .close-gallery-modal:hover,
-.close-hello-asso-modal:focus  .close-gallery-modal:focus {
+.close-layout-modal:hover, .close-gallery-modal:hover,
+.close-layout-modal:focus  .close-gallery-modal:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
@@ -665,6 +670,14 @@ article p {
 }
 
 @media screen and (max-width: 600px) {
+
+    h1 {
+        font-size: 27px;
+    }
+
+    .footer-btn {
+        font-size: 18px;
+    }
 
     #memory, #radiobox {
         padding-top: unset;

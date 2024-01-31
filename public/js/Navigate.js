@@ -96,14 +96,15 @@ export class NavigateJs {
 
     async handleNavLinkClick(e) {
         e.preventDefault();
-        const targetUrl = e.target.getAttribute('data-njs-href');
+
+        const targetUrl = e.target.closest('a').getAttribute('data-njs-href');
         await this.navigate(targetUrl);
 
         // Construct the full URL by appending the target URL to the base URL
         const baseUrl = window.location.protocol + '//' + window.location.host;
         const fullUrl = baseUrl + targetUrl;
 
-        // Change the URL in the browser's address bar
+        // Save URLS in the browser history
         window.history.pushState({ path: fullUrl }, '', fullUrl);
     }
 

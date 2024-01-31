@@ -1,5 +1,6 @@
 #team-members {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     padding-top: 2em;
 }
@@ -26,10 +27,6 @@
     text-transform: uppercase;
     font-family: 'Josefin sans', sans-serif;
     font-size: 21px;
-}
-
-.member-name {
-
 }
 
 .member-photo {

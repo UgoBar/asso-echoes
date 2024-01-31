@@ -1,0 +1,107 @@
+#team-members {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 2em;
+}
+
+.team-member {
+    overflow: hidden;
+    position: relative;
+    margin: 0 4px;
+}
+
+.member-name-role {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--primary);
+    padding: 22px 0;
+    text-align: center;
+    color: white;
+}
+
+.member-role {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'Josefin sans', sans-serif;
+    font-size: 21px;
+}
+
+.member-name {
+
+}
+
+.member-photo {
+    margin: 0;
+}
+
+.member-info {
+    display: none;
+    /*transform: translateY(-100%);*/
+}
+
+.team-member:hover .member-info {
+    /*transform: translateY(0);*/
+}
+
+.card-links {
+    display: flex;
+    justify-content: space-around;
+    margin: 8em 0;
+}
+
+.card {
+    background-color: #fff;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 1em 2em 2em 2em;
+    border-radius: 20px;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card i {
+    font-size: 65px;
+    color: var(--primary);
+    background-color: white;
+    margin-top: -58px;
+    display: block;
+    /* padding: 20px; */
+    border-radius: 50%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px -5px 8px 0px;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 0.4em;
+}
+
+.card-text {
+    margin-bottom: 1.1em;
+    font-family: 'Josefin sans', sans-serif;
+    font-size: 17px;
+    text-align: center;
+}
+
+.card .footer-btn {
+    font-size: 19px;
+}
+
+@media screen and (max-width: 600px) {
+
+    .team-member {
+        margin-top: 1em;
+    }
+
+    .card-links {
+        flex-direction: column;
+    }
+
+    .card {
+        width: 230px;
+        margin: 3em auto;
+    }
+}

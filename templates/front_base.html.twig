@@ -21,11 +21,11 @@
             <style>
                 @font-face {
                     font-family: 'icomoon';
-                    src:  url('{{ asset("fonts/icomoon.eot?7gvdg0") }}');
-                    src:  url('{{ asset("fonts/icomoon.eot?7gvdg0#iefix") }}') format('embedded-opentype'),
-                    url('{{ asset("fonts/icomoon.ttf?7gvdg0") }}') format('truetype'),
-                    url('{{ asset("fonts/icomoon.woff?7gvdg0") }}') format('woff'),
-                    url('{{ asset("fonts/icomoon.svg?7gvdg0#icomoon") }}') format('svg');
+                    src:  url('{{ asset("fonts/icomoon.eot?nx31xa") }}');
+                    src:  url('{{ asset("fonts/icomoon.eot?nx31xa#iefix") }}') format('embedded-opentype'),
+                    url('{{ asset("fonts/icomoon.ttf?nx31xa") }}') format('truetype'),
+                    url('{{ asset("fonts/icomoon.woff?nx31xa") }}') format('woff'),
+                    url('{{ asset("fonts/icomoon.svg?nx31xa#icomoon") }}') format('svg');
                     font-weight: normal;
                     font-style: normal;
                     font-display: block;
@@ -42,30 +42,32 @@
                     -webkit-font-smoothing: antialiased;
                     -moz-osx-font-smoothing: grayscale;
                 }
-                .icon-calendar:before {
-                    content: "\e907";
-                }
-                .icon-headset:before {
-                    content: "\e903";
-                }
-                .icon-micro:before {
-                    content: "\e904";
-                }
-                .icon-radiobox:before {
-                    content: "\e905";
-                }
-                .icon-wave:before {
-                    content: "\e906";
-                }
-                .icon-podcast:before {
-                    content: "\e900";
-                }
-                .icon-elder:before {
-                    content: "\e901";
-                }
-                .icon-radio:before {
-                    content: "\e902";
-                }
+                .icon-facebook:before { content: "\e916"; }
+                .icon-instagram:before { content: "\e917"; }
+                .icon-linkedin:before { content: "\e918"; }
+                .icon-mail:before { content: "\e919"; }
+                .icon-clock:before { content: "\e90e"; font-weight: bold; }
+                .icon-pin:before { content: "\e90f"; }
+                .icon-chevron-left:before { content: "\e910"; }
+                .icon-chevron-right:before { content: "\e911"; }
+                .icon-next:before { content: "\e912"; }
+                .icon-play:before { content: "\e913"; }
+                .icon-previous:before { content: "\e914"; }
+                .icon-times:before { content: "\e915"; }
+                .icon-heart-filled:before { content: "\e909"; }
+                .icon-heart-unfilled:before { content: "\e90a"; }
+                .icon-charity:before { content: "\e90b"; }
+                .icon-broadcast:before { content: "\e90c"; }
+                .icon-volunteer:before { content: "\e90d"; }
+                .icon-hero:before { content: "\e908"; }
+                .icon-calendar:before { content: "\e907"; }
+                .icon-headset:before { content: "\e903"; }
+                .icon-micro:before { content: "\e904"; }
+                .icon-radiobox:before { content: "\e905"; }
+                .icon-wave:before { content: "\e906"; }
+                .icon-podcast:before { content: "\e900"; }
+                .icon-elder:before { content: "\e901"; }
+                .icon-radio:before { content: "\e902"; }
             </style>
         {% endblock %}
 
@@ -88,7 +90,7 @@
                 </div>
             </div>
             <div class="header-btn donate-wrapper" data-modal-id="hello-asso-modal">
-                <i class="far fa-heart" aria-hidden="true"></i>
+                <i class="icon-heart-unfilled" aria-hidden="true"></i>
                 <span class="fw-bold josefin">Faire un don</span>
             </div>
             <div class="header-btn podcast-wrapper" data-modal-id="podcast-modal">
@@ -111,7 +113,7 @@
                         </div>
                         <div class="control">
                             <div class="button" id="play-pause-button">
-                                <i class="fas fa-play"></i>
+                                <i class="icon-play"></i>
                             </div>
                         </div>
                         <div class="control">
@@ -165,7 +167,7 @@
                             <span class="menu-title">Accueil</span>
                             <div class="nav-links">
                                 <div class="go-back-mobile-nav">
-                                    <span><i class="fas fa-long-arrow-alt-left"></i> Retour</span>
+                                    <span><i class="icon-previous"></i> Retour</span>
                                     <span class="ariane">Accueil</span>
                                 </div>
                                 <a href="{{ path('front_home') }}" data-njs-href="{{ path('front_home') }}">Retour à la case départ</a>
@@ -175,11 +177,11 @@
                             <span class="menu-title">Echoes</span>
                             <div class="nav-links">
                                 <div class="go-back-mobile-nav">
-                                    <span><i class="fas fa-long-arrow-alt-left"></i> Retour</span>
+                                    <span><i class="icon-previous"></i> Retour</span>
                                     <span class="ariane">Echoes</span>
                                 </div>
                                 <a href="#">L'association</a>
-                                <a href="#">L’équipe</a>
+                                <a href="{{ path('front_team') }}" data-njs-href="{{ path('front_team') }}">L’équipe</a>
                                 <a href="{{ path('front_radiobox') }}" data-njs-href="{{ path('front_radiobox') }}">La radiobox</a>
                             </div>
                         </div>
@@ -187,7 +189,7 @@
                             <span class="menu-title">Les ateliers</span>
                             <div class="nav-links">
                                 <div class="go-back-mobile-nav">
-                                    <span><i class="fas fa-long-arrow-alt-left"></i> Retour</span>
+                                    <span><i class="icon-previous"></i> Retour</span>
                                     <span class="ariane">Les Ateliers</span>
                                 </div>
                                 <a href="{{ path('front_memory_box') }}" data-njs-href="{{ path('front_memory_box') }}">La Boîte à souvenirs</a>
@@ -199,7 +201,7 @@
                             <span class="menu-title">Espace Pro</span>
                             <div class="nav-links">
                                 <div class="go-back-mobile-nav">
-                                    <span><i class="fas fa-long-arrow-alt-left"></i> Retour</span>
+                                    <span><i class="icon-previous"></i> Retour</span>
                                     <span class="ariane">Espace Pro</span>
                                 </div>
                                 <a href="#">Revue de presse</a>
@@ -212,7 +214,7 @@
                             <span class="menu-title">Contact</span>
                             <div class="nav-links">
                                 <div class="go-back-mobile-nav">
-                                    <span><i class="fas fa-long-arrow-alt-left"></i> Retour</span>
+                                    <span><i class="icon-previous"></i> Retour</span>
                                     <span class="ariane">Contact</span>
                                 </div>
                                 <a href="#">Envoyez nous un mail</a>
@@ -221,9 +223,9 @@
                     </div>
                 </nav>
                 <aside>
-                    <button class="btn btn-rect btn-black"><i class="fas fa-hand-holding-heart"></i> Devenir adhérent</button>
-                    <button class="btn btn-rect btn-black"><i class="fas fa-podcast"></i> Inscription newsletter</button>
-                    <button class="btn btn-rect btn-black"><i class="fas fa-headphones"></i> Organiser un atelier</button>
+                    <button class="btn btn-rect btn-black"><i class="icon-charity"></i> Devenir adhérent</button>
+                    <button class="btn btn-rect btn-black"><i class="icon-broadcast"></i> Inscription newsletter</button>
+                    <button class="btn btn-rect btn-black"><i class="icon-headset"></i> Organiser un atelier</button>
                     <button class="btn btn-rect btn-black"><i class="icon-radio" aria-hidden="true"></i> Louer notre radiobox</button>
                 </aside>
             </div>
@@ -231,7 +233,7 @@
 
         <div class="mobile-header-btn">
             <div class="header-btn donate-wrapper" data-modal-id="hello-asso-modal">
-                <i class="far fa-heart" aria-hidden="true"></i>
+                <i class="icon-heart-unfilled" aria-hidden="true"></i>
                 <span class="fw-bold josefin">Faire un don</span>
             </div>
             <div class="header-btn podcast-wrapper" data-modal-id="podcast-modal">
@@ -266,10 +268,10 @@
                     <div class="footer-left">
                         <img src="{{ asset('img/logo-asso-echoes-blanc.png') }}" alt="Logo de l'association echoes">
                         <div class="social-icons icon-circle icon-rotate">
-                            <a target="_blank" href="https://www.facebook.com/associationechoes" class="footer-social-link"><i class="fab fa-facebook-f facebook"></i></a>
-                            <a target="_blank" href="https://www.instagram.com/association_echoes/" class="footer-social-link"><i class="fab fa-instagram instagram"></i></a>
-                            <a target="_blank" href="https://www.linkedin.com/in/association-echoes/" class="footer-social-link"><i class="fab fa-linkedin-in linkedin"></i></a>
-                            <a href="mailto:association.echoes@gmail.com" class="footer-social-link"><i class="fas fa-paper-plane gmail"></i></a>
+                            <a target="_blank" href="https://www.facebook.com/associationechoes" class="footer-social-link"><i class="icon-facebook facebook"></i></a>
+                            <a target="_blank" href="https://www.instagram.com/association_echoes/" class="footer-social-link"><i class="icon-instagram instagram"></i></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/association-echoes/" class="footer-social-link"><i class="icon-linkedin linkedin"></i></a>
+                            <a href="mailto:association.echoes@gmail.com" class="footer-social-link"><i class="icon-mail gmail"></i></a>
                         </div>
                     </div>
                     <div class="footer-right">

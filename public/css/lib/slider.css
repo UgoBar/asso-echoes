@@ -129,7 +129,7 @@ button {
     top: 50%;
     transform: translateY(-50%);
     z-index: 100;
-    border-color: white;
+    border: unset;
 }
 .cardList__btn.btn--left {
     left: 0;
@@ -751,11 +751,14 @@ button {
 }
 
 .swiper-slide {
-    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+}
+
+#sessions .swiper-slide {
+    text-align: center;
 }
 
 .session {
@@ -814,4 +817,8 @@ button {
 .sessions-pagination .swiper-pagination-bullet-active {
     height: 11px;
     width: 30px;
+}
+
+.session-time i {
+    font-weight: bold;
 }

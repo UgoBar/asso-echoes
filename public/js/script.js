@@ -85,14 +85,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error(countUp.error);
             }
         });
-
-    }
-
-    function fillHeart() {
-        this.querySelector('i').classList.replace('far', 'fas');
-    }
-    function unFillHeart() {
-        this.querySelector('i').classList.replace('fas', 'far');
     }
 
     // BURGER MENU ANIMATION
@@ -214,9 +206,6 @@ document.addEventListener("DOMContentLoaded", function () {
         initModalEvents();
 
         window.addEventListener("scroll", scrollEvents);
-
-        document.querySelector('header .donate-wrapper').addEventListener('mouseenter', fillHeart);
-        document.querySelector('header .donate-wrapper').addEventListener('mouseleave', unFillHeart);
 
         document.addEventListener('njs:start', function (event) {
             if (document.getElementById('menu').classList.contains('active')) {

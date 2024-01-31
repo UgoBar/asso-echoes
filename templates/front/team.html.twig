@@ -1,0 +1,103 @@
+{% extends 'front_base.html.twig' %}
+
+{% block title %}Actualités{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block main %}
+
+    <navigate-js>
+
+        <link rel="stylesheet" href="{{ asset('css/team.css') }}" data-njs>
+
+        <section id="team">
+            <div class="container">
+                <h1>Le conseil d'administration</h1>
+
+                <p>Le conseil d'administration est composé de 3 membres élus par l'assemblée générale. Il se réunit au moins 3 fois par an.</p>
+
+                <section id="team-members">
+                    <div class="team-member reveal-type">
+                        <figure class="member-photo">
+                            <img src="{{ asset('img/team/echoes-barbara-rouveyrol.jpg') }}" alt="">
+                            <figcaption class="member-info">
+                                <div class="team-overlay"></div>
+                                <div class="blog-slider__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae voluptate repellendus magni illo ea animi?</div>
+                            </figcaption>
+                        </figure>
+                        <div class="member-name-role">
+                            <span class="member-role">Présidente</span>
+                            <div class="member-name">Barbara Rouveyrol</div>
+                        </div>
+                    </div>
+
+                    <div class="team-member reveal-type">
+                        <figure class="member-photo">
+                            <img src="{{ asset('img/team/echoes-natacha-cousin.jpg') }}" alt="">
+                            <figcaption class="member-info">
+                                <div class="team-overlay"></div>
+                                <div class="blog-slider__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae voluptate repellendus magni illo ea animi?</div>
+                            </figcaption>
+                        </figure>
+                        <div class="member-name-role">
+                            <span class="member-role">Trésorière</span>
+                            <div class="member-name">Natacha Cousin</div>
+                        </div>
+                    </div>
+
+                    <div class="team-member reveal-type">
+                        <figure class="member-photo">
+                            <img src="{{ asset('img/team/echoes-marie-lou.jpg') }}" alt="">
+                            <figcaption class="member-info">
+                                <div class="team-overlay"></div>
+                                <div class="blog-slider__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae voluptate repellendus magni illo ea animi?</div>
+                            </figcaption>
+                        </figure>
+                        <div class="member-name-role">
+                            <span class="member-role">Secrétaire</span>
+                            <div class="member-name">Benoit Laisney</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card-links reveal-type">
+                    <div class="card">
+                        <i class="icon-volunteer card-icon"></i>
+                        <div class="card-text">Adhérer à l'association en quelques clics :</div>
+                        <a class="footer-btn pointer">Adhérer</a>
+                    </div>
+                    <div class="card">
+                        <i class="icon-charity"></i>
+                        <div class="card-text">Vous aimeriez devenir bénévole ?</div>
+                        <a class="footer-btn pointer">Nous écrire</a>
+                    </div>
+                </section>
+
+            </div>
+        </section>
+
+        <script type="module" data-njs>
+            document.addEventListener('DOMContentLoaded', initTeam);
+
+            if (document.querySelector('navigate-js').classList.contains('njs-page-loaded')) {
+                initTeam();
+            }
+
+            function initTeam() {
+                const teamMembers = document.querySelectorAll('.team-member');
+
+                if (window.innerWidth > 900) {
+                    teamMembers.forEach((member) => {
+                        member.style.width = 90 / teamMembers.length + '%';
+                    });
+                }
+            }
+        </script>
+    </navigate-js>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

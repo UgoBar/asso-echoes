@@ -75,8 +75,14 @@ a:hover {
 .mt-0 {
     margin-top: 0;
 }
+.mb-0 {
+    margin-bottom: 0;
+}
 .d-none {
     display: none;
+}
+.pointer {
+    cursor: pointer;
 }
 .rotate-left {
     transform: rotate(270deg);
@@ -174,6 +180,7 @@ header .toggle-menu {
 .header-btn i {
     padding-bottom: 5px;
     padding-right: 8px;
+    font-size: 30px;
 }
 #podcast-wrapper i {
     font-size: 30px;
@@ -299,11 +306,13 @@ footer .credits a:hover {
 
 .social-icons {
     padding: 1em 0;
+    display: flex;
 }
 .social-icons a:hover {
     opacity: 1;
 }
 .social-icons i {
+    display: block;
     font-size: 1.8em;
     margin: 0 5px;
     width: 50px;
@@ -548,7 +557,7 @@ article p {
     opacity: 1;
 }
 
-#radiobox {
+#radiobox, #team {
     padding: 2em 2em 3em 2em;
 }
 #radiobox .hero-banner {
@@ -834,5 +843,12 @@ article p {
         width: 42px;
         height: 42px;
         line-height: 43px;
+    }
+    .rect-title {
+        clip-path: unset;
+    }
+    #radiobox, #team {
+        padding-left: 0;
+        padding-right: 0;
     }
 }

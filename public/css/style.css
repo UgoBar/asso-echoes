@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;400;600;700;800;900&display=swap');
+
 :root {
     --primary: rgb(255, 85, 0);
     --success: #014921;
@@ -30,10 +32,11 @@ a {
 }
 
 h1 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Kanit', sans-serif;
     font-size: 40px;
     text-transform: uppercase;
-    font-weight: 900;
+    font-weight: 800;
+    letter-spacing: 2px;
 }
 
 img {
@@ -376,8 +379,9 @@ footer .credits a:hover {
     color: white;
     background-color: var(--primary);
     width: fit-content;
-    font-weight: 900;
-    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-family: 'Kanit', sans-serif;
+    letter-spacing: 1px;
     text-transform: uppercase;
     margin-top: 10px;
     font-size: 23px;
@@ -504,8 +508,10 @@ footer .credits a:hover {
 
 .hero-banner {
     width: 100%;
-    height: 450px;
+    /*height: 450px;*/
+    height: calc(100vh - 85px);
     background-size: cover;
+    background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -517,7 +523,7 @@ footer .credits a:hover {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .hero-banner h1 {
@@ -527,6 +533,8 @@ footer .credits a:hover {
     font-size: 60px;
     margin-bottom: 0;
     letter-spacing: 7px;
+    /*text-shadow: 0 1px 0 #da996c, 0 2px 0 #ce895d, 0 3px 0 #dc874c, 0 4px 0 #d57038, 0 5px 0 #cf8383, 0 6px 0 #cd7c7c, 0 7px 0 #ca7474, 0 8px 0 #c76d6d, 0 0 5px rgba(230, 139, 139, 0.05), 0 -1px 1px rgba(236, 123, 44, 0.5), 0 9px 2px rgba(232, 77, 12, 0.3), 0 12px 3px rgba(232, 77, 12, 0.5), 0 15px 5px rgba(232, 77, 12, 0.5);*/
+    /*text-shadow: 2px -1px 0 #ffb87b, 2px -2px 0 #ffa259, 2px -3px 0 #ff8c24, 2px -4px 0 #ff7300;*/
 }
 
 .article-svg-animated {

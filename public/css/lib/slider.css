@@ -242,7 +242,7 @@ button {
 }
 .info .text {
     position: relative;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Kanit", sans-serif;
     font-size: calc(var(--card-width) * var(--text-size-offset, 0.2));
     /*white-space: nowrap;*/
     color: #fff;
@@ -310,7 +310,7 @@ button {
 }
 .loading__wrapper .loader--text {
     color: #fff;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Kanit", sans-serif;
     font-weight: 500;
     margin-bottom: 1.4rem;
 }
@@ -782,7 +782,7 @@ button {
     left: 50%;
     top: 47%;
     font-weight: 900;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Kanit', sans-serif;
     font-size: 34px;
     transform: translateX(-50%);
     color: var(--primary);
@@ -802,8 +802,9 @@ button {
 .session-title {
     font-size: 20px;
     font-weight: 600;
-    font-family: 'Josefin sans', sans-serif;
+    font-family: 'Kanit', sans-serif;
     text-transform: capitalize;
+    letter-spacing: 1px;
 }
 
 .sessions-pagination {

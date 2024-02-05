@@ -15,7 +15,7 @@ body {
     font-family: 'Nunito', sans-serif;
     min-height: 100vh;
     position: relative;
-    background-image: url("../img/background.jpg");
+    background-image: url("../../img/background.jpg");
     background-repeat: repeat;
     background-size: 500px 300px;
     display: flex;
@@ -387,6 +387,7 @@ footer .credits a:hover {
     font-size: 23px;
     border: 2px solid var(--primary);
     transition: .2s ease-in-out;
+    cursor: pointer;
 }
 .footer-btn:hover {
     color: var(--primary);
@@ -569,7 +570,7 @@ article p {
     padding: 2em 2em 3em 2em;
 }
 #radiobox .hero-banner {
-    background-image: url("../img/radiobox-echoes-making-waves.png");
+    background-image: url("../../img/radiobox-echoes-making-waves.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

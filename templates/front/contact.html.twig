@@ -1,0 +1,57 @@
+{% extends 'front_base.html.twig' %}
+
+{% block title %}Actualités{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block main %}
+
+    <navigate-js>
+
+        <link rel="stylesheet" href="{{ asset('css/front/contact.css') }}" data-njs>
+
+        <section id="contact">
+{#        <section id="contact" style="background-image: url('{{ asset('img/contact/contact-bg-desktop.png') }}')">#}
+            <div class="image-and-bg">
+                <div class="img" style="background-image: url('{{ asset('img/contact/contact_background.png') }}')"></div>
+            </div>
+            <div class="form-section reveal-type">
+                <h1>Contact</h1>
+                <p>Vous avez une question, une suggestion ou une demande de partenariat ? N'hésitez pas à nous contacter en remplissant le formulaire ci-dessous.</p>
+
+                <form action="">
+                    <div class='field required'>
+{#                        <label class='label required' for='name'>Full name</label>#}
+                        <input class='text-input' id='name' name='name' required type='text' placeholder="Nom complet">
+                    </div>
+                    <div class='field required'>
+{#                        <label class='label required' for='email'>Email</label>#}
+                        <input class='text-input' id='email' name='email' required type='text' placeholder="Email">
+                    </div>
+                    <div class='field required'>
+{#                        <label class='label required' for='subject'>Sujet</label>#}
+                        <input class='text-input' id='subject' name='subject' required type='text' placeholder="Sujet">
+                    </div>
+                    <div class='field required'>
+{#                        <label class='label' for='message'>Message</label>#}
+                        <textarea class='textarea' cols='50' id='message' name='message' rows='4' placeholder="Votre message"></textarea>
+                    </div>
+                    <input type="submit" value="Envoyer" class="footer-btn">
+                </form>
+            </div>
+        </section>
+
+        <script data-njs>
+            if (document.querySelector('navigate-js').classList.contains('njs-page-loaded')) {
+                console.log('page contact loaded');
+            }
+        </script>
+
+    </navigate-js>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

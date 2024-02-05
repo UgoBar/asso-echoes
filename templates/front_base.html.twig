@@ -16,7 +16,7 @@
                     rel="stylesheet"
                     href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
             />
-            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/front/style.css') }}">
 
             <style>
                 @font-face {
@@ -217,7 +217,7 @@
                                     <span><i class="icon-previous"></i> Retour</span>
                                     <span class="ariane">Contact</span>
                                 </div>
-                                <a href="#">Envoyez nous un mail</a>
+                                <a href="{{ path('front_contact') }}" data-njs-href="{{ path('front_contact') }}">Envoyez nous un mail</a>
                             </div>
                         </div>
                     </div>

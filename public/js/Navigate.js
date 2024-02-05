@@ -55,6 +55,10 @@ export class NavigateJs {
                 link.addEventListener('click', (event) => this.handleNavLinkClick(event));
             });
 
+            window.addEventListener('resize', () => {
+                this.resizeContainerHeight(this.currentPage.querySelector('.njs-container').clientHeight);
+            });
+
             // Emit the "njs:init" event
             this.emitEvent('njs:init');
 
@@ -86,12 +90,16 @@ export class NavigateJs {
         // Append the new container div to this.currentPage
         this.currentPage.appendChild(container);
 
-
         // <navigate-js> height must match height of <div clas="njs-container">
         setTimeout(() => {
             // Throttle the height update to prevent layout thrashing
-            this.currentPage.style.height = container.clientHeight + 'px';
+            this.resizeContainerHeight(container.clientHeight);
+            // this.currentPage.style.height = container.clientHeight + 'px';
         }, 200);
+    }
+
+    resizeContainerHeight(height) {
+        this.currentPage.style.height = height + 'px';
     }
 
     async handleNavLinkClick(e) {

@@ -60,8 +60,10 @@ class ContactController extends AbstractController
 
         // Add contact to newsletter with Mailjet
         $mj = new Client($this->getParameter('app.mailjet_access_key'), $this->getParameter('app.mailjet_secret_key'), true, ['version' => 'v3.1']);
+//        $body = ['ContactAlt' => $email, 'ListID' => 256913];
         $body = ['Email' => $email];
 
+//        $response = $mj->post(Resources::$Listrecipient, ['body' => $body]);
         $response = $mj->post(Resources::$ContactslistManagecontact, ['id' => '256913', 'body' => $body]);
 
         // Vérifiez la réponse de Mailjet (ajustez selon la documentation Mailjet)

@@ -24,7 +24,8 @@ class ContactController extends AbstractController
     {
         if ($request->isMethod('POST')) {
             $data = $request->request->all();
-            $this->sendEmail($mailer, $validator, $data);
+//            $this->sendEmail($mailer, $validator, $data);
+            $this->sendMailViaMailjet($validator, $data);
         }
 
         return $this->render('front/contact.html.twig', [
@@ -138,5 +139,77 @@ class ContactController extends AbstractController
 
         $this->addFlash('success', 'Votre email a bien été envoyé ! Nous vous répondrons dans les plus brefs délais.');
         return $this->redirectToRoute('front_contact');
+    }
+
+    public function sendMailViaMailjet(ValidatorInterface $validator, array $data)
+    {
+        // Validate data
+        $constraints = new Assert\Collection([
+            'name' => [
+                new Assert\NotBlank(null, 'Le nom doit être renseigné'),
+            ],
+            'email' => [
+                new Assert\NotBlank(null, 'L\'email doit être renseigné'),
+                new Assert\Email(null, 'L\'email n\'est pas valide'),
+            ],
+            'subject' => [
+                new Assert\NotBlank(null, 'Le sujet doit être renseigné'),
+            ],
+            'message' => [
+                new Assert\NotBlank(),
+                new Assert\Regex([
+                    'pattern' => '/^[^<>;=#{}%^*()\/]+$/',
+                    'message' => 'Le message ne doit pas contenir de caractères spéciaux.',
+                ]),
+            ],
+        ]);
+
+        $errors = $validator->validate($data, $constraints);
+
+        if (count($errors) > 0) {
+            foreach ($errors as $error) {
+                $this->addFlash('error', $error->getMessage());
+            }
+            return $this->redirectToRoute('front_contact');
+        }
+
+        // Initialisation du client Mailjet
+        $mj = new Client(
+            $this->getParameter('app.mailjet_access_key'),
+            $this->getParameter('app.mailjet_secret_key'),
+            true, // Mode sandbox (à désactiver en production)
+            ['version' => 'v3.1']
+        );
+
+        // Paramètres de l'e-mail
+        $body = [
+            'Messages' => [
+                [
+                    'From' => [
+                        'Email' => $data['email'],
+                        'Name' => $data['name'],
+                    ],
+                    'To' => [
+                        [
+                            'Email' => 'ugo17190@gmail.com',
+                            'Name' => 'Ugo Barathe',
+                        ],
+                    ],
+                    'Subject' => $data['subject'],
+                    'HTMLPart' => '<p>'. $data['message'] .'</p>',
+                ],
+            ],
+        ];
+
+        // Envoi de l'e-mail
+        $response = $mj->post(Resources::$Email, ['body' => $body]);
+
+        // Traitement de la réponse
+        if ($response->success()) {
+            $this->addFlash('success', 'Votre email a bien été envoyé ! Nous vous répondrons dans les plus brefs délais.');
+            return $this->redirectToRoute('front_contact');
+        } else {
+            return new Response('Erreur lors de l\'envoi de l\'e-mail: ' . $response->getStatus());
+        }
     }
 }

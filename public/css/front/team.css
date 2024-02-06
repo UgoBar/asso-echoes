@@ -1,3 +1,7 @@
+navigate-js {
+    height: 100vh;
+}
+
 #team-members {
     display: flex;
     justify-content: center;
@@ -9,6 +13,7 @@
     overflow: hidden;
     position: relative;
     margin: 0 4px;
+    width: calc(100% / 3 - 8px);
 }
 
 .member-name-role {
@@ -68,7 +73,7 @@
 .card-links {
     display: flex;
     justify-content: space-around;
-    margin: 8em 0;
+    padding: 8em 0;
 }
 
 .card {
@@ -106,22 +111,32 @@
     text-align: center;
 }
 
-.card .footer-btn {
+.card .main-btn {
     font-size: 19px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1024px) {
 
     .team-member {
         margin-top: 1em;
-    }
-
-    .card-links {
-        flex-direction: column;
+        height: 560px;
     }
 
     .card {
         width: 230px;
         margin: 3em auto;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #team-members {
+        flex-direction: column;
+    }
+    .team-member {
+        width: 100%;
+        margin: 0.4em 0;
+    }
+    .card-links {
+        flex-direction: column;
     }
 }

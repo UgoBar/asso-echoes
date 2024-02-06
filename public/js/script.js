@@ -2,8 +2,9 @@ import { NavigateJs } from './Navigate.js';
 import { CountUp } from './CountUp.js';
 
 document.addEventListener("DOMContentLoaded", function () {
-    let lastScrollTop = 0,
-        isMobile      = false;
+    let lastScrollTop  = 0,
+        newsletterForm = document.getElementById('newsletter-form'),
+        isMobile       = false;
 
     function revealElem(init, elem, forSvg) {
 
@@ -52,11 +53,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (currentScrollTop > headerSize && currentScrollTop > lastScrollTop) {
             // Scrolling down, hide the header
             document.querySelector("header").style.transform = "translateY(-100%)";
-            document.querySelector(".mobile-header-btn").style.transform = "translateY(-300%)";
         } else {
             // Scrolling up, show the header
             document.querySelector("header").style.transform = "translateY(0)";
-            document.querySelector(".mobile-header-btn").style.transform = "translateY(0)";
         }
 
         lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
@@ -217,8 +216,106 @@ document.addEventListener("DOMContentLoaded", function () {
             scrollEvents(true);
             counterUp();
         });
+
+        document.querySelectorAll('.toast-alert').forEach((toastAlert, index) => {
+            setTimeout(() => {
+                toast({
+                    title: toastAlert.dataset.toastTitle,
+                    message: toastAlert.dataset.toastMessage,
+                    type: toastAlert.dataset.toastType,
+                    duration: toastAlert.dataset.toastDuration
+                });
+            }, 150);
+        });
+
+        document.getElementById('newsletter-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            addContactToNewsletter();
+        });
+    }
+
+    function addContactToNewsletter() {
+        const email = newsletterForm.querySelector('#newsletter-email');
+        let modal = document.getElementById('newsletter-modal');
+        let overlay = document.querySelector('.overlay');
+
+        // Verify email
+        if (!isValidEmail(email.value)) {
+            toast({title: 'Erreur', message: 'Email invalide', type: 'error', duration: 10000});
+            return;
+        }
+
+        // Add contact to newsletter
+        const formData = new FormData(newsletterForm);
+        let route = newsletterForm.getAttribute('data-route');
+
+        fetch(route, { method: 'POST', body: formData }).then((response) => {
+            if (response.ok) {
+                // Show success notification
+                toast({title: 'Super !', message: response.message, type: 'success', duration: 10000});
+            } else {
+                // Show error notification
+                toast({title: 'Merde...', message: 'Ca marche pas', type: 'error', duration: 10000});
+            }
+        });
+
+        // Close modal
+        openCloseModal(modal, overlay);
+    }
+
+    function isValidEmail(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
     }
 
     initApp();
 });
 // -- [END] DOM CONTENT LOADED
+
+
+// Toast function
+window.toast = ({ title = "", message = "", type = "info", duration = 3000 }) => {
+    const main = document.getElementById("toast");
+    if (main) {
+        const toast = document.createElement("div");
+
+        // Auto remove toast
+        const autoRemoveId = setTimeout(function () {
+            main.removeChild(toast);
+        }, duration + 1000);
+
+        // Remove toast when clicked
+        toast.onclick = function (e) {
+            if (e.target.closest(".toast__close")) {
+                main.removeChild(toast);
+                clearTimeout(autoRemoveId);
+            }
+        };
+
+        const icons = {
+            success: "fas fa-check-circle",
+            info: "fas fa-info-circle",
+            warning: "fas fa-exclamation-circle",
+            error: "fas fa-exclamation-circle"
+        };
+        const icon = icons[type];
+        const delay = (duration / 1000).toFixed(2);
+
+        toast.classList.add("toast", `toast--${type}`);
+        toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s ${delay}s forwards`;
+
+        toast.innerHTML = `
+                    <div class="toast__icon">
+                        <i class="${icon}"></i>
+                    </div>
+                    <div class="toast__body">
+                        <h3 class="toast__title">${title}</h3>
+                        <p class="toast__msg">${message}</p>
+                    </div>
+                    <div class="toast__close">
+                        <i class="fas fa-times"></i>
+                    </div>
+                `;
+        main.appendChild(toast);
+    }
+}

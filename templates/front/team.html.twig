@@ -53,7 +53,7 @@
                             </figcaption>
                         </figure>
                         <div class="member-name-role">
-                            <span class="member-role">Secrétaire</span>
+                            <span class="member-role">Administrateur</span>
                             <div class="member-name">Benoit Laisney</div>
                         </div>
                     </div>
@@ -63,35 +63,33 @@
                     <div class="card">
                         <i class="icon-volunteer card-icon"></i>
                         <div class="card-text">Adhérer à l'association en quelques clics :</div>
-                        <a class="footer-btn pointer">Adhérer</a>
+                        <a class="main-btn pointer">Adhérer</a>
                     </div>
                     <div class="card">
                         <i class="icon-charity"></i>
                         <div class="card-text">Vous aimeriez devenir bénévole ?</div>
-                        <a class="footer-btn pointer">Nous écrire</a>
+                        <a class="main-btn pointer">Nous écrire</a>
                     </div>
                 </section>
 
             </div>
         </section>
 
-        <script type="module" data-njs>
-            document.addEventListener('DOMContentLoaded', initTeam);
+{#        <script type="module" data-njs>#}
+{#            document.addEventListener('DOMContentLoaded', initTeam);#}
+{#            document.addEventListener('resize', initTeam);#}
 
-            if (document.querySelector('navigate-js').classList.contains('njs-page-loaded')) {
-                initTeam();
-            }
+{#            if (document.querySelector('navigate-js').classList.contains('njs-page-loaded')) {#}
+{#                initTeam();#}
+{#            }#}
 
-            function initTeam() {
-                const teamMembers = document.querySelectorAll('.team-member');
-
-                if (window.innerWidth > 900) {
-                    teamMembers.forEach((member) => {
-                        member.style.width = 90 / teamMembers.length + '%';
-                    });
-                }
-            }
-        </script>
+{#            function initTeam() {#}
+{#                const teamMembers = document.querySelectorAll('.team-member');#}
+{#                teamMembers.forEach((member) => {#}
+{#                    member.style.width = window.innerWidth > 900 ? 90 / teamMembers.length + '%' : 'unset';#}
+{#                });#}
+{#            }#}
+{#        </script>#}
     </navigate-js>
 {% endblock %}
 

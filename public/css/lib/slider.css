@@ -441,7 +441,7 @@ button {
         font-size: 1.5em;
     }
     .app {
-        height: calc(100vh - 135px);
+        /*height: calc(100vh - 135px);*/
     }
     .btn.play-icon {
         top: -220px;
@@ -691,7 +691,7 @@ button {
         text-align: center;
         padding: 0 30px;
     }
-    .blog-slider__content .footer-btn {
+    .blog-slider__content .main-btn {
         display: block;
         margin: 0 auto;
     }

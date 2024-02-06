@@ -1,13 +1,38 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Echoes - {% block title %}{% endblock %}</title>
+        <title>Association Echoes</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <meta name="description" content="Bienvenue sur le site de l’association Echoes qui a pour but de promouvoir des projets culturels et solidaires luttant contre l’isolement, à travers la production de podcasts radio avec des seniors dans la métropole d’Aix-Marseille.">
+
+        <!-- Favicon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/favicon/apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicon/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon/favicon-16x16.png') }}">
+        <link rel="manifest" href="{{ asset('img/favicon/site.webmanifest') }}">
+
+        <!-- Facebook Meta Tags -->
+        <meta property="og:url" content="https://www.kaizenmouse.com/">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Association Echoes">
+        <meta property="og:description" content="L’association Echoes a pour but de promouvoir des projets culturels et solidaires luttant contre l’isolement, à travers la production de podcasts radio avec des seniors dans la métropole d’Aix-Marseille.">
+        <meta property="og:image" content="{{ asset('img/logo-asso-echoes-blanc.png') }}">
+
+        <!-- Twitter Meta Tags -->
+        <meta property="twitter:url" content="https://www.kaizenmouse.com/">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Association Echoes">
+        <meta property="twitter:domain" content="kaizenmouse.com">
+        <meta name="twitter:description" content="L’association Echoes a pour but de promouvoir des projets culturels et solidaires luttant contre l’isolement, à travers la production de podcasts radio avec des seniors dans la métropole d’Aix-Marseille.">
+        <meta name="twitter:image" content="{{ asset('img/logo-asso-echoes-blanc.png') }}">
+
+        <!-- GOOGLE FONTS -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400;500;700&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap" rel="stylesheet">
+
+        <!-- CSS -->
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
             <link rel="stylesheet" href="{{ asset('css/lib/burger.css') }}">
@@ -89,69 +114,15 @@
                     </div>
                 </div>
             </div>
-            <div class="header-btn donate-wrapper" data-modal-id="hello-asso-modal">
-                <i class="icon-heart-unfilled" aria-hidden="true"></i>
-                <span class="fw-bold josefin">Faire un don</span>
-            </div>
-            <div class="header-btn podcast-wrapper" data-modal-id="podcast-modal">
-                <i class="icon-radio" aria-hidden="true"></i>
-                <span class="fw-bold josefin">Les podcast</span>
-            </div>
-            <div class="header-player">
-                <div id="album-art">
-                    <img src="{{ asset('img/podcast/echoes-podcast-1.png') }}" class="active" id="_1">
-                    <img src="{{ asset('img/podcast/echoes-podcast-2.png') }}" id="_2">
-                    <img src="{{ asset('img/podcast/echoes-podcast-3.png') }}" id="_3">
-                    <div id="buffer-box">Buffering ...</div>
+            <div class="header-buttons">
+                <div class="header-btn donate-wrapper" data-modal-id="hello-asso-modal">
+{#                <div class="header-btn donate-wrapper" data-modal-id="hello-asso-modal">#}
+                    <i class="icon-heart-unfilled" aria-hidden="true"></i>
+                    <span class="fw-bold josefin">Faire un don</span>
                 </div>
-                <div id="player-controls">
-                    <div class="controls">
-                        <div class="control">
-                            <div class="button" id="play-previous">
-                                <i class="fas fa-backward"></i>
-                            </div>
-                        </div>
-                        <div class="control">
-                            <div class="button" id="play-pause-button">
-                                <i class="icon-play"></i>
-                            </div>
-                        </div>
-                        <div class="control">
-                            <div class="button" id="play-next">
-                                <i class="fas fa-forward"></i>
-                            </div>
-                        </div>
-                        <div class="control">
-                            <div class="button" id="volume">
-                                <i class="fas fa-volume-up"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="player-track">
-                    <div id="track-name"></div>
-                    <div id="album-name"></div>
-                    <div id="track-time">
-                        <div id="current-time"></div>
-                        <div id="track-length"></div>
-                    </div>
-                    <div id="s-area">
-                        <div id="ins-time"></div>
-                        <div id="s-hover"></div>
-                        <div id="seek-bar"></div>
-                    </div>
-                    <div id="volume-container">
-                        <div class="hidden-input">
-                            <input id="volume-input" type="range" min="0" max="100" value="100">
-                        </div>
-                        <div id="volume-range-icon">
-                            <div id="volume-off" class="active"><i class="fas fa-volume-off"></i></div>
-                            <div id="volume-on" class="active"><i class="fas fa-volume-up"></i></div>
-                        </div>
-                        <div id="fake-input-area">
-                            <div id="volume-area"></div>
-                        </div>
-                    </div>
+                <div class="header-btn podcast-wrapper" data-modal-id="podcast-modal">
+                    <i class="icon-radio" aria-hidden="true"></i>
+                    <span class="fw-bold josefin">Les podcast</span>
                 </div>
             </div>
         </header>
@@ -224,21 +195,10 @@
                 </nav>
                 <aside>
                     <button class="btn btn-rect btn-black"><i class="icon-charity"></i> Devenir adhérent</button>
-                    <button class="btn btn-rect btn-black"><i class="icon-broadcast"></i> Inscription newsletter</button>
+                    <button class="btn btn-rect btn-black" data-modal-id="newsletter-modal" onclick="burgerTime()"><i class="icon-broadcast"></i> Inscription newsletter</button>
                     <button class="btn btn-rect btn-black"><i class="icon-headset"></i> Organiser un atelier</button>
                     <button class="btn btn-rect btn-black"><i class="icon-radio" aria-hidden="true"></i> Louer notre radiobox</button>
                 </aside>
-            </div>
-        </div>
-
-        <div class="mobile-header-btn">
-            <div class="header-btn donate-wrapper" data-modal-id="hello-asso-modal">
-                <i class="icon-heart-unfilled" aria-hidden="true"></i>
-                <span class="fw-bold josefin">Faire un don</span>
-            </div>
-            <div class="header-btn podcast-wrapper" data-modal-id="podcast-modal">
-                <i class="icon-radio" aria-hidden="true"></i>
-                <span class="fw-bold josefin">Les podcast</span>
             </div>
         </div>
 
@@ -256,9 +216,31 @@
             </div>
         </div>
 
+        <div id="newsletter-modal" class="layout-modal">
+            <div id="newsletter-modal-card" class="modal-content">
+                <span class="close-layout-modal">&times;</span>
+                <div class="rainbow"><span></span><span></span></div>
+                <div class="newsletter-wrapper">
+                    <h3 class="newsletter-title">Inscription Newsletter</h3>
+                    <p class="newsletter-text">Pour ne pas rater un seul podcast et recevoir les dernières actualités de l'asso !</p>
+                    <form id="newsletter-form" method="post" data-route="{{ path('add_contact_news') }}">
+                        <input id="newsletter-email" name="newsletter-email" class="text-center" type="email" placeholder="mon_mail@gmail.com"/>
+                        <input class="main-btn" type="submit" value="Envoyer"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <main>
             <div class="overlay"></div>
             <a class="d-none" href="https://storyset.com/people">People illustrations by Storyset</a>
+            {% for message in app.session.flashbag.get('success') %}
+                <div class="d-none toast-alert" data-toast-title="Super !" data-toast-message="{{ message }}" data-toast-type="success" data-toast-duration="10000"></div>
+            {% endfor %}
+            {% for message in app.session.flashbag.get('error') %}
+                <div class="d-none toast-alert" data-toast-title="Erreur" data-toast-message="{{ message }}" data-toast-type="error" data-toast-duration="10000"></div>
+            {% endfor %}
+            <div id="toast"></div>
             {% block main %}{% endblock %}
         </main>
 
@@ -271,14 +253,17 @@
                             <a target="_blank" href="https://www.facebook.com/associationechoes" class="footer-social-link"><i class="icon-facebook facebook"></i></a>
                             <a target="_blank" href="https://www.instagram.com/association_echoes/" class="footer-social-link"><i class="icon-instagram instagram"></i></a>
                             <a target="_blank" href="https://www.linkedin.com/in/association-echoes/" class="footer-social-link"><i class="icon-linkedin linkedin"></i></a>
-                            <a href="mailto:association.echoes@gmail.com" class="footer-social-link"><i class="icon-mail gmail"></i></a>
+                            <a href="mailto:association.echoes@gmail.com" class="footer-social-link pointer"><i class="icon-mail gmail"></i></a>
                         </div>
                     </div>
                     <div class="footer-right">
                         <p>Association loi 1901</p>
                         <p>SIRET : 793032103 00038</p>
                         <p>Ancien Chemin du Coton Rouge, 13100 Aix-en-Provence</p>
-                        <a href="#" class="footer-btn">Contactez nous</a>
+                        <div class="footer-buttons">
+                            <a href="#" class="main-btn">Contactez nous</a>
+                            <span class="main-btn" data-modal-id="newsletter-modal">Newsletter</span>
+                        </div>
                     </div>
                 </section>
             </div>
@@ -286,24 +271,6 @@
         </footer>
 
         {% block javascripts %}
-            <script>
-                const albums = [
-                    "La boite à souvenir",
-                    "Rencontre avec l'Ephad Roger Duquesne",
-                    "Rencontre avec l'Ephad Roger Duquesne",
-                ];
-                const trackNames = [
-                    "Bienvenue à l'Ephad",
-                    "Le rêve de la sirène",
-                    "Les princes du rap",
-                ];
-                const albumArtworks = ["_1", "_2", "_3"];
-                const trackUrl = [
-                    "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/1.mp3",
-                    "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/2.mp3",
-                    "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/3.mp3",
-                ];
-            </script>
             <script src="https://kit.fontawesome.com/73ab01ebea.js" crossorigin="anonymous"></script>
             <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.3/gsap.min.js"></script>

@@ -1,7 +1,10 @@
+:root {
+    --color-light: #fecc83;
+}
+
 body {
     background-color: #FEA525;
     background-image: unset;
-
 }
 
 navigate-js {
@@ -16,7 +19,7 @@ navigate-js {
 
 .image-and-bg {
     width: 45%;
-    background-color: #fecc83;
+    background-color: var(--color-light);
     height: 100%;
     clip-path: ellipse(73% 93% at 10% 50%);
 }
@@ -48,36 +51,6 @@ h1 {
     display: flex;
 }
 
-input[type="text"], input[type="email"] {
-    font-weight: bold;
-}
-input[type="text"]::placeholder, input[type="email"]::placeholder {
-    font-weight: initial;
-}
-input[type="text"], input[type="email"], textarea {
-    width: 100%;
-    padding: 1em;
-    margin: .5em 0;
-    border: 2px solid #fecc83;
-    background-color: #fecc83;
-    color: #000219;
-    font-size: 1.2em;
-    transition: .2s ease-in-out;
-}
-
-.footer-btn:hover, .footer-btn:focus {
-    outline: none;
-    border-color: white;
-    color: white;
-    background-color: var(--primary);
-}
-
-input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
-    outline: none;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    border: 2px solid var(--primary);
-}
-
 @media screen and (max-width: 900px) {
 
     #contact {
@@ -106,10 +79,6 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
         margin: 3em auto 1em auto;
         width: 90%;
         padding-right: 0;
-    }
-
-    input[type="text"], input[type="email"], textarea {
-        padding: .5em 1em;
     }
 }
 

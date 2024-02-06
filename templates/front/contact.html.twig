@@ -21,7 +21,7 @@
                 <h1>Contact</h1>
                 <p>Vous avez une question, une suggestion ou une demande de partenariat ? N'hésitez pas à nous contacter en remplissant le formulaire ci-dessous.</p>
 
-                <form action="">
+                <form method="POST">
                     <div class='field required'>
 {#                        <label class='label required' for='name'>Full name</label>#}
                         <input class='text-input' id='name' name='name' required type='text' placeholder="Nom complet">
@@ -38,7 +38,7 @@
 {#                        <label class='label' for='message'>Message</label>#}
                         <textarea class='textarea' cols='50' id='message' name='message' rows='4' placeholder="Votre message"></textarea>
                     </div>
-                    <input type="submit" value="Envoyer" class="footer-btn">
+                    <input type="submit" value="Envoyer" class="main-btn">
                 </form>
             </div>
         </section>
@@ -48,6 +48,8 @@
                 console.log('page contact loaded');
             }
         </script>
+
+{#        <script>alert('attention script')</script>#}
 
     </navigate-js>
 {% endblock %}

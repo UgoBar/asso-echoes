@@ -59,12 +59,22 @@ class ContactController extends AbstractController
         }
 
         // Add contact to newsletter with Mailjet
-        $mj = new Client($this->getParameter('app.mailjet_access_key'), $this->getParameter('app.mailjet_secret_key'), true, ['version' => 'v3.1']);
-        $body = ['ContactAlt' => $email, 'ListID' => 256913];
+        $mj = new Client($this->getParameter('app.mailjet_access_key'), $this->getParameter('app.mailjet_secret_key'), true, ['version' => 'v3']);
+        $body = [
+            'Action' => 'addnoforce',
+            'Contacts' => [
+                [
+                    'Email' => $email,
+                    'IsExcludedFromCampaigns' => "false",
+                    'Name' => "New Contact",
+                    'Properties' => "object"
+                ]
+            ]
+        ];
 //        $body = ['Email' => $email];
 
-        $response = $mj->post(Resources::$Listrecipient, ['body' => $body]);
-//        $response = $mj->post(Resources::$ContactslistManagecontact, ['id' => 256913, 'body' => $body]);
+//        $response = $mj->post(Resources::$Listrecipient, ['body' => $body]);
+        $response = $mj->post(Resources::$ContactslistManagemanycontacts, ['id' => 256913, 'body' => $body]);
 
         // Vérifiez la réponse de Mailjet (ajustez selon la documentation Mailjet)
         if ($response->success()) {

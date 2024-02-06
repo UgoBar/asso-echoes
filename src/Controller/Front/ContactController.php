@@ -71,9 +71,7 @@ class ContactController extends AbstractController
                 ]
             ]
         ];
-//        $body = ['Email' => $email];
 
-//        $response = $mj->post(Resources::$Listrecipient, ['body' => $body]);
         $response = $mj->post(Resources::$ContactslistManagemanycontacts, ['id' => 256913, 'body' => $body]);
 
         // Vérifiez la réponse de Mailjet (ajustez selon la documentation Mailjet)
@@ -120,27 +118,18 @@ class ContactController extends AbstractController
         }
 
         // Send mail
-        $email = (new Email())
-            ->from($data['email'])
-            ->to('ugo17190@example.com')
-            ->subject($data['subject'])
-            ->text($data['message']);
+        // $mailTo  = 'association.echoes@gmail.com';
+        $mailTo  = 'ugo17190@gmail.com';
 
-        $mailer->send($email);
+        $headers  = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'From: Association Echoes <contact@association-echoes.fr>'."\r\n";
+        $headers .= 'Reply-To: '. $data['email']."\r\n";
+        $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
+        $headers .= 'X-Mailer: PHP/' . phpversion();
 
-        // Send mail
-        // $mailTo  = 'pfavre92@icloud.com';
-//        $mailTo  = 'ugo17190@gmail.com';
-//
-//        $headers  = 'MIME-Version: 1.0' . "\r\n";
-//        $headers .= 'From: Association Echoes <contact@association-echoes.fr>'."\r\n";
-//        $headers .= 'Reply-To: '. $data['email']."\r\n";
-//        $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
-//        $headers .= 'X-Mailer: PHP/' . phpversion();
-//
-//        mail($mailTo, $data['subject'], $data['message'], $headers);
+        mail($mailTo, $data['subject'], $data['message'], $headers);
 
-        $this->addFlash('success', 'Votre email a bien été envoyé');
+        $this->addFlash('success', 'Votre email a bien été envoyé ! Nous vous répondrons dans les plus brefs délais.');
         return $this->redirectToRoute('front_contact');
     }
 }

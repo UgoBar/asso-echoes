@@ -64,7 +64,7 @@ class ContactController extends AbstractController
         $body = ['Email' => $email];
 
 //        $response = $mj->post(Resources::$Listrecipient, ['body' => $body]);
-        $response = $mj->post(Resources::$ContactslistManagecontact, ['id' => '256913', 'body' => $body]);
+        $response = $mj->post(Resources::$ContactslistManagecontact, ['id' => 256913, 'body' => $body]);
 
         // Vérifiez la réponse de Mailjet (ajustez selon la documentation Mailjet)
         if ($response->success()) {

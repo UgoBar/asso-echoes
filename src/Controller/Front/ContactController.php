@@ -117,17 +117,24 @@ class ContactController extends AbstractController
             return $this->redirectToRoute('front_contact');
         }
 
-        // Send mail
-        // $mailTo  = 'association.echoes@gmail.com';
-        $mailTo  = 'ugo17190@gmail.com';
+        $email = (new Email())
+            ->from('contact@association-echoes.fr')
+            ->to('ugo17190@gmail.com')
+            ->subject($data['subject'])
+            ->html('<p>'. $data['message'] .'</p>');
+        $mailer->send($email);
 
-        $headers  = 'MIME-Version: 1.0' . "\r\n";
-        $headers .= 'From: Association Echoes <contact@association-echoes.fr>'."\r\n";
-        $headers .= 'Reply-To: '. $data['email']."\r\n";
-        $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
-        $headers .= 'X-Mailer: PHP/' . phpversion();
-
-        mail($mailTo, $data['subject'], $data['message'], $headers);
+//        // Send mail
+//        // $mailTo  = 'association.echoes@gmail.com';
+//        $mailTo  = 'ugo17190@gmail.com';
+//
+//        $headers  = 'MIME-Version: 1.0' . "\r\n";
+//        $headers .= 'From: Association Echoes <contact@association-echoes.fr>'."\r\n";
+//        $headers .= 'Reply-To: '. $data['email']."\r\n";
+//        $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
+//        $headers .= 'X-Mailer: PHP/' . phpversion();
+//
+//        mail($mailTo, $data['subject'], $data['message'], $headers);
 
         $this->addFlash('success', 'Votre email a bien été envoyé ! Nous vous répondrons dans les plus brefs délais.');
         return $this->redirectToRoute('front_contact');

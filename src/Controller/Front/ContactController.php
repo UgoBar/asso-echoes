@@ -174,15 +174,10 @@ class ContactController extends AbstractController
         }
 
         // Initialisation du client Mailjet
-        $mj = new Client(
-            $this->getParameter('app.mailjet_access_key'),
-            $this->getParameter('app.mailjet_secret_key'),
-            true, // Mode sandbox (à désactiver en production)
-            ['version' => 'v3.1']
-        );
+        $mj = new Client($this->getParameter('app.mailjet_access_key'), $this->getParameter('app.mailjet_secret_key'), true, ['version' => 'v3.1']);
 
         // Paramètres de l'e-mail
-        $body = [
+        $oldBody = [
             'Messages' => [
                 [
                     'From' => [
@@ -196,9 +191,29 @@ class ContactController extends AbstractController
                         ],
                     ],
                     'Subject' => $data['subject'],
-                    'HTMLPart' => '<p>'. $data['message'] .'</p>',
+                    'TextPart' => $data['message'],
                 ],
             ],
+        ];
+
+        $body = [
+            'Messages' => [
+                [
+                    'From' => [
+                        'Email' => "pilot@mailjet.com",
+                        'Name' => "Mailjet Pilot"
+                    ],
+                    'To' => [
+                        [
+                            'Email' => 'ugo17190@gmail.com',
+                            'Name' => 'Ugo Barathe',
+                        ]
+                    ],
+                    'Subject' => "Your email flight plan!",
+                    'TextPart' => "Dear passenger 1, welcome to Mailjet! May the delivery force be with you!",
+                    'HTMLPart' => "<h3>Dear passenger 1, welcome to <a href=\"https://www.mailjet.com/\">Mailjet</a>!</h3><br />May the delivery force be with you!"
+                ]
+            ]
         ];
 
         // Envoi de l'e-mail
@@ -206,7 +221,6 @@ class ContactController extends AbstractController
 
         // Traitement de la réponse
         if ($response->success()) {
-            $this->addFlash('success', 'Votre email a bien été envoyé ! Nous vous répondrons dans les plus brefs délais.');
             return $this->redirectToRoute('front_contact');
         } else {
             return new Response('Erreur lors de l\'envoi de l\'e-mail: ' . $response->getStatus());

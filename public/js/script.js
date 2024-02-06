@@ -252,10 +252,10 @@ document.addEventListener("DOMContentLoaded", function () {
         fetch(route, { method: 'POST', body: formData }).then((response) => {
             if (response.ok) {
                 // Show success notification
-                toast({title: 'Super !', message: response.message, type: 'success', duration: 10000});
+                toast({title: 'Super !', message: "Votre email a bien été envoyé ! Nous vous répondrons dans les plus brefs délais.", type: 'success', duration: 10000});
             } else {
                 // Show error notification
-                toast({title: 'Merde...', message: 'Ca marche pas', type: 'error', duration: 10000});
+                toast({title: 'Oups', message: 'Une erreur s\'est produite', type: 'error', duration: 10000});
             }
         });
 

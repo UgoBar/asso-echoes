@@ -209,6 +209,9 @@ function initSlider() {
     }
 
     function initCardEvents() {
+        // Ignore for mobile to preserve performance
+        if (window.innerWidth < 1024) return;
+
         const currentCardEl = cardsContainerEl.querySelector(".current--card");
         currentCardEl.addEventListener("pointermove", updateCard);
         currentCardEl.addEventListener("pointerout", (e) => {

@@ -64,49 +64,47 @@ function initSlider() {
         const nextBgImageEl = appBgContainerEl.querySelector(".next--image");
 
         changeInfo(direction);
-        swapCardsClass();
+        swapCardsClass(direction, currentCardEl, previousCardEl, nextCardEl, currentBgImageEl, previousBgImageEl, nextBgImageEl);
+    }
 
-        removeCardEvents(currentCardEl);
+    function swapCardsClass(direction, currentCardEl, previousCardEl, nextCardEl, currentBgImageEl, previousBgImageEl, nextBgImageEl) {
+        currentCardEl.classList.remove("current--card");
+        previousCardEl.classList.remove("previous--card");
+        nextCardEl.classList.remove("next--card");
 
-        function swapCardsClass() {
-            currentCardEl.classList.remove("current--card");
-            previousCardEl.classList.remove("previous--card");
-            nextCardEl.classList.remove("next--card");
+        currentBgImageEl.classList.remove("current--image");
+        previousBgImageEl.classList.remove("previous--image");
+        nextBgImageEl.classList.remove("next--image");
 
-            currentBgImageEl.classList.remove("current--image");
-            previousBgImageEl.classList.remove("previous--image");
-            nextBgImageEl.classList.remove("next--image");
+        // currentCardEl.style.zIndex = "50";
+        currentBgImageEl.style.zIndex = "-2";
 
-            // currentCardEl.style.zIndex = "50";
-            currentBgImageEl.style.zIndex = "-2";
+        if (direction === "right") {
+            // previousCardEl.style.zIndex = "20";
+            // nextCardEl.style.zIndex = "30";
 
-            if (direction === "right") {
-                // previousCardEl.style.zIndex = "20";
-                // nextCardEl.style.zIndex = "30";
+            nextBgImageEl.style.zIndex = "-1";
 
-                nextBgImageEl.style.zIndex = "-1";
+            currentCardEl.classList.add("previous--card");
+            previousCardEl.classList.add("next--card");
+            nextCardEl.classList.add("current--card");
 
-                currentCardEl.classList.add("previous--card");
-                previousCardEl.classList.add("next--card");
-                nextCardEl.classList.add("current--card");
+            currentBgImageEl.classList.add("previous--image");
+            previousBgImageEl.classList.add("next--image");
+            nextBgImageEl.classList.add("current--image");
+        } else if (direction === "left") {
+            // previousCardEl.style.zIndex = "30";
+            // nextCardEl.style.zIndex = "20";
 
-                currentBgImageEl.classList.add("previous--image");
-                previousBgImageEl.classList.add("next--image");
-                nextBgImageEl.classList.add("current--image");
-            } else if (direction === "left") {
-                // previousCardEl.style.zIndex = "30";
-                // nextCardEl.style.zIndex = "20";
+            previousBgImageEl.style.zIndex = "-1";
 
-                previousBgImageEl.style.zIndex = "-1";
+            currentCardEl.classList.add("next--card");
+            previousCardEl.classList.add("current--card");
+            nextCardEl.classList.add("previous--card");
 
-                currentCardEl.classList.add("next--card");
-                previousCardEl.classList.add("current--card");
-                nextCardEl.classList.add("previous--card");
-
-                currentBgImageEl.classList.add("next--image");
-                previousBgImageEl.classList.add("current--image");
-                nextBgImageEl.classList.add("previous--image");
-            }
+            currentBgImageEl.classList.add("next--image");
+            previousBgImageEl.classList.add("current--image");
+            nextBgImageEl.classList.add("previous--image");
         }
     }
 
@@ -134,7 +132,6 @@ function initSlider() {
             .call(() => {
                 swapInfosClass(direction);
             })
-            .call(() => initCardEvents())
             .fromTo(
                 direction === "right"
                     ? nextInfoEl.querySelectorAll(".text")
@@ -172,57 +169,6 @@ function initSlider() {
                 previousInfoEl.classList.add("current--info");
             }
         }
-    }
-
-    function updateCard(e) {
-        const card = e.currentTarget;
-        const box = card.getBoundingClientRect();
-        const centerPosition = {
-            x: box.left + box.width / 2,
-            y: box.top + box.height / 2,
-        };
-        let angle = Math.atan2(e.pageX - centerPosition.x, 0) * (35 / Math.PI);
-        gsap.set(card, {
-            "--current-card-rotation-offset": `${angle}deg`,
-        });
-        const currentInfoEl = cardInfosContainerEl.querySelector(".current--info");
-        gsap.set(currentInfoEl, {
-            rotateY: `${angle}deg`,
-        });
-        gsap.set(buttons.play, {
-            rotateY: `${angle}deg`,
-        });
-    }
-
-    function resetCardTransforms(e) {
-        const card = e.currentTarget;
-        const currentInfoEl = cardInfosContainerEl.querySelector(".current--info");
-        gsap.set(card, {
-            "--current-card-rotation-offset": 0,
-        });
-        gsap.set(currentInfoEl, {
-            rotateY: 0,
-        });
-        gsap.set(buttons.play, {
-            rotateY: 0,
-        });
-    }
-
-    function initCardEvents() {
-        // Ignore for mobile to preserve performance
-        if (window.innerWidth < 1024) return;
-
-        const currentCardEl = cardsContainerEl.querySelector(".current--card");
-        currentCardEl.addEventListener("pointermove", updateCard);
-        currentCardEl.addEventListener("pointerout", (e) => {
-            resetCardTransforms(e);
-        });
-    }
-
-    initCardEvents();
-
-    function removeCardEvents(card) {
-        card.removeEventListener("pointermove", updateCard);
     }
 
     function init() {

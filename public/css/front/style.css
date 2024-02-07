@@ -211,10 +211,12 @@ header .toggle-menu {
     position: absolute;
     width: 100%;
     top: -300px;
-    z-index: 4;
+    z-index: 10;
     transition: .5s cubic-bezier(.74,.08,.51,.95);
     overflow-y: auto;
     max-height: calc(100vh - 87px);
+    max-height: -webkit-fill-available;
+    max-height: -moz-available;
 }
 #menu.active {
     top: 87px;
@@ -257,9 +259,6 @@ header .toggle-menu {
 
 #menu-top nav a {
     margin-bottom: 10px;
-}
-#menu-top nav a:hover {
-
 }
 
 #menu-top aside {
@@ -714,8 +713,8 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
 
 @media screen and (max-width: 1024px) {
 
-    #memory, #radiobox {
-        padding-top: 40px;
+    #memory, #radiobox, #contact {
+        padding-top: 1em;
     }
     /*main {*/
     /*    padding-top: 125px;*/
@@ -828,9 +827,9 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
     .main-btn {
         font-size: 18px;
     }
-    #memory, #radiobox {
-        padding-top: unset;
-    }
+    /*#memory, #radiobox {*/
+    /*    padding-top: unset;*/
+    /*}*/
     header {
         padding-left: 0;
     }
@@ -852,10 +851,10 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
         display: block;
         width: 100%;
         text-align: center;
-        padding-bottom: 10px;
+        /*padding-bottom: 10px;*/
     }
     #menu-top nav > .menu-list:nth-of-type(1) img {
-        width: 45%;
+        width: 39%;
     }
     #menu-top nav > .menu-list:nth-of-type(1) a {
         border-bottom: unset;
@@ -867,7 +866,7 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
     }
     #menu-top nav .menu-title {
         width: 100%;
-        padding: 10px 10px 10px 1em;
+        padding: 8px 8px 8px 1em;
         position: relative;
         transition: .3s cubic-bezier(.74,.08,.51,.95);
         left: 0;
@@ -890,6 +889,7 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
     #menu-top nav a {
         border-bottom: 1px solid #d0d0d0;
         padding: 0.8em;
+        margin-bottom: 0;
     }
     #menu-top aside button {
         width: 100%;
@@ -939,6 +939,7 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
     .go-back-mobile-nav {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         font-family: 'Josefin Sans', sans-serif;
         font-weight: 800;
         font-size: 18px;

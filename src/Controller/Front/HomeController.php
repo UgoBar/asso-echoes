@@ -15,4 +15,11 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+
+
+    #[Route('/not_found', name: 'front_not_found')]
+    public function notFound(): Response
+    {
+        return $this->render('error404.html.twig');
+    }
 }

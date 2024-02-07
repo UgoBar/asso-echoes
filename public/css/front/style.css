@@ -52,9 +52,13 @@ a {
     text-decoration: none;
     color: #1a1e23;
 }
-a:hover {
+a:not(a.btn):not(a.main-btn):hover {
     color: var(--primary);
     opacity: .7;
+}
+
+navigate-js {
+    height: 100vh;
 }
 
 .text-primary {
@@ -99,6 +103,7 @@ a:hover {
 .image-and-text {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .image-and-text > * {
     width: 50%;
@@ -119,6 +124,12 @@ a:hover {
     background-color: var(--primary);
     color: #ffff;
     clip-path: polygon(0 0, 91% 0, 24% 84vh, 0 100%);
+}
+.mt-1em {
+    margin-top: 1em;
+}
+.mt-2em {
+    margin-top: 2em;
 }
 
 .height-section {
@@ -210,7 +221,7 @@ header .toggle-menu {
 #menu {
     position: absolute;
     width: 100%;
-    top: -300px;
+    top: -450px;
     z-index: 10;
     transition: .5s cubic-bezier(.74,.08,.51,.95);
     overflow-y: auto;
@@ -267,7 +278,7 @@ header .toggle-menu {
     flex-direction: column;
     padding: 1em 2em;
 }
-#menu-top aside button {
+#menu-top aside .btn {
     margin: 5px 0;
 }
 
@@ -777,7 +788,7 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
         justify-content: space-between;
         width: 100%;
     }
-    #menu-top aside button {
+    #menu-top aside .btn {
         width: 48%;
         margin: 0.4em;
     }
@@ -891,7 +902,7 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
         padding: 0.8em;
         margin-bottom: 0;
     }
-    #menu-top aside button {
+    #menu-top aside .btn {
         width: 100%;
         margin: 0.4em;
     }

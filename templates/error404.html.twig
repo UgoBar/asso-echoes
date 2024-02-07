@@ -1,0 +1,31 @@
+{% extends 'front_base.html.twig' %}
+
+{% block title %}Page inconnue{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block main %}
+
+    <navigate-js>
+
+        <link rel="stylesheet" href="{{ asset('css/front/not_found.css') }}" data-njs>
+
+        <section class="not-found">
+            <figure>
+                <img src="{{ asset('img/not_found.svg') }}" alt="Image avec le texte 404 not found">
+            </figure>
+            <div class="centered">
+                <p class="text-center fw-bold">La page que vous cherchez n'existe pas</p>
+                <a href="{{ path('front_home') }}" data-njs-href="{{ path('front_home') }}" class="btn btn-white">Retour à l'accueil</a>
+            </div>
+        </section>
+    </navigate-js>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

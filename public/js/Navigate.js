@@ -92,10 +92,9 @@ export class NavigateJs {
 
         // <navigate-js> height must match height of <div clas="njs-container">
         setTimeout(() => {
-            // Throttle the height update to prevent layout thrashing
+            // Throttle the height update to prevent layout from trashing
             this.resizeContainerHeight(container.clientHeight);
-            // this.currentPage.style.height = container.clientHeight + 'px';
-        }, 200);
+        }, this.animationDuration);
     }
 
     resizeContainerHeight(height) {
@@ -170,9 +169,9 @@ export class NavigateJs {
 
         // <navigate-js> height must match height of <div clas="njs-container">
         setTimeout(() => {
-            // Throttle the height update to prevent layout thrashing
-            container.parentNode.style.height = container.clientHeight + 'px';
-        }, 200);
+            // Throttle the height update to prevent layout from trashing
+            this.resizeContainerHeight(container.clientHeight);
+        }, this.animationDuration);
     }
 
     // Animation logic based on the configured animation type

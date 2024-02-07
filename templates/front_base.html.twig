@@ -151,7 +151,7 @@
                                     <span><i class="icon-previous"></i> Retour</span>
                                     <span class="ariane">Echoes</span>
                                 </div>
-                                <a href="#">L'association</a>
+                                <a href="{{ path('front_association') }}" data-njs-href="{{ path('front_association') }}">L'association</a>
                                 <a href="{{ path('front_team') }}" data-njs-href="{{ path('front_team') }}">L’équipe</a>
                                 <a href="{{ path('front_radiobox') }}" data-njs-href="{{ path('front_radiobox') }}">La radiobox</a>
                             </div>
@@ -164,7 +164,8 @@
                                     <span class="ariane">Les Ateliers</span>
                                 </div>
                                 <a href="{{ path('front_memory_box') }}" data-njs-href="{{ path('front_memory_box') }}">La Boîte à souvenirs</a>
-                                <a href="{{ path('front_news') }}" data-njs-href="{{ path('front_news') }}">Actualités</a>
+                                <!-- COMMENT NEWS -->
+{#                                <a href="{{ path('front_news') }}" data-njs-href="{{ path('front_news') }}">Actualités</a>#}
                                 <a href="{{ path('front_gallery') }}" data-njs-href="{{ path('front_gallery') }}">Galerie Photo</a>
                             </div>
                         </div>
@@ -194,7 +195,7 @@
                     </div>
                 </nav>
                 <aside>
-                    <button class="btn btn-rect btn-black"><i class="icon-charity"></i> Devenir adhérent</button>
+                    <a class="btn btn-rect btn-black" href="https://www.helloasso.com/associations/echoes/adhesions/cotisation-annuelle-a-l-association-echoes" target="_blank"><i class="icon-charity"></i> Devenir adhérent</a>
                     <button class="btn btn-rect btn-black" data-modal-id="newsletter-modal" onclick="burgerTime()"><i class="icon-broadcast"></i> Inscription newsletter</button>
                     <button class="btn btn-rect btn-black"><i class="icon-headset"></i> Organiser un atelier</button>
                     <button class="btn btn-rect btn-black"><i class="icon-radio" aria-hidden="true"></i> Louer notre radiobox</button>

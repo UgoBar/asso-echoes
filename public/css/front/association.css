@@ -1,0 +1,36 @@
+h1 {
+    margin: 0;
+}
+
+main .container {
+    width: 800px;
+}
+
+#association {
+    padding-top: 2em;
+}
+figure.logo {
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+article {
+    margin-bottom: 2em;
+}
+
+@media screen and (max-width: 1024px) {
+    main .container {
+        width: 90%;
+    }
+    figure.logo {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    figure.logo {
+        width: 80%;
+    }
+}

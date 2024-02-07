@@ -656,17 +656,17 @@ button {
 
 @media screen and (max-width: 992px) {
 
-    .cardList .cards__wrapper {
-        perspective: unset;
-    }
-    .infoList .info__wrapper {
-        perspective: unset;
-        transform-style: unset;
-    }
-    .info {
-        transform: unset;
-        transition: unset;
-    }
+    /*.cardList .cards__wrapper {*/
+    /*    perspective: unset;*/
+    /*}*/
+    /*.infoList .info__wrapper {*/
+    /*    perspective: unset;*/
+    /*    transform-style: unset;*/
+    /*}*/
+    /*.info {*/
+    /*    transform: unset;*/
+    /*    transition: unset;*/
+    /*}*/
 
     .blog-slider {
         max-width: 680px;

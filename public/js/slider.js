@@ -66,7 +66,7 @@ function initSlider() {
         changeInfo(direction);
         swapCardsClass();
 
-        // removeCardEvents(currentCardEl);
+        removeCardEvents(currentCardEl);
 
         function swapCardsClass() {
             currentCardEl.classList.remove("current--card");
@@ -134,7 +134,7 @@ function initSlider() {
             .call(() => {
                 swapInfosClass(direction);
             })
-            // .call(() => initCardEvents())
+            .call(() => initCardEvents())
             .fromTo(
                 direction === "right"
                     ? nextInfoEl.querySelectorAll(".text")
@@ -208,22 +208,22 @@ function initSlider() {
         });
     }
 
-    // function initCardEvents() {
-    //     // Ignore for mobile to preserve performance
-    //     if (window.innerWidth < 1024) return;
-    //
-    //     const currentCardEl = cardsContainerEl.querySelector(".current--card");
-    //     currentCardEl.addEventListener("pointermove", updateCard);
-    //     currentCardEl.addEventListener("pointerout", (e) => {
-    //         resetCardTransforms(e);
-    //     });
-    // }
-    //
-    // initCardEvents();
+    function initCardEvents() {
+        // Ignore for mobile to preserve performance
+        if (window.innerWidth < 768) return;
 
-    // function removeCardEvents(card) {
-    //     card.removeEventListener("pointermove", updateCard);
-    // }
+        const currentCardEl = cardsContainerEl.querySelector(".current--card");
+        currentCardEl.addEventListener("pointermove", updateCard);
+        currentCardEl.addEventListener("pointerout", (e) => {
+            resetCardTransforms(e);
+        });
+    }
+
+    initCardEvents();
+
+    function removeCardEvents(card) {
+        card.removeEventListener("pointermove", updateCard);
+    }
 
     function init() {
 

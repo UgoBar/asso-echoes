@@ -29,6 +29,82 @@ class ContactController extends AbstractController
         ]);
     }
 
+    #[Route('/location-radiobox', name: 'front_rent')]
+    public function rent(Request $request, ValidatorInterface $validator): Response
+    {
+        if ($request->isMethod('POST')) {
+            $data = $request->request->all();
+            $data['subject'] = 'Location de la radiobox';
+            $this->sendEmail($validator, $data);
+        }
+
+        return $this->render('front/rent.html.twig', [
+            'controller_name' => 'NewsController',
+        ]);
+    }
+
+    #[Route('/organiser-atelier', name: 'front_organize')]
+    public function organize(Request $request, ValidatorInterface $validator): Response
+    {
+        if ($request->isMethod('POST')) {
+            $data = $request->request->all();
+            $data['subject'] = 'Organiser un atelier';
+            $this->sendEmail($validator, $data);
+        }
+
+        return $this->render('front/organize.html.twig', [
+            'controller_name' => 'NewsController',
+        ]);
+    }
+
+    public function sendEmail(ValidatorInterface $validator, array $data): RedirectResponse
+    {
+        // Validate data
+        $constraints = new Assert\Collection([
+            'name' => [
+                new Assert\NotBlank(null, 'Le nom doit être renseigné'),
+            ],
+            'email' => [
+                new Assert\NotBlank(null, 'L\'email doit être renseigné'),
+                new Assert\Email(null, 'L\'email n\'est pas valide'),
+            ],
+            'subject' => [
+                new Assert\NotBlank(null, 'Le sujet doit être renseigné'),
+            ],
+            'message' => [
+                new Assert\NotBlank(),
+                new Assert\Regex([
+                    'pattern' => '/^[^<>;=#{}%^*()\/]+$/',
+                    'message' => 'Le message ne doit pas contenir de caractères spéciaux.',
+                ]),
+            ],
+        ]);
+
+        $errors = $validator->validate($data, $constraints);
+
+        if (count($errors) > 0) {
+            foreach ($errors as $error) {
+                $this->addFlash('error', $error->getMessage());
+            }
+            return $this->redirectToRoute('front_contact');
+        }
+
+        // Send mail
+        // $mailTo  = 'association.echoes@gmail.com';
+        $mailTo  = 'ugo17190@gmail.com';
+
+        $headers  = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'From: Association Echoes <contact@association-echoes.fr>'."\r\n";
+        $headers .= 'Reply-To: '. $data['email']."\r\n";
+        $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
+        $headers .= 'X-Mailer: PHP/' . phpversion();
+
+        mail($mailTo, $data['subject'], $data['message'], $headers);
+
+        $this->addFlash('success', 'Votre email a bien été envoyé ! Nous vous répondrons dans les plus brefs délais.');
+        return $this->redirectToRoute('front_contact');
+    }
+
     #[Route('/add_contact_news', name: 'add_contact_news')]
     public function addContactToNewsletter(Request $request, ValidatorInterface $validator): Response
     {
@@ -77,54 +153,5 @@ class ContactController extends AbstractController
         } else {
             return new JsonResponse(['message' => 'Erreur lors de l\'inscription à la newsletter.'], 500);
         }
-    }
-
-
-    public function sendEmail(ValidatorInterface $validator, array $data): RedirectResponse
-    {
-        // Validate data
-        $constraints = new Assert\Collection([
-            'name' => [
-                new Assert\NotBlank(null, 'Le nom doit être renseigné'),
-            ],
-            'email' => [
-                new Assert\NotBlank(null, 'L\'email doit être renseigné'),
-                new Assert\Email(null, 'L\'email n\'est pas valide'),
-            ],
-            'subject' => [
-                new Assert\NotBlank(null, 'Le sujet doit être renseigné'),
-            ],
-            'message' => [
-                new Assert\NotBlank(),
-                new Assert\Regex([
-                    'pattern' => '/^[^<>;=#{}%^*()\/]+$/',
-                    'message' => 'Le message ne doit pas contenir de caractères spéciaux.',
-                ]),
-            ],
-        ]);
-
-        $errors = $validator->validate($data, $constraints);
-
-        if (count($errors) > 0) {
-            foreach ($errors as $error) {
-                $this->addFlash('error', $error->getMessage());
-            }
-            return $this->redirectToRoute('front_contact');
-        }
-
-        // Send mail
-        // $mailTo  = 'association.echoes@gmail.com';
-        $mailTo  = 'ugo17190@gmail.com';
-
-        $headers  = 'MIME-Version: 1.0' . "\r\n";
-        $headers .= 'From: Association Echoes <contact@association-echoes.fr>'."\r\n";
-        $headers .= 'Reply-To: '. $data['email']."\r\n";
-        $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
-        $headers .= 'X-Mailer: PHP/' . phpversion();
-
-        mail($mailTo, $data['subject'], $data['message'], $headers);
-
-        $this->addFlash('success', 'Votre email a bien été envoyé ! Nous vous répondrons dans les plus brefs délais.');
-        return $this->redirectToRoute('front_contact');
     }
 }

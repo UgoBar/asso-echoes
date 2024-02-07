@@ -64,47 +64,49 @@ function initSlider() {
         const nextBgImageEl = appBgContainerEl.querySelector(".next--image");
 
         changeInfo(direction);
-        swapCardsClass(direction, currentCardEl, previousCardEl, nextCardEl, currentBgImageEl, previousBgImageEl, nextBgImageEl);
-    }
+        swapCardsClass();
 
-    function swapCardsClass(direction, currentCardEl, previousCardEl, nextCardEl, currentBgImageEl, previousBgImageEl, nextBgImageEl) {
-        currentCardEl.classList.remove("current--card");
-        previousCardEl.classList.remove("previous--card");
-        nextCardEl.classList.remove("next--card");
+        // removeCardEvents(currentCardEl);
 
-        currentBgImageEl.classList.remove("current--image");
-        previousBgImageEl.classList.remove("previous--image");
-        nextBgImageEl.classList.remove("next--image");
+        function swapCardsClass() {
+            currentCardEl.classList.remove("current--card");
+            previousCardEl.classList.remove("previous--card");
+            nextCardEl.classList.remove("next--card");
 
-        // currentCardEl.style.zIndex = "50";
-        currentBgImageEl.style.zIndex = "-2";
+            currentBgImageEl.classList.remove("current--image");
+            previousBgImageEl.classList.remove("previous--image");
+            nextBgImageEl.classList.remove("next--image");
 
-        if (direction === "right") {
-            // previousCardEl.style.zIndex = "20";
-            // nextCardEl.style.zIndex = "30";
+            // currentCardEl.style.zIndex = "50";
+            currentBgImageEl.style.zIndex = "-2";
 
-            nextBgImageEl.style.zIndex = "-1";
+            if (direction === "right") {
+                // previousCardEl.style.zIndex = "20";
+                // nextCardEl.style.zIndex = "30";
 
-            currentCardEl.classList.add("previous--card");
-            previousCardEl.classList.add("next--card");
-            nextCardEl.classList.add("current--card");
+                nextBgImageEl.style.zIndex = "-1";
 
-            currentBgImageEl.classList.add("previous--image");
-            previousBgImageEl.classList.add("next--image");
-            nextBgImageEl.classList.add("current--image");
-        } else if (direction === "left") {
-            // previousCardEl.style.zIndex = "30";
-            // nextCardEl.style.zIndex = "20";
+                currentCardEl.classList.add("previous--card");
+                previousCardEl.classList.add("next--card");
+                nextCardEl.classList.add("current--card");
 
-            previousBgImageEl.style.zIndex = "-1";
+                currentBgImageEl.classList.add("previous--image");
+                previousBgImageEl.classList.add("next--image");
+                nextBgImageEl.classList.add("current--image");
+            } else if (direction === "left") {
+                // previousCardEl.style.zIndex = "30";
+                // nextCardEl.style.zIndex = "20";
 
-            currentCardEl.classList.add("next--card");
-            previousCardEl.classList.add("current--card");
-            nextCardEl.classList.add("previous--card");
+                previousBgImageEl.style.zIndex = "-1";
 
-            currentBgImageEl.classList.add("next--image");
-            previousBgImageEl.classList.add("current--image");
-            nextBgImageEl.classList.add("previous--image");
+                currentCardEl.classList.add("next--card");
+                previousCardEl.classList.add("current--card");
+                nextCardEl.classList.add("previous--card");
+
+                currentBgImageEl.classList.add("next--image");
+                previousBgImageEl.classList.add("current--image");
+                nextBgImageEl.classList.add("previous--image");
+            }
         }
     }
 
@@ -132,6 +134,7 @@ function initSlider() {
             .call(() => {
                 swapInfosClass(direction);
             })
+            // .call(() => initCardEvents())
             .fromTo(
                 direction === "right"
                     ? nextInfoEl.querySelectorAll(".text")
@@ -170,6 +173,57 @@ function initSlider() {
             }
         }
     }
+
+    function updateCard(e) {
+        const card = e.currentTarget;
+        const box = card.getBoundingClientRect();
+        const centerPosition = {
+            x: box.left + box.width / 2,
+            y: box.top + box.height / 2,
+        };
+        let angle = Math.atan2(e.pageX - centerPosition.x, 0) * (35 / Math.PI);
+        gsap.set(card, {
+            "--current-card-rotation-offset": `${angle}deg`,
+        });
+        const currentInfoEl = cardInfosContainerEl.querySelector(".current--info");
+        gsap.set(currentInfoEl, {
+            rotateY: `${angle}deg`,
+        });
+        gsap.set(buttons.play, {
+            rotateY: `${angle}deg`,
+        });
+    }
+
+    function resetCardTransforms(e) {
+        const card = e.currentTarget;
+        const currentInfoEl = cardInfosContainerEl.querySelector(".current--info");
+        gsap.set(card, {
+            "--current-card-rotation-offset": 0,
+        });
+        gsap.set(currentInfoEl, {
+            rotateY: 0,
+        });
+        gsap.set(buttons.play, {
+            rotateY: 0,
+        });
+    }
+
+    // function initCardEvents() {
+    //     // Ignore for mobile to preserve performance
+    //     if (window.innerWidth < 1024) return;
+    //
+    //     const currentCardEl = cardsContainerEl.querySelector(".current--card");
+    //     currentCardEl.addEventListener("pointermove", updateCard);
+    //     currentCardEl.addEventListener("pointerout", (e) => {
+    //         resetCardTransforms(e);
+    //     });
+    // }
+    //
+    // initCardEvents();
+
+    // function removeCardEvents(card) {
+    //     card.removeEventListener("pointermove", updateCard);
+    // }
 
     function init() {
 

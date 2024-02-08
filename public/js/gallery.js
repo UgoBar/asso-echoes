@@ -6,7 +6,6 @@ if (document.querySelector('navigate-js').classList.contains('njs-page-loaded'))
 
 function initGallery() {
 
-    const gallery = document.getElementById("gallery");
     let galleryModal = document.querySelector('.gallery-modal');
     let mainOverlay = document.querySelector('.gallery-overlay');
     let replacePicture = document.getElementById('picture-replace');
@@ -14,11 +13,14 @@ function initGallery() {
     const previousBtn = document.querySelector('.gallery-modal .previous');
     const nextBtn = document.querySelector('.gallery-modal .next');
 
-    for (let i = gallery.children.length; i >= 0; i--) {
-        gallery.appendChild(gallery.children[Math.random() * i | 0]);
+    if (document.getElementById("gallery") !== null) {
+        const gallery = document.getElementById("gallery");
+        for (let i = gallery.children.length; i >= 0; i--) {
+            gallery.appendChild(gallery.children[Math.random() * i | 0]);
+        }
     }
 
-    const pictures = document.querySelectorAll('#gallery figure');
+    const pictures = document.querySelectorAll('figure');
     const picturesArray = Array.from(pictures)
 
     pictures.forEach(picture => {

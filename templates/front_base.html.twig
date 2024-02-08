@@ -46,11 +46,11 @@
             <style>
                 @font-face {
                     font-family: 'icomoon';
-                    src:  url('{{ asset("fonts/icomoon.eot?nx31xa") }}');
-                    src:  url('{{ asset("fonts/icomoon.eot?nx31xa#iefix") }}') format('embedded-opentype'),
-                    url('{{ asset("fonts/icomoon.ttf?nx31xa") }}') format('truetype'),
-                    url('{{ asset("fonts/icomoon.woff?nx31xa") }}') format('woff'),
-                    url('{{ asset("fonts/icomoon.svg?nx31xa#icomoon") }}') format('svg');
+                    src:  url('{{ asset("fonts/icomoon.eot?2z9h1y") }}');
+                    src:  url('{{ asset("fonts/icomoon.eot?2z9h1y#iefix") }}') format('embedded-opentype'),
+                    url('{{ asset("fonts/icomoon.ttf?2z9h1y") }}') format('truetype'),
+                    url('{{ asset("fonts/icomoon.woff?2z9h1y") }}') format('woff'),
+                    url('{{ asset("fonts/icomoon.svg?2z9h1y#icomoon") }}') format('svg');
                     font-weight: normal;
                     font-style: normal;
                     font-display: block;
@@ -67,6 +67,7 @@
                     -webkit-font-smoothing: antialiased;
                     -moz-osx-font-smoothing: grayscale;
                 }
+                .icon-download:before { content: "\e91a"; }
                 .icon-facebook:before { content: "\e916"; }
                 .icon-instagram:before { content: "\e917"; }
                 .icon-linkedin:before { content: "\e918"; }
@@ -176,7 +177,7 @@
                                     <span><i class="icon-previous"></i> Retour</span>
                                     <span class="ariane">Espace Pro</span>
                                 </div>
-                                <a href="#">Revue de presse</a>
+                                <a href="{{ path('front_press_review') }}" data-njs-href="{{ path('front_press_review') }}">Revue de presse</a>
                                 <a href="{{ path('front_rent') }}" data-njs-href="{{ path('front_rent') }}">Louer notre radiobox</a>
                                 <a href="{{ path('front_organize') }}" data-njs-href="{{ path('front_organize') }}">Organiser un atelier</a>
                                 <a href="#">Nos partenaires</a>

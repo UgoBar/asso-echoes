@@ -16,8 +16,11 @@ body:has(#contact) {
 body:has(#rent) {
     background-color: #7fb7d8;
 }
+body:has(#organize) {
+    background-color: var(--color-light);
+}
 
-#contact, #rent {
+#contact, #rent, #organize {
     width: 100%;
     height: calc(100vh - 85px);
     display: flex;
@@ -38,12 +41,14 @@ body:has(#rent) {
     height: 100%;
 }
 
-#rent .image-and-bg .img {
+#rent .image-and-bg .img,
+#organize .image-and-bg .img {
     background-position: 133% 50%;
     background-size: cover;
 }
 
-#rent input[type="text"], #rent input[type="email"], #rent textarea {
+#rent input[type="text"], #rent input[type="email"], #rent textarea,
+#organize input[type="text"], #organize input[type="email"], #organize textarea {
     border: 2px solid #fff;
     background-color: #fff;
 }
@@ -69,7 +74,7 @@ h1 {
 
 @media screen and (max-width: 900px) {
 
-    #contact, #rent {
+    #contact, #rent, #organize {
         flex-direction: column-reverse;
         height: 100%;
     }
@@ -121,7 +126,8 @@ h1 {
         width: 100%;
     }
 
-    #rent .image-and-bg .img {
+    #rent .image-and-bg .img,
+    #organize .image-and-bg .img {
         background-position: 100% 50%;
         background-size: cover;
     }

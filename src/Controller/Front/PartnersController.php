@@ -6,12 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class GalleryController extends AbstractController
+class PartnersController extends AbstractController
 {
-    #[Route('/gallerie', name: 'front_gallery')]
+    #[Route('/partenaires', name: 'front_partners')]
     public function index(): Response
     {
-        return $this->render('front/gallery.html.twig', [
+        return $this->render('front/partners.html.twig', [
             'controller_name' => 'NewsController',
         ]);
     }

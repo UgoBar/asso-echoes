@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Bienvenue sur le site de l’association Echoes qui a pour but de promouvoir des projets culturels et solidaires luttant contre l’isolement, à travers la production de podcasts radio avec des seniors dans la métropole d’Aix-Marseille.">
+        <meta name="keywords" content="Echoes, radio, podcast, EHPAD, seniors, bien-vieillir, isolement, solidaire, personne âgée, culture, art, partage, bien-être">
 
         <!-- Favicon -->
         <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/favicon/apple-touch-icon.png') }}">
@@ -180,7 +181,7 @@
                                 <a href="{{ path('front_press_review') }}" data-njs-href="{{ path('front_press_review') }}">Revue de presse</a>
                                 <a href="{{ path('front_rent') }}" data-njs-href="{{ path('front_rent') }}">Louer notre radiobox</a>
                                 <a href="{{ path('front_organize') }}" data-njs-href="{{ path('front_organize') }}">Organiser un atelier</a>
-                                <a href="#">Nos partenaires</a>
+                                <a href="{{ path('front_partners') }}" data-njs-href="{{ path('front_partners') }}">Nos partenaires</a>
                             </div>
                         </div>
                         <div class="menu-list">
@@ -198,8 +199,8 @@
                 <aside>
                     <a class="btn btn-rect btn-black" href="https://www.helloasso.com/associations/echoes/adhesions/cotisation-annuelle-a-l-association-echoes" target="_blank"><i class="icon-charity"></i> Devenir adhérent</a>
                     <button class="btn btn-rect btn-black" data-modal-id="newsletter-modal" onclick="burgerTime()"><i class="icon-broadcast"></i> Inscription newsletter</button>
-                    <button class="btn btn-rect btn-black"><i class="icon-headset"></i> Organiser un atelier</button>
-                    <button class="btn btn-rect btn-black"><i class="icon-radio" aria-hidden="true"></i> Louer notre radiobox</button>
+                    <a class="btn btn-rect btn-black" href="{{ path('front_organize') }}" data-njs-href="{{ path('front_organize') }}"><i class="icon-headset"></i> Organiser un atelier</a>
+                    <a class="btn btn-rect btn-black" href="{{ path('front_rent') }}" data-njs-href="{{ path('front_rent') }}"><i class="icon-radio" aria-hidden="true"></i> Louer notre radiobox</a>
                 </aside>
             </div>
         </div>
@@ -207,7 +208,7 @@
         <div id="hello-asso-modal" class="layout-modal">
             <div class="modal-content">
                 <span class="close-layout-modal">&times;</span>
-{#                <iframe id="haWidget" allowtransparency="true" scrolling="auto" src="https://www.helloasso.com/associations/echoes/formulaires/1/widget" style="width: 100%; height: 750px; border: none;"></iframe>#}
+                <iframe id="haWidget" allowtransparency="true" scrolling="auto" src="https://www.helloasso.com/associations/echoes/formulaires/1/widget" style="width: 100%; height: 750px; border: none;"></iframe>
             </div>
         </div>
 
@@ -263,7 +264,7 @@
                         <p>SIRET : 793032103 00038</p>
                         <p>Ancien Chemin du Coton Rouge, 13100 Aix-en-Provence</p>
                         <div class="footer-buttons">
-                            <a href="#" class="main-btn">Contactez nous</a>
+                            <a href="{{ path('front_contact') }}" data-njs-href="{{ path('front_contact') }}" class="main-btn">Contactez nous</a>
                             <span class="main-btn" data-modal-id="newsletter-modal">Newsletter</span>
                         </div>
                     </div>

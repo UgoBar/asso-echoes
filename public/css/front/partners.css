@@ -1,0 +1,57 @@
+h1 {
+    margin: 0;
+}
+
+p {
+    margin-top: 0;
+}
+
+#partners {
+    margin: 2em 0 4em 0;
+}
+
+figure {
+    width: 240px;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+}
+
+#partners section {
+    padding: 1.5em;
+    border-radius: 10px;
+    margin-bottom: 2em;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.logos {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.section-title {
+    font-size: 25px;
+    font-family: 'Josefin Sans', sans-serif;
+    color: var(--primary);
+    text-transform: uppercase;
+    padding-left: 1em;
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 1024px) {
+    figure {
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #partners {
+        margin: 0 0 4em 0;
+    }
+
+    .section-title {
+        padding-left: 0;
+        text-align: center;
+    }
+}

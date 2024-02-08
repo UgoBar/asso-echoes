@@ -222,7 +222,7 @@ header .toggle-menu {
     position: absolute;
     width: 100%;
     top: -450px;
-    z-index: 10;
+    z-index: 4;
     transition: .5s cubic-bezier(.74,.08,.51,.95);
     overflow-y: auto;
     max-height: calc(100vh - 87px);
@@ -724,7 +724,7 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
 
 @media screen and (max-width: 1024px) {
 
-    #radiobox, #contact, #rent, #organize {
+    #radiobox, #contact, #rent, #organize, #partners {
         padding-top: 1em;
     }
     /*main {*/

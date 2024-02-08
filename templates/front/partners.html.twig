@@ -1,0 +1,57 @@
+{% extends 'front_base.html.twig' %}
+
+{% block title %}Boîte à souvenir{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block main %}
+
+    <navigate-js>
+
+        <link rel="stylesheet" href="{{ asset('css/front/partners.css') }}" data-njs>
+
+        <section id="partners">
+
+            <div class="container">
+
+                <h1 class="text-center">Nos partenaires</h1>
+                <p class="text-center">Ils font partie de l’impact positif !</p>
+
+                <section class="financial-partners">
+                    <h2 class="section-title">Les financeurs</h2>
+                    <div class="logos">
+                        <figure><img src="{{ asset('img/partners/logo_FDVA.png') }}" alt="Logo de la FDVA"></figure>
+                        <figure><img src="{{ asset('img/partners/logo_bouche_rhone.png') }}" alt="Logo des bouches du rhone"></figure>
+                        <figure><img src="{{ asset('img/partners/ensemble_provence_2023.png') }}" alt="Logo ensemble en provence"></figure>
+                        <figure><img src="{{ asset('img/partners/logo_departement_13.png') }}" alt="Logo du département 13"></figure>
+                    </div>
+                </section>
+
+                <section class="collaborative-partners">
+                    <h2 class="section-title">Nous avons collaboré</h2>
+                    <div class="logos">
+                        <figure><img src="{{ asset('img/partners/stakkato.png') }}" alt="Logo de Stakkato"></figure>
+                        <figure><img src="{{ asset('img/partners/logo_chaire.png') }}" alt="Logo de la Chaire"></figure>
+                        <figure><img src="{{ asset('img/partners/logo_gtp.png') }}" alt="Logo du Grand Théâtre de Provence "></figure>
+                        <figure><img src="{{ asset('img/partners/logo_6mic.png') }}" alt="Logo du 6mic"></figure>
+                        <figure><img src="{{ asset('img/partners/logo_aixquis_noir.png') }}" alt="Logo de Aixqui"></figure>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <script data-njs>
+            if (document.querySelector('navigate-js').classList.contains('njs-page-loaded')) {
+
+            }
+        </script>
+
+    </navigate-js>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

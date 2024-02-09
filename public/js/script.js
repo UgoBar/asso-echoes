@@ -134,22 +134,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // Layout Modal
-    document.querySelectorAll('.layout-modal').forEach(modal => {
-        let closeBtn = modal.querySelector(".close-layout-modal");
+    window.closeLayoutModal = () => {
+        document.querySelectorAll('.layout-modal').forEach(modal => {
+            let closeBtn = modal.querySelector(".close-layout-modal");
 
-        // Click on close btn ? close modal
-        closeBtn.onclick = function() {
-            openCloseModal(modal, overlay)
-        }
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
+            // Click on close btn ? close modal
+            closeBtn.onclick = function() {
                 openCloseModal(modal, overlay)
             }
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    openCloseModal(modal, overlay)
+                }
+            });
         });
-    });
+    }
 
     window.openCloseModal = (modal, overlay) => {
+        console.log('open close');
         modal.classList.toggle('active');
         overlay.classList.toggle('active');
         modal.querySelector('.modal-content').classList.toggle('active');
@@ -183,9 +186,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // Event open/close layout modal
     function initModalEvents() {
         document.querySelectorAll('[data-modal-id]').forEach(btn => {
-            let modal = document.querySelector('#' + btn.dataset.modalId);
+            let modal = document.getElementById(btn.dataset.modalId);
             btn.addEventListener('click', () => openCloseModal(modal, overlay));
         });
+        closeLayoutModal();
     }
 
     function initApp() {

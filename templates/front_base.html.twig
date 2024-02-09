@@ -98,6 +98,14 @@
             </style>
         {% endblock %}
 
+        {% block javascripts %}
+            <script src="https://kit.fontawesome.com/73ab01ebea.js" crossorigin="anonymous"></script>
+            <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.3/gsap.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+            <script src="{{ asset('js/script.js') }}" type="module"></script>
+        {% endblock %}
+
     </head>
     <body>
 
@@ -124,7 +132,7 @@
                 </div>
                 <div class="header-btn podcast-wrapper" data-modal-id="podcast-modal">
                     <i class="icon-radio" aria-hidden="true"></i>
-                    <span class="fw-bold josefin">Les podcast</span>
+                    <span class="fw-bold josefin">Les podcasts</span>
                 </div>
             </div>
         </header>
@@ -205,38 +213,39 @@
             </div>
         </div>
 
-        <div id="hello-asso-modal" class="layout-modal">
-            <div class="modal-content">
-                <span class="close-layout-modal">&times;</span>
-                <iframe id="haWidget" allowtransparency="true" scrolling="auto" src="https://www.helloasso.com/associations/echoes/formulaires/1/widget" style="width: 100%; height: 750px; border: none;"></iframe>
+        <div id="modals-wrapper">
+            <div id="hello-asso-modal" class="layout-modal">
+                <div class="modal-content">
+                    <span class="close-layout-modal">&times;</span>
+                    <iframe id="haWidget" allowtransparency="true" scrolling="auto" src="https://www.helloasso.com/associations/echoes/formulaires/1/widget" style="width: 100%; height: 750px; border: none;"></iframe>
+                </div>
             </div>
-        </div>
 
-        <div id="podcast-modal" class="layout-modal">
-            <div class="modal-content">
-                <span class="close-layout-modal">&times;</span>
-                <script data-format="playlist" data-pId="6427" src="https://players.podcastics.com/podcastics/player.js"></script>
+            <div id="podcast-modal" class="layout-modal">
+                <div class="modal-content">
+                    <span class="close-layout-modal">&times;</span>
+                    <script defer data-format="playlist" data-pId="6427" src="https://players.podcastics.com/podcastics/player.js"></script>
+                </div>
             </div>
-        </div>
 
-        <div id="newsletter-modal" class="layout-modal">
-            <div id="newsletter-modal-card" class="modal-content">
-                <span class="close-layout-modal">&times;</span>
-                <div class="rainbow"><span></span><span></span></div>
-                <div class="newsletter-wrapper">
-                    <h3 class="newsletter-title">Inscription Newsletter</h3>
-                    <p class="newsletter-text">Pour ne pas rater un seul podcast et recevoir les dernières actualités de l'asso !</p>
-                    <form id="newsletter-form" method="post" data-route="{{ path('add_contact_news') }}">
-                        <input id="newsletter-email" name="newsletter-email" class="text-center" type="email" placeholder="mon_mail@gmail.com"/>
-                        <input class="main-btn" type="submit" value="Envoyer"/>
-                    </form>
+            <div id="newsletter-modal" class="layout-modal">
+                <div id="newsletter-modal-card" class="modal-content">
+                    <span class="close-layout-modal">&times;</span>
+                    <div class="rainbow"><span></span><span></span></div>
+                    <div class="newsletter-wrapper">
+                        <h3 class="newsletter-title">Inscription Newsletter</h3>
+                        <p class="newsletter-text">Pour ne pas rater un seul podcast et recevoir les dernières actualités de l'asso !</p>
+                        <form id="newsletter-form" method="post" data-route="{{ path('add_contact_news') }}">
+                            <input id="newsletter-email" name="newsletter-email" class="text-center" type="email" placeholder="mon_mail@gmail.com"/>
+                            <input class="main-btn" type="submit" value="Envoyer"/>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
 
         <main>
             <div class="overlay"></div>
-            <a class="d-none" href="https://storyset.com/people">People illustrations by Storyset</a>
             {% for message in app.session.flashbag.get('success') %}
                 <div class="d-none toast-alert" data-toast-title="Super !" data-toast-message="{{ message }}" data-toast-type="success" data-toast-duration="10000"></div>
             {% endfor %}
@@ -273,12 +282,5 @@
             <div class="credits"><em>Site réalisé par <a href="https://ugo-barathe.com" class="credit-link">Ugo Barathe</a></em></div>
         </footer>
 
-        {% block javascripts %}
-            <script src="https://kit.fontawesome.com/73ab01ebea.js" crossorigin="anonymous"></script>
-            <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.3/gsap.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-            <script src="{{ asset('js/script.js') }}" type="module"></script>
-        {% endblock %}
     </body>
 </html>

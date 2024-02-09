@@ -110,6 +110,7 @@ navigate-js {
 }
 .image-and-text img {
     border: 5px solid var(--primary);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .image-and-text .text {
     padding: 1em;
@@ -564,18 +565,6 @@ footer .credits a:hover {
     /*text-shadow: 2px -1px 0 #ffb87b, 2px -2px 0 #ffa259, 2px -3px 0 #ff8c24, 2px -4px 0 #ff7300;*/
 }
 
-.article-svg-animated {
-    display: flex;
-    justify-content: space-between;
-}
-.article-svg-animated > * {
-    width: 50%;
-}
-
-.article-svg-animated section {
-    padding-top: 2em;
-}
-
 article p {
     text-align: justify;
     font-size: 17px;
@@ -738,9 +727,6 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
     #radiobox, #contact, #rent, #organize, #partners {
         padding-top: 1em;
     }
-    /*main {*/
-    /*    padding-top: 125px;*/
-    /*}*/
 
     .container {
         width: 90%;
@@ -812,22 +798,15 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
         text-align: center;
         font-size: 50px;
     }
-    .article-svg-animated > * {
-        width: initial;
-    }
-
-    .article-svg-animated p {
-        margin: 0;
-    }
-    .article-svg-animated p:last-of-type {
-        margin-bottom: 2em;
-    }
 
     .image-and-text {
         flex-wrap: wrap;
     }
     .image-and-text > * {
         width: 100%;
+    }
+    .image-and-text .text {
+        padding: 1em 0;
     }
 
     input[type="text"], input[type="email"], textarea {

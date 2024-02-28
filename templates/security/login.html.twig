@@ -1,0 +1,47 @@
+{% extends 'security/base_security.html.twig' %}
+
+{% block body %}
+
+    <div class="grid">
+
+        <img src="{{ asset('img/logo-asso-echoes-blanc.png') }}" alt="Logo de l'association Echoes">
+
+        {% if error %}
+            <div class="alert alert-danger">Email ou mot de passe invalide</div>
+        {% endif %}
+
+        <form method="POST" class="form login">
+
+            <div class="form__field">
+                <label for="username">
+                    <i class="fas fa-user"></i>
+                    <span class="hidden">Email</span>
+                </label>
+                <input type="email" value="{{ last_username }}" name="_username" id="username" class="form__input" autocomplete="email" required autofocus placeholder="Email">
+            </div>
+
+            <div class="form__field">
+                <label for="password">
+                    <i class="fas fa-lock"></i>
+                    <span class="hidden">Password</span>
+                </label>
+                <input type="password" name="_password" id="password" class="form__input" autocomplete="current-password" required placeholder="Mot de passe">
+            </div>
+
+            <label class="no-bg">
+                <input type="checkbox" name="_remember_me"> <span class="checkbox-text">Rester connecté ?</span>
+            </label>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <div class="form__field">
+                <input type="submit" value="Se connecter">
+            </div>
+
+        </form>
+
+        <a class="text-center" href="">Mot de passe oublié ?</a>
+
+    </div>
+
+{% endblock %}

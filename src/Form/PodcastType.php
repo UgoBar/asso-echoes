@@ -18,8 +18,11 @@ class PodcastType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('subtitle')
+            ->add('subtitle', TextType::class, [
+                'label' => 'Sous-titre'
+            ])
             ->add('title', TextType::class, [
+                'label' => 'Titre',
                 'constraints' => new NotBlank(['message' => 'Le titre ne peut pas être vide'])
             ])
             ->add('position', IntegerType::class, [

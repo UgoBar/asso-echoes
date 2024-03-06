@@ -1,0 +1,44 @@
+{% extends 'back_base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .breadcrump-header {
+            display: none;
+        }
+
+        {% if title != 'Logo noir' %}
+        #file-image {
+            background-color: #1a1e23;
+        }
+        {% endif %}
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('back_dashboard') }}" class="btn btn-secondary mb-4 d-block mx-auto mt-5">
+        <i class="material-icons pe-2">keyboard_backspace</i>Retour au dashboard
+    </a>
+
+    {% for error in form_errors(form) %}
+        <div class="form-error">{{ error.message }}</div>
+    {% endfor %}
+
+    {{ form_start(form, {'attr': {'class': 'justify-form', 'id': 'file-upload-form'}}) }}
+
+    {% set label = title == 'Logo noir' ? 'logo_black_media_imageFile_file' : 'logo_white_media_imageFile_file' %}
+    {% include 'widgets/upload_card.html.twig' with {card_title: title, label_for: label} %}
+
+    <button type="submit" class="btn btn-success">
+        <span class="material-icons pe-2">edit</span>{{ editMode ? 'Modifier' : 'Ajouter' }}
+    </button>
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/back/upload.js') }}"></script>
+{% endblock %}

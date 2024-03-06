@@ -188,11 +188,12 @@
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-20 ">
         <div class="mx-3">
-                    <span class="bg-gradient-primary mt-2 w-100 mb-1 d-flex align-items-center justify-content-between px-4" style="cursor: initial;">
-                        {{ app.user.firstname }} {{ app.user.lastname }}
-                        <a class="sider-btn" type="submit" href="{{ path('app_logout') }}"><i class="material-icons">logout</i></a>
-                    </span>
+            <span class="bg-gradient-primary mt-2 w-100 mb-1 d-flex align-items-center justify-content-between px-4" style="cursor: initial;">
+                {{ app.user.firstname }} {{ app.user.lastname }}
+                <a class="sider-btn" type="submit" href="{{ path('app_logout') }}"><i class="material-icons">logout</i></a>
+            </span>
             <div class="d-flex justify-content-center mt-2">
+            <a href="{{ path('front_home') }}" target="_blank" class="btn btn-small btn-black" id="mobile-website-link"><span class="material-icons pe-2">open_in_new</span><span class="link-text">Voir le site</span></a>
 
 {#                <a class="sider-btn" href="{{ path('update_user_password', {'id': app.session.get('user').id}) }}"><i class="material-icons">manage_accounts</i></a>#}
             </div>
@@ -238,8 +239,10 @@
     </div>
 </main>
 
+<a href="{{ path('front_home') }}" target="_blank" class="btn btn-small btn-black" id="website-link"><span class="material-icons pe-2">open_in_new</span><span class="link-text">Voir le site</span></a>
+
 {% block javascripts %}
-    <script src="{{ asset('js/back/core/bootstrap.min.js') }}"></script>
+{#    <script src="{{ asset('js/back/core/bootstrap.min.js') }}"></script>#}
     <script src="{{ asset('js/back/material-dashboard.js') }}"></script>
 {#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>#}
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

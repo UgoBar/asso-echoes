@@ -17,11 +17,9 @@
                             <figure>
                                 <img src="{{ asset('img/' ~ podcast.media.picture) }}" alt="{{ podcast.media.alt }}">
                                 <div class="card-actions">
-                                    <a class="btn btn-secondary action-btn"
-                                       href="{{ path('back_edit_podcast', { 'id': podcast.id }) }}"
-                                       data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top"
-                                    >
-                                        <i class="material-icons" aria-hidden="true">edit</i></a>
+                                    <a class="btn btn-secondary action-btn" href="{{ path('back_edit_podcast', { 'id': podcast.id }) }}">
+                                        <i class="material-icons" aria-hidden="true">edit</i>
+                                    </a>
                                     <span class="btn btn-danger"
                                           onclick="deleteElem({{ podcast.id }}, 'Podcast', 'podcast-{{ podcast.id }}', 'Tu es sur le point de supprimer le podcast {{ podcast|e('js') }}')"
                                     >

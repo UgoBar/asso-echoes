@@ -50,7 +50,6 @@ class PodcastController extends BaseController
     #[Route('/admin/podcast/edit/{id}', name: 'back_edit_podcast')]
     public function form(Request $request, Podcast $podcast = null): Response
     {
-
         // Manage access to this page (max podcast = 3)
         $countPodcasts = count($this->getRepo(Podcast::class)->findBy([], ['position' => 'ASC']));
         if ($podcast === null && $countPodcasts === 3) {
@@ -58,15 +57,10 @@ class PodcastController extends BaseController
             return $this->redirectToRoute('back_podcasts');
         }
 
-        // Init entities
-        $isEdit = $podcast instanceof Podcast;
-        if ($isEdit) {
-            $media = $podcast->getMedia();
-        } else {
-            $media = new Media();
-            $podcast = new Podcast();
+        $isEdit = $podcast !== null;
+        list($podcast, $media) = $this->createEntities('Podcast', $podcast, true);
+        if ($isEdit === false)
             $podcast->setPosition($countPodcasts + 1);
-        }
 
         // Manage form
         $form = $this->createForm(PodcastType::class, $podcast);

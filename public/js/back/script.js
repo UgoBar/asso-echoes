@@ -10,24 +10,30 @@ function deleteElem(entityId, entityName, elemId, textWarning) {
         cancelButtonText: 'Annuler',
     }).then((result) => {
         if (result.isConfirmed) {
-            $.ajax({
-                url: window.deleteElemRoute,
-                type: "POST",
-                dataType: "json",
-                data: {
-                    "entityId": entityId,
-                    "entityName": entityName
+            fetch(window.deleteElemRoute, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' // Set content type for JSON data
                 },
-                async: true,
-                success: (data) => {
+                body: JSON.stringify({ // Convert data object to JSON string
+                    entityId: entityId,
+                    entityName: entityName
+                }),
+                async: true // Keep async behavior for consistency
+            })
+                .then(response => response.json()) // Parse the JSON response
+                .then(data => {
                     Swal.fire(
                         'C\'est fait !',
                         data.successDeleteMsg,
                         'success'
                     );
-                    $('#' + elemId).remove();
-                }
-            })
+                    document.getElementById(elemId).remove();
+                })
+                .catch(error => {
+                    // Handle errors, e.g., display an error message
+                    console.error('Error:', error);
+                });
         }
     })
 }

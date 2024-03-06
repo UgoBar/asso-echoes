@@ -1,5 +1,68 @@
 {% extends 'back_base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/back/coloris.min.css') }}">
+    {{ parent() }}
+    <link href="{{ asset('css/back/dashboard.css') }}" rel="stylesheet" />
+{% endblock %}
+
 {% block body %}
 
+    <section class="logos mb-5">
+        <h4 class="mb-4 mt-3 w-100">Logos</h4>
+        <figure class="logo-black">
+            {% if logoBlack is not null %}
+                <img src="{{  vich_uploader_asset(logoBlack.media, 'imageFile') }}" alt="" class="rounded-img">
+            {% else %}
+                <img src="{{ asset('img/back/no-logo-black.png') }}" alt="" class="rounded-img">
+            {% endif %}
+            <figcaption class="logo-title">Logo noir</figcaption>
+            <a href="{{ logoBlack is not null ? path('back_logo_black_edit', { 'id': logoBlack.id }) : path('back_logo_black_new') }}" class="edit-logo"><span class="material-icons">edit</span></a>
+        </figure>
+
+        <figure class="logo-white">
+            {% if logoWhite is not null %}
+                <img src="{{  vich_uploader_asset(logoWhite.media, 'imageFile') }}" alt="{{ logoWhite.media.alt }}" class="rounded-img">
+            {% else %}
+                <img src="{{ asset('img/back/no-logo-white.png') }}" alt="" class="rounded-img">
+            {% endif %}
+            <figcaption class="logo-title">Logo blanc</figcaption>
+            <a href="{{ logoWhite is not null ? path('back_logo_white_edit', { 'id': logoWhite.id }) : path('back_logo_white_new') }}" class="edit-logo"><span class="material-icons">edit</span></a>
+        </figure>
+    </section>
+
+    <section class="color-section">
+        <h4 class="mt-3">Couleur</h4>
+        {{ form_start(form, {'attr': {'class': 'flex-form'}}) }}
+        <div class="colorpicker form-group">
+            {{ form_widget(form.color, {'attr': { 'class':'coloris', 'value': color }}) }}
+        </div>
+        <button class="btn btn-outline-dark py-0 px-2 ms-lg-3" type="submit" style="text-transform: unset;">Changer la couleur</button>
+        {{ form_end(form) }}
+        <small>Couleur non mise à jour ? <a href="" onclick="window.location.reload();">Recharger</a></small>
+    </section>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('js/back/coloris.min.js') }}"></script>
+
+    <script>
+        Coloris({
+            themeMode: 'dark',
+            el: '.coloris',
+            theme: 'large',
+            wrap: true,
+            swatches: [
+                '#1a1e23',
+                '#f8f9fa',
+                '#ff5500',
+                '#014921',
+                '#2cd2b6',
+                '#e85f99',
+            ]
+        });
+    </script>
 {% endblock %}

@@ -33,7 +33,7 @@ figcaption {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
-.logos {
+.logos-section {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;

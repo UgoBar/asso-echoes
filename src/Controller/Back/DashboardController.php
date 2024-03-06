@@ -3,7 +3,15 @@
 namespace App\Controller\Back;
 
 use App\Controller\BaseController;
+use App\Entity\LogoBlack;
+use App\Entity\LogoWhite;
+use App\Entity\Media;
+use App\Entity\Podcast;
+use App\Entity\Site;
 use App\Entity\User;
+use App\Form\LogoBlackType;
+use App\Form\LogoWhiteType;
+use App\Form\SiteType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,9 +21,99 @@ class DashboardController extends BaseController
     #[Route('/admin', name: 'back_dashboard')]
     public function index(Request $request): Response
     {
+        $logoBlack = count($this->getRepo(LogoBlack::class)->findAll()) > 0 ? $this->getRepo(LogoBlack::class)->findAll()[0] : null;
+        $logoWhite = count($this->getRepo(LogoWhite::class)->findAll()) > 0 ? $this->getRepo(LogoWhite::class)->findAll()[0] : null;
+        $site      = count($this->getRepo(Site::class)->findAll()) > 0 ? $this->getRepo(Site::class)->findAll()[0] : new Site();
+        $color = $site->getColor() !== null ? $site->getColor() : '#ff5500';
+
+        // Manage colorpicker form
+        $form = $this->createForm(SiteType::class, $site);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->save($site, true, 'back_dashboard', 'La couleur principale a été modifiée');
+        }
+
         return $this->render('back/dashboard.html.twig', [
             'nav' => 'dashboard',
-            'title' => 'Dashboard'
+            'title' => 'Dashboard',
+            'logoBlack' => $logoBlack,
+            'logoWhite' => $logoWhite,
+            'form' => $form->createView(),
+            'color' => $color
+        ]);
+    }
+
+    #[Route('/admin/logo/noir/nouveau', name: 'back_logo_black_new')]
+    #[Route('/admin/logo/noir/{id}', name: 'back_logo_black_edit')]
+    public function logoBlack(Request $request, LogoBlack $logoBlack = null): \Symfony\Component\HttpFoundation\RedirectResponse|Response
+    {
+        $isEdit = $logoBlack !== null;
+        $state  = $logoBlack !== null ? 'modifié' : 'ajouté';
+        list($logoBlack, $media) = $this->createEntities('LogoBlack', $logoBlack, true);
+
+        // Manage form
+        $form = $this->createForm(LogoBlackType::class, $logoBlack);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+
+            // First record Media
+            $media->setImageFile($data->getMedia()->getImageFile());
+            $media->setAlt($data->getMedia()->getAlt());
+            $this->save($media);
+            // Then record Podcast with previously created Media
+            $logoBlack->setMedia($media);
+            $this->save($logoBlack);
+
+            $this->save($logoBlack, true, 'back_dashboard', 'Le logo noir a bien été ' . $state);
+        }
+
+        return $this->render('back/logo/form.html.twig', [
+            'nav' => 'dashboard',
+            'title' => 'Logo noir',
+            'subtitle' => $isEdit ? 'Modifier' : 'Ajouter',
+            'logoBlack' => $logoBlack,
+            'form' => $form->createView(),
+            'editMode' => $isEdit,
+            'media' => $media,
+        ]);
+    }
+
+    #[Route('/admin/logo/blanc/nouveau', name: 'back_logo_white_new')]
+    #[Route('/admin/logo/blanc/{id}', name: 'back_logo_white_edit')]
+    public function logoWhite(Request $request, LogoWhite $logo = null): \Symfony\Component\HttpFoundation\RedirectResponse|Response
+    {
+        $isEdit = $logo !== null;
+        $state  = $logo !== null ? 'modifié' : 'ajouté';
+        list($logo, $media) = $this->createEntities('LogoWhite', $logo, true);
+
+        // Manage form
+        $form = $this->createForm(LogoWhiteType::class, $logo);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+
+            // First record Media
+            $media->setImageFile($data->getMedia()->getImageFile());
+            $media->setAlt($data->getMedia()->getAlt());
+            $this->save($media);
+            // Then record Podcast with previously created Media
+            $logo->setMedia($media);
+            $this->save($logo, true, 'back_dashboard', 'Le logo blanc a bien été ' . $state);
+        }
+
+        return $this->render('back/logo/form.html.twig', [
+            'nav' => 'dashboard',
+            'title' => 'Logo blanc',
+            'subtitle' => $isEdit ? 'Modifier' : 'Ajouter',
+            'logo' => $logo,
+            'form' => $form->createView(),
+            'editMode' => $isEdit,
+            'media' => $media,
         ]);
     }
 }

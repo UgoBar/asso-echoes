@@ -26,6 +26,11 @@ class Podcast
     #[ORM\Column]
     private ?int $position = null;
 
+    public function __toString()
+    {
+        return $this->title;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

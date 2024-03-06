@@ -1,148 +1,100 @@
-/**********
- * UPLOAD *
- *********/
-function ekUpload(){
-    function Init() {
-
-        console.log("Upload Initialised");
-
-        let fileSelect    = document.querySelector('input[type=file]'),
-            fileDrag      = document.getElementById('fileDrag'),
-            submitButton  = document.querySelector('input[type=submit]');
-
-        fileSelect.addEventListener('change', fileSelectHandler, false);
-
-        // Is XHR2 available?
-        let xhr = new XMLHttpRequest();
-        if (xhr.upload) {
-            // File Drop
-            fileDrag.addEventListener('dragover', fileDragHover, false);
-            fileDrag.addEventListener('dragleave', fileDragHover, false);
-            fileDrag.addEventListener('drop', fileSelectHandler, false);
+function deleteElem(entityId, entityName, elemId, textWarning) {
+    Swal.fire({
+        title: 'Attention',
+        html: textWarning,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#929292',
+        confirmButtonText: 'Supprimer',
+        cancelButtonText: 'Annuler',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: window.deleteElemRoute,
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "entityId": entityId,
+                    "entityName": entityName
+                },
+                async: true,
+                success: (data) => {
+                    Swal.fire(
+                        'C\'est fait !',
+                        data.successDeleteMsg,
+                        'success'
+                    );
+                    $('#' + elemId).remove();
+                }
+            })
         }
-    }
+    })
+}
 
-    function fileDragHover(e) {
-        let fileDrag = document.getElementById('file-drag');
+// Toast function
+function toastFn({ title = "", message = "", type = "info", duration = 3000 }) {
+    const main = document.getElementById("toast");
 
-        e.stopPropagation();
-        e.preventDefault();
-    }
+    console.log(duration)
 
-    function fileSelectHandler(e) {
-        // Fetch FileList object
-        let files = e.target.files || e.dataTransfer.files;
+    if (main) {
+        const toast = document.createElement("div");
 
-        // Cancel event and hover styling
-        fileDragHover(e);
+        // Auto remove toast
+        const autoRemoveId = setTimeout(function () {
+            main.removeChild(toast);
+        }, duration + 1000);
 
-        // Process all File objects
-        for (let i = 0, f; f = files[i]; i++) {
-            parseFile(f);
-            uploadFile(f);
-        }
-    }
-
-    // Output
-    function output(msg) {
-        // Response
-        let m = document.getElementById('messages');
-        m.innerHTML = msg;
-    }
-
-    function parseFile(file) {
-
-        console.log(file.name);
-        output(
-            '<strong>' + encodeURI(file.name) + '</strong>'
-        );
-
-        // let fileType = file.type;
-        // console.log(fileType);
-        let imageName = file.name;
-
-        let isGood = (/\.(?=gif|jpg|png|pdf|jpeg)/gi).test(imageName);
-        if (isGood) {
-            document.getElementById('response').classList.remove("hidden");
-            document.getElementById('notimage').classList.add("hidden");
-            // Thumbnail Preview
-            document.getElementById('file-image').classList.remove("hidden");
-            //document.getElementById('file-image').style.height="200px";
-            document.getElementById('file-image').style.width="100%";
-            document.getElementById('file-image').src = URL.createObjectURL(file);
-        }
-        else {
-            document.getElementById('file-image').classList.add("hidden");
-            document.getElementById('notimage').classList.remove("hidden");
-            document.getElementById('start').classList.remove("hidden");
-            document.getElementById('response').classList.add("hidden");
-            document.getElementById("file-upload-form").reset();
-        }
-    }
-
-    function setProgressMaxValue(e) {
-        let pBar = document.getElementById('file-progress');
-
-        if (e.lengthComputable) {
-            pBar.max = e.total;
-        }
-    }
-
-    function updateFileProgress(e) {
-        let pBar = document.getElementById('file-progress');
-
-        if (e.lengthComputable) {
-            pBar.value = e.loaded;
-        }
-    }
-
-    function uploadFile(file) {
-
-        let xhr = new XMLHttpRequest(),
-            fileInput = document.getElementById('class-roster-file'),
-            pBar = document.getElementById('file-progress'),
-            fileSizeLimit = 1024; // In MB
-        if (xhr.upload) {
-            // Check if file is less than x MB
-            if (file.size <= fileSizeLimit * 1024 * 1024) {
-                // Progress bar
-                pBar.style.display = 'inline';
-                xhr.upload.addEventListener('loadstart', setProgressMaxValue, false);
-                xhr.upload.addEventListener('progress', updateFileProgress, false);
-
-                // File received / failed
-                xhr.onreadystatechange = function(e) {
-                    if (xhr.readyState == 4) {
-                        // Everything is good!
-
-                        // progress.className = (xhr.status == 200 ? "success" : "failure");
-                        // document.location.reload(true);
-                    }
-                };
-
-                // Start upload
-                xhr.open('POST', document.getElementById('file-upload-form').action, true);
-                xhr.setRequestHeader('X-File-Name', file.name);
-                xhr.setRequestHeader('X-File-Size', file.size);
-                xhr.setRequestHeader('Content-Type', 'multipart/form-data');
-                xhr.send(file);
-            } else {
-                output('Please upload a smaller file (< ' + fileSizeLimit + ' MB).');
+        // Remove toast when clicked
+        toast.onclick = function (e) {
+            if (e.target.closest(".toast__close")) {
+                main.removeChild(toast);
+                clearTimeout(autoRemoveId);
             }
-        }
-    }
+        };
 
-    // Check for the letious File API support.
-    if (window.File && window.FileList && window.FileReader) {
-        Init();
-    } else {
-        document.getElementById('file-drag').style.display = 'none';
+        const icons = {
+            success: "check_circle",
+            info: "info",
+            warning: "warning",
+            error: "error"
+        };
+        const icon = icons[type];
+        console.log(icon, type)
+        const delay = (duration / 1000).toFixed(2);
+
+        toast.classList.add("toast", `toast--${type}`, 'show');
+        toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s ${delay}s forwards`;
+
+        toast.innerHTML = `
+                    <div class="toast__icon">
+                        <i class="material-icons">${icon}</i>
+                    </div>
+                    <div class="toast__body">
+                        <h3 class="toast__title">${title}</h3>
+                        <p class="toast__msg">${message}</p>
+                    </div>
+                    <div class="toast__close">
+                        <i class="material-icons">close</i>
+                    </div>
+                `;
+        main.appendChild(toast);
     }
 }
-ekUpload();
-/**************
- * END UPLOAD *
- **************/
+
+
+document.querySelectorAll('.toast-alert').forEach(toastAlert => {
+    // setTimeout(() => {
+        toastFn({
+            title: toastAlert.dataset.toastTitle,
+            message: toastAlert.dataset.toastMessage,
+            type: toastAlert.dataset.toastType,
+            duration: toastAlert.dataset.toastDuration
+        });
+    // }, 150);
+});
+
 
 const inputsText = document.querySelectorAll('input[type=text]') ?? false;
 
@@ -153,3 +105,9 @@ if (inputsText) {
         }
     })
 }
+
+document.querySelectorAll('.input-group').forEach(group => {
+    let errorToRemove = group.querySelector('ul')
+    if (errorToRemove)
+        errorToRemove.remove();
+})

@@ -1,0 +1,50 @@
+{% extends 'back_base.html.twig' %}
+
+{% block body %}
+    <div class="row ms-0 w-100">
+        <a class="btn bg-gradient-primary mb-4" style="width: fit-content" href="{{ path('back_add_podcast') }}">
+            <i class="material-icons pe-2">add</i>Ajouter un Podcast
+        </a>
+    </div>
+
+    {% if podcasts %}
+        <form action="" method="post">
+            <div class="row ms-0 no-gutter w-100">
+{#                <h6 class="text-uppercase pink font-weight-bolder mb-2">Page d'accueil</h6>#}
+                {% for podcast in podcasts %}
+                    <div class="col-xs-12 col-md-6 col-xl-3 me-4 mb-4" id="podcast-{{ podcast.id }}">
+                        <div class="banner-card">
+                            <figure>
+                                <img src="{{ asset('img/' ~ podcast.media.picture) }}" alt="{{ podcast.media.alt }}">
+                                <div class="card-actions">
+                                    <a class="btn btn-secondary action-btn"
+                                       href="{{ path('back_edit_podcast', { 'id': podcast.id }) }}"
+                                       data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top"
+                                    >
+                                        <i class="material-icons" aria-hidden="true">edit</i></a>
+                                    <span class="btn btn-danger"
+                                          onclick="deleteElem({{ podcast.id }}, 'Podcast', 'podcast-{{ podcast.id }}', 'Tu es sur le point de supprimer le podcast {{ podcast|e('js') }}')"
+                                    >
+                                        <i class="material-icons" aria-hidden="true">delete</i>
+                                    </span>
+                                </div>
+                            </figure>
+                            <div class="card-body">
+                                <h4 class="text-center">{{ podcast.title }}</h4>
+                                <select id="podcast-{{ podcast.id }}" class="form-select" name="podcast-{{ podcast.id }}-position">
+                                    <option value="1" {{ podcast.position == 1 ? 'selected' : '' }}>1</option>
+                                    <option value="2" {{ podcast.position == 2 ? 'selected' : '' }}>2</option>
+                                    <option value="3" {{ podcast.position == 3 ? 'selected' : '' }}>3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="submit" name="order" class="btn btn-secondary">
+                <i class="material-icons pe-2">sync_alt</i>Changer l'ordre
+            </button>
+        </form>
+    {% endif %}
+
+{% endblock %}

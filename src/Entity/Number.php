@@ -22,6 +22,11 @@ class Number
     #[ORM\Column]
     private ?int $number = null;
 
+    public function __toString()
+    {
+        return $this->title;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

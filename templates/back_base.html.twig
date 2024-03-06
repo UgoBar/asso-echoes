@@ -29,155 +29,171 @@
 <body class="g-sidenav-show  bg-gray-200">
 
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark scrollbar" id="sidenav-main">
-    <div class="sidenav-header" >
+    <div class="sidenav-header m-4" >
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-7 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-        <h4 class="font-weight-bold text-white text-uppercase text-center bodoni my-4">Echoes</h4>
+{#        <h4 class="font-weight-bold text-white text-uppercase text-center josefin my-4">Echoes</h4>#}
+        <img src="{{ asset('img/logo-asso-echoes-blanc.png') }}" alt="">
     </div>
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
 
             <li class="nav-item">
-                <a class="{{ nav == 'dashboard' ? 'bg-gradient-primary' : '' }} nav-link text-white" href="{{ path('back_dashboard') }}">
+                <a class="{{ nav == 'dashboard' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white" href="{{ path('back_dashboard') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
                     </div>
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="{{ nav == 'banner' ? 'bg-gradient-primary' : '' }} nav-link text-white" href="#">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">photo_library</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Bannières</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="{{ nav == 'pictos' ? 'bg-gradient-primary' : '' }} nav-link text-white" href="#">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">draw</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Pictos</span>
-                </a>
-            </li>
 
+            <!-- === ACCUEIL === -->
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-white font-weight-bolder opacity-8">Accueil</h6>
             </li>
             <li class="nav-item">
-                <a class="{{ nav == 'bio' ? 'bg-gradient-primary' : '' }} nav-link text-white " href="#">
+                <a class="{{ nav == 'podcast' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white " href="{{ path('back_podcasts') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">radio</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Podcasts</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="{{ nav == 'number' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white " href="#">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">looks_3</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Chiffres clés</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="{{ nav == 'session' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white " href="#">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">event</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Ateliers</span>
+                </a>
+            </li>
+
+            <!-- === ECHOES === -->
+            <li class="nav-item mt-3">
+                <h6 class="ps-4 ms-2 text-uppercase text-white font-weight-bolder opacity-8">Echoes</h6>
+            </li>
+            <li class="nav-item">
+                <a class="{{ nav == 'asso' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white" href="#">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">menu_book</i>
                     </div>
-                    <span class="nav-link-text ms-1">Présentation</span>
+                    <span class="nav-link-text ms-1">Association</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="{{ nav == 'team_info' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white " href="#">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">description</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Page équipe - infos</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="{{ nav == 'team_member' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white " href="#">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">groups</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Page équipe - membres</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="{{ nav == 'radiobox' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white "  href="#">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">mic</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Page Radiobox</span>
                 </a>
             </li>
 
+            <!-- === ATELIERS === -->
             <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-white font-weight-bolder opacity-8">Centres</h6>
+                <h6 class="ps-4 ms-2 text-uppercase text-white font-weight-bolder opacity-8">Ateliers</h6>
             </li>
             <li class="nav-item">
-                <a class="{{ nav == 'centers' ? 'bg-gradient-primary' : '' }} nav-link text-white" href="#">
+                <a class="{{ nav == 'testimonials' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white" href="#">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">home</i>
+                        <i class="material-icons opacity-10">elderly</i>
                     </div>
-                    <span class="nav-link-text ms-1">Liste des centres</span>
+                    <span class="nav-link-text ms-1">Boîte à souvenirs</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="{{ nav == 'contacts' ? 'bg-gradient-primary' : '' }} nav-link text-white " href="#">
+                <a class="{{ nav == 'gallery' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white" href="#">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">mail</i>
+                        <i class="material-icons opacity-10">photo_library</i>
                     </div>
-                    <span class="nav-link-text ms-1">Contacts</span>
+                    <span class="nav-link-text ms-1">Gallerie</span>
                 </a>
             </li>
 
+            <!-- === PRO === -->
             <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-white font-weight-bolder opacity-8">Clients</h6>
+                <h6 class="ps-4 ms-2 text-uppercase text-white font-weight-bolder opacity-8">Espace pro</h6>
             </li>
             <li class="nav-item">
-                <a class="{{ nav == 'customers' ? 'bg-gradient-primary' : '' }} nav-link text-white "  href="#">
+                <a class="{{ nav == 'press' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white" href="#">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">list_alt</i>
+                        <i class="material-icons opacity-10">folder_open</i>
                     </div>
-                    <span class="nav-link-text ms-1">Liste des clients</span>
+                    <span class="nav-link-text ms-1">Revue de presse</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="{{ nav == 'testimonials' ? 'bg-gradient-primary' : '' }} nav-link text-white" href="#">
+                <a class="{{ nav == 'rent' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white" href="#">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">volunteer_activism</i>
+                        <i class="material-icons opacity-10">handshake</i>
                     </div>
-                    <span class="nav-link-text ms-1">Témoignages</span>
+                    <span class="nav-link-text ms-1">Location radiobox</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="{{ nav == 'organize' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white" href="#">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">calendar_month</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Organiser un atelier</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="{{ nav == 'partner' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white" href="#">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">diversity_1</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Partenaires</span>
                 </a>
             </li>
 
+            <!-- === CONTACT === -->
             <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-white font-weight-bolder opacity-8">Cabines</h6>
+                <h6 class="ps-4 ms-2 text-uppercase text-white font-weight-bolder opacity-8">Contact</h6>
             </li>
             <li class="nav-item">
-                <a class="{{ nav == 'elec' ? 'bg-gradient-primary' : '' }} nav-link text-white " href="#">
+                <a class="{{ nav == 'contact' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white " href="#">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">bolt</i>
+                        <i class="material-icons opacity-10">call</i>
                     </div>
-                    <span class="nav-link-text ms-1">Electriques</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="{{ nav == 'azote' ? 'bg-gradient-primary' : '' }} nav-link text-white " href="#">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="icon-azote opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Azote</span>
+                    <span class="nav-link-text ms-1">Page contact</span>
                 </a>
             </li>
 
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-white font-weight-bolder opacity-8">Historique</h6>
-            </li>
-            <li class="nav-item">
-                <a class="{{ nav == 'historic' ? 'bg-gradient-primary' : '' }} nav-link text-white " href="#">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">history_edu</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Les dates</span>
-                </a>
-            </li>
-
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-white font-weight-bolder opacity-8">Communication</h6>
-            </li>
-            <li class="nav-item">
-                <a class="{{ nav == 'about' ? 'bg-gradient-primary' : '' }} nav-link text-white" href="#">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">badge</i>
-                    </div>
-                    <span class="nav-link-text ms-1">A propos</span>
-                </a>
-            </li>
-
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-white font-weight-bolder opacity-8">Utilisateurs</h6>
-            </li>
-            <li class="nav-item">
-                <a class="{{ nav == 'users' ? 'bg-gradient-primary' : '' }} nav-link text-white" href="#">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">group</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Liste des utilisateurs</span>
-                </a>
-            </li>
         </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-20 ">
         <div class="mx-3">
-                    <span class="btn bg-gradient-primary mt-2 w-100 mb-1 d-flex align-items-center justify-content-around" style="cursor: initial;">
+                    <span class="bg-gradient-primary mt-2 w-100 mb-1 d-flex align-items-center justify-content-between px-4" style="cursor: initial;">
                         {{ app.user.firstname }} {{ app.user.lastname }}
+                        <a class="sider-btn" type="submit" href="{{ path('app_logout') }}"><i class="material-icons">logout</i></a>
                     </span>
             <div class="d-flex justify-content-center mt-2">
-                <a class="sider-btn me-2" type="submit" href="{{ path('app_logout') }}"><i class="material-icons">logout</i></a>
+
 {#                <a class="sider-btn" href="{{ path('update_user_password', {'id': app.session.get('user').id}) }}"><i class="material-icons">manage_accounts</i></a>#}
             </div>
         </div>
@@ -185,10 +201,22 @@
 </aside>
 
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+
+    {% for message in app.session.flashbag.get('success') %}
+        <div class="d-none toast-alert" data-toast-title="C'est bon" data-toast-message="{{ message }}" data-toast-type="success" data-toast-duration="10000"></div>
+    {% endfor %}
+    {% for message in app.session.flashbag.get('danger') %}
+        <div class="d-none toast-alert" data-toast-title="Oups" data-toast-message="{{ message }}" data-toast-type="error" data-toast-duration="10000"></div>
+    {% endfor %}
+    <div id="toast"></div>
+
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
         <div class="py-3 mt-3 breadcrump-header">
-            <h1 class="font-weight-bolder mb-0 page-title">{{ title }}</h1>
+            <h1 class="mb-0 page-title">{{ title }}</h1>
+            {% if subtitle is defined %}
+                <h4 class="mb-0 page-subtitle w-100">{{ subtitle }}</h4>
+            {% endif %}
             <div class="collapse navbar-collapse mt-sm-0 me-md-0 me-sm-4" id="navbar">
                 <ul class="navbar-nav  justify-content-end">
                     <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -213,11 +241,13 @@
 {% block javascripts %}
     <script src="{{ asset('js/back/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/back/material-dashboard.js') }}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>#}
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="{{ asset('js/back/toast.js') }}"></script>
 
     <script>
+
+        window.deleteElemRoute = "{{ path('delete_entity') }}"
+
         tinymce.init({
             selector: 'textarea',
             height: 300,
@@ -234,6 +264,8 @@
             // ]
         });
     </script>
+
+    <script src="{{ asset('js/back/script.js') }}"></script>
 
 {% endblock %}
 

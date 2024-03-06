@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends BaseController
 {
-    #[Route('/admin/dashboard', name: 'back_dashboard')]
+    #[Route('/admin', name: 'back_dashboard')]
     public function index(Request $request): Response
     {
         return $this->render('back/dashboard.html.twig', [

@@ -27,9 +27,6 @@ class Media
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $alt = null;
 
-    #[ORM\Column(type: 'datetime')]
-    private ?\DateTimeInterface $updatedAt = null;
-
     #[ORM\OneToMany(mappedBy: 'media', targetEntity: Podcast::class)]
     private Collection $podcasts;
 
@@ -75,6 +72,9 @@ class Media
     #[ORM\OneToMany(mappedBy: 'media', targetEntity: Contact::class)]
     private Collection $contacts;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $updatedAt = null;
+
     public function __construct()
     {
         $this->podcasts = new ArrayCollection();
@@ -105,7 +105,7 @@ class Media
         if (null !== $imageFile) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
+            $this->setUpdatedAt(new \DateTimeImmutable());
         }
     }
 
@@ -589,6 +589,18 @@ class Media
                 $contact->setMedia(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

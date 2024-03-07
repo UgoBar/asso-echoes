@@ -5,11 +5,7 @@ namespace App\Controller\Back;
 use App\Controller\BaseController;
 use App\Entity\Asso;
 use App\Entity\Media;
-use App\Entity\Podcast;
-use App\Entity\User;
 use App\Form\AssoType;
-use App\Form\PodcastType;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -48,7 +44,7 @@ class AssoController extends BaseController
 
         return $this->render('back/asso/form.html.twig', [
             'asso' => $asso,
-            'nav' => 'podcast',
+            'nav' => 'asso',
             'title' => 'Page association',
             'media' => $media,
             'form' => $form->createView()

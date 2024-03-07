@@ -1,0 +1,51 @@
+{% extends 'back_base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        h1 {
+            display: block;
+            margin: 0 auto;
+        }
+        h4 {
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    {% for error in form_errors(form) %}
+        <div class="form-error">{{ error.message }}</div>
+    {% endfor %}
+
+    {{ form_start(form, {'attr': {'class': 'd-flex justify-content-center flex-column align-items-center', 'id': 'file-upload-form'}}) }}
+
+    <div class="col-lg-6 col-12 ms-lg-4">
+        <div class="card p-4 mb-4">
+            <h6 class="text-uppercase pink font-weight-bolder mb-3">Informations générales</h6>
+            {{ form_row(form.title, {
+                'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+                'label_attr':{'class':'form-label'},
+                'row_attr': {'class':'input-group input-group-outline mb-3'},
+            }) }}
+            <div class="form-error col-12 col-lg-6">
+                {{ form_errors(form.title) }}
+            </div>
+            {{ form_row(form.subtitle, {
+                'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+                'label_attr':{'class':'form-label'},
+                'row_attr': {'class':'input-group input-group-outline mb-3'},
+            }) }}
+        </div>
+    </div>
+
+    <div class="d-flex">
+        <button type="submit" class="btn btn-success">
+            <span class="material-icons pe-2">edit</span> Mettre à jour
+        </button>
+    </div>
+
+    {{ form_end(form) }}
+
+{% endblock %}

@@ -16,7 +16,7 @@ class AssoType extends AbstractType
     {
         $builder
             ->add('text', TextareaType::class, [
-                'label' => 'Paragraphe',
+                'label' => false,
                 'required' => false
             ])
             ->add('media', MediaType::class, [

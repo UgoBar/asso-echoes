@@ -1,0 +1,30 @@
+{% extends 'back_base.html.twig' %}
+
+{% block body %}
+
+    {{ form_start(form, {'attr': {'class': 'flex-form', 'id': 'file-upload-form'}}) }}
+
+    {% include 'widgets/upload_card.html.twig' with {card_title: 'Image', label_for: 'asso_media_imageFile_file'} %}
+
+    <div class="col-lg-6 col-12 ms-lg-4">
+        <div class="card p-4 mb-4">
+            <h6 class="text-uppercase pink font-weight-bolder mb-3">Informations générales</h6>
+            {{ form_row(form.text, {
+                'attr': {'class':'form-group ps-3'},
+                'row_attr': {'class':'form-control mb-3'}
+            }) }}
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        <span class="material-icons pe-2">edit</span> Mettre à jour
+    </button>
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/back/upload.js') }}"></script>
+{% endblock %}

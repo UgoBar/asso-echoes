@@ -12,19 +12,22 @@ use App\Entity\User;
 use App\Form\LogoBlackType;
 use App\Form\LogoWhiteType;
 use App\Form\SiteType;
+use App\Service\MainColorService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends BaseController
 {
+    // https://stackoverflow.com/questions/54117732/how-to-define-global-variables-for-twig-templates-with-values-coming-from-the-db
+
     #[Route('/admin', name: 'back_dashboard')]
-    public function index(Request $request): Response
+    public function index(Request $request, MainColorService $colorService): Response
     {
         $logoBlack = count($this->getRepo(LogoBlack::class)->findAll()) > 0 ? $this->getRepo(LogoBlack::class)->findAll()[0] : null;
         $logoWhite = count($this->getRepo(LogoWhite::class)->findAll()) > 0 ? $this->getRepo(LogoWhite::class)->findAll()[0] : null;
         $site      = count($this->getRepo(Site::class)->findAll()) > 0 ? $this->getRepo(Site::class)->findAll()[0] : new Site();
-        $color = $site->getColor() !== null ? $site->getColor() : '#ff5500';
+        $color = $colorService->getColor();
 
         // Manage colorpicker form
         $form = $this->createForm(SiteType::class, $site);

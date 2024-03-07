@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;400;600;700;800;900&display=swap');
 
 :root {
-    --primary: rgb(255, 85, 0);
     --success: #014921;
     --dark: #1a1e23;
     --shadow: 0 10px 25px rgba(0,0,0,.6);

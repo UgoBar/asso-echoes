@@ -32,7 +32,9 @@
     </section>
 
     <section class="color-section">
-        <h4 class="mt-3">Couleur</h4>
+        <div class="d-flex align-items-center mb-3">
+            <h4 class="mb-0">Couleur -</h4><span class="ms-2">{{ mainColor.color }}</span>
+        </div>
         {{ form_start(form, {'attr': {'class': 'flex-form'}}) }}
         <div class="colorpicker form-group">
             {{ form_widget(form.color, {'attr': { 'class':'coloris', 'value': color }}) }}

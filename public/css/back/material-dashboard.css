@@ -28,7 +28,8 @@
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529;
   --bs-primary: rgb(255, 85, 0);
-  --bs-secondary: #7b809a;
+  --bs-secondary: #45b7a4;
+  /*--bs-secondary: #7b809a;*/
   --bs-success: #4CAF50;
   --bs-info: #1A73E8;
   --bs-warning: #fb8c00;
@@ -3677,7 +3678,7 @@ fieldset:disabled .btn {
 
 .btn-secondary {
   --bs-btn-color: #000;
-  --bs-btn-bg: #7b809a;
+  --bs-btn-bg: #758ed9;
   --bs-btn-border-color: #7b809a;
   --bs-btn-hover-color: #000;
   --bs-btn-hover-bg: #8f93a9;
@@ -10502,7 +10503,7 @@ fieldset:disabled .btn {
 }
 
 .text-secondary {
-  color: #7b809a !important;
+  color: #758ed9 !important;
 }
 
 .text-success {
@@ -20510,8 +20511,8 @@ fieldset:disabled .btn {
 .btn.bg-gradient-secondary:not(:disabled):not(.disabled).active,
 .btn.bg-gradient-secondary:not(:disabled):not(.disabled):active,
 .show>.btn.bg-gradient-secondary.dropdown-toggle {
-  color: color-yiq(#7b809a);
-  background-color: #7b809a;
+  color: white;
+  background-color: #45b7a4;
 }
 
 .btn-secondary.focus,

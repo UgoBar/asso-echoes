@@ -62,6 +62,7 @@
             font-family: 'Kanit', sans-serif;
             text-transform: capitalize;
             letter-spacing: 1px;
+            /*color: #006f6f;*/
         }
         .session-time i {
             font-weight: bold;
@@ -77,10 +78,19 @@
             margin-top: 15px;
         }
         .session-footer a {
-            border-bottom-right-radius: 20px;
+            border-bottom-left-radius: 20px;
+            border-top: 1px solid var(--dark) !important;
+            border-right: 1px solid var(--dark) !important;
+        }
+        .session-footer a:hover {
+            color: #7b7992 !important;
         }
         .session-footer span {
-            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            border-top: 1px solid var(--dark) !important;
+        }
+        .session-footer span:hover {
+            color: #df2121 !important;
         }
         @media screen and (max-width: 600px) {
             #sessions {
@@ -122,12 +132,12 @@
                             </span>
                             </div>
                             <div class="session-footer">
-                            <span class="btn btn-danger" onclick="deleteElem({{ session.id }}, 'Session', 'session-{{ session.id }}', 'Tu es sur le point de supprimer l\'atelier <b>{{ session|e('js') }}</b>')">
-                                <i class="material-icons" aria-hidden="true">delete</i>
-                            </span>
-                                <a class="btn btn-secondary action-btn" href="{{ path('back_edit_session', { 'id': session.id }) }}">
+                                <a class="btn text-secondary action-btn" href="{{ path('back_edit_session', { 'id': session.id }) }}">
                                     <i class="material-icons" aria-hidden="true">edit</i>
                                 </a>
+                                <span class="btn text-danger" onclick="deleteElem({{ session.id }}, 'Session', 'session-{{ session.id }}', 'Tu es sur le point de supprimer l\'atelier <b>{{ session|e('js') }}</b>')">
+                                    <i class="material-icons" aria-hidden="true">delete</i>
+                                </span>
                             </div>
                         </div>
                     {% endfor %}

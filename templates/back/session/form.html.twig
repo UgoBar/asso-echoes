@@ -1,0 +1,72 @@
+{% extends 'back_base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        h1 {
+            display: block;
+            margin: 0 auto;
+        }
+        h4 {
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('back_sessions') }}" class="btn btn-secondary mb-4 d-block mx-auto">
+        <i class="material-icons pe-2">keyboard_backspace</i>Retour à la liste
+    </a>
+
+    {% for error in form_errors(form) %}
+        <div class="form-error">{{ error.message }}</div>
+    {% endfor %}
+
+    {{ form_start(form, {'attr': {'class': 'd-flex justify-content-center flex-column align-items-center', 'id': 'file-upload-form'}}) }}
+
+    <div class="col-lg-6 col-12 ms-lg-4">
+        <div class="card p-4 mb-4">
+            <h6 class="text-uppercase pink font-weight-bolder mb-3">Informations générales</h6>
+            <div class="d-flex flex-wrap">
+                {{ form_row(form.date, {
+                    'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+                    'label_attr':{'class':'form-label'},
+                    'row_attr': {'class':'input-group input-group-outline mb-3 half-input'},
+                }) }}
+                {{ form_row(form.title, {
+                    'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+                    'label_attr':{'class':'form-label'},
+                    'row_attr': {'class':'input-group input-group-outline mb-3 ms-md-3 half-input'},
+                }) }}
+            </div>
+            <div class="d-flex">
+                <div class="form-error col-12 col-lg-6">
+                    {{ form_errors(form.date) }}
+                </div>
+                <div class="form-error col-12 col-lg-6">
+                    {{ form_errors(form.title) }}
+                </div>
+            </div>
+            <div class="d-flex">
+                {{ form_row(form.location, {
+                    'attr': {'class':'form-control'},
+                    'label_attr': {'class':'form-label'},
+                    'row_attr': {'class':'input-group input-group-outline mb-3 me-md-3'}
+                }) }}
+            </div>
+            <div class="form-error">
+                {{ form_errors(form.location) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex">
+        <button type="submit" class="btn btn-success">
+            <span class="material-icons pe-2">edit</span>{{ editMode ? 'Modifier' : 'Ajouter' }}
+        </button>
+    </div>
+
+    {{ form_end(form) }}
+
+{% endblock %}

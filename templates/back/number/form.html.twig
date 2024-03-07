@@ -23,19 +23,19 @@
                     'label_attr':{'class':'form-label'},
                     'row_attr': {'class':'input-group input-group-outline mb-3 w-50'},
                 }) }}
+                <div class="form-error">
+                    {{ form_errors(form.title) }}
+                </div>
                 {{ form_row(form.number, {
                     'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
                     'label_attr':{'class':'form-label'},
                     'row_attr': {'class':'input-group input-group-outline ms-3 mb-3 w-50'},
                 }) }}
             </div>
-            <div class="form-error">
-                {{ form_errors(form.title) }}
-            </div>
             {{ form_row(form.position, {
                 'attr': {'class':'form-control'},
                 'label_attr': {'class':'form-label'},
-                'row_attr': {'class':'mb-3'}
+                'row_attr': {'class':'mb-3 w-100'}
             }) }}
         </div>
     </div>

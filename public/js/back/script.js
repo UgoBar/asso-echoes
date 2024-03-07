@@ -111,6 +111,10 @@ if (inputsText) {
     })
 }
 
+document.querySelectorAll('input[type="date"]').forEach(input => {
+    input.parentNode.classList.add('is-filled');
+})
+
 document.querySelectorAll('.input-group').forEach(group => {
     let errorToRemove = group.querySelector('ul')
     if (errorToRemove)

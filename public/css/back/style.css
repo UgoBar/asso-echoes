@@ -618,9 +618,6 @@ input[type=number] {
 }
 
 @media screen and (max-width: 992px) {
-    /*#fileDrag {*/
-    /*    margin-left: 0;*/
-    /*}*/
     .banner-card .not-home-figure {
         height: 300px;
     }
@@ -646,7 +643,13 @@ input[type=number] {
     display: none;
 }
 
+.half-input {
+    width: 48%;
+}
 @media screen and (max-width: 600px) {
+    .half-input {
+        width: 100%;
+    }
     #website-link {
         display: none;
     }

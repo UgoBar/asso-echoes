@@ -115,12 +115,13 @@ a {
 
 .page-title {
     color: var(--primary);
-    /*text-transform: uppercase;*/
-    /*font-size: 22px;*/
 }
 .page-subtitle {
     font-style: italic;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
+    font-family: 'Kanit', sans-serif;
+    letter-spacing: 1px;
+    font-weight: 800;
 }
 
 li h6 {
@@ -140,7 +141,7 @@ li h6::after {
 }
 
 h1 {
-    font-family: 'Kanit', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
     font-weight: 800;
     font-size: 40px;
     text-transform: uppercase;

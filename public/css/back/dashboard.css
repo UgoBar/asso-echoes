@@ -3,6 +3,10 @@
     flex-wrap: wrap;
 }
 
+.page-subtitle {
+    font-style: unset;
+}
+
 .logos figure {
     position: relative;
     width: 192px;

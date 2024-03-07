@@ -9,7 +9,7 @@
 {% block body %}
 
     <section class="logos mb-5">
-        <h4 class="mb-4 mt-3 w-100">Logos</h4>
+        <h4 class="mb-4 mt-3 w-100 page-subtitle">Logos</h4>
         <figure class="logo-black">
             {% if logoBlack is not null %}
                 <img src="{{  vich_uploader_asset(logoBlack.media, 'imageFile') }}" alt="" class="rounded-img">
@@ -33,7 +33,7 @@
 
     <section class="color-section">
         <div class="d-flex align-items-center">
-            <h4 class="mb-0">Couleur -</h4><span class="ms-2">{{ mainColor.color }}</span>
+            <h4 class="mb-0 page-subtitle">Couleur </h4><span class="ms-2">({{ mainColor.color }})</span>
         </div>
         <small class="mb-3">Cliquer sur la couleur ouvre le color-picker</small>
         {{ form_start(form, {'attr': {'class': 'flex-form'}}) }}

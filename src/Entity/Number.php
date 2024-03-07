@@ -22,6 +22,9 @@ class Number
     #[ORM\Column]
     private ?int $number = null;
 
+    #[ORM\Column]
+    private ?int $position = null;
+
     public function __toString()
     {
         return $this->title;
@@ -52,6 +55,18 @@ class Number
     public function setNumber(int $number): static
     {
         $this->number = $number;
+
+        return $this;
+    }
+
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(int $position): static
+    {
+        $this->position = $position;
 
         return $this;
     }

@@ -33,7 +33,7 @@ class DashboardController extends BaseController
         $form = $this->createForm(SiteType::class, $site);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->save($site, true, 'back_dashboard', 'La couleur principale a été modifiée');
+            return $this->save($site, true, 'back_dashboard', 'La couleur principale a été modifiée');
         }
 
         return $this->render('back/dashboard.html.twig', [

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Media;
+use App\Entity\Number;
 use App\Entity\Podcast;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -13,33 +14,33 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class PodcastType extends AbstractType
+class NumberType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('subtitle', TextType::class, [
-                'label' => 'Sous-titre'
-            ])
             ->add('title', TextType::class, [
                 'label' => 'Titre',
                 'constraints' => new NotBlank(['message' => 'Le titre ne peut pas être vide'])
             ])
+            ->add('number', IntegerType::class, [
+                'label' => 'Chiffre',
+                'constraints' => new NotBlank(['message' => 'Le chiffre ne peut pas être vide'])
+            ])
             ->add('position', IntegerType::class, [
-                'label' => 'Afficher le podcast en position',
+                'label' => 'Afficher la chiffre en position',
                 'required' => false
             ])
             ->add('media', MediaType::class, [
                 'label' => false
             ])
-//            ->add('save', SubmitType::class)
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Podcast::class,
+            'data_class' => Number::class,
         ]);
     }
 }

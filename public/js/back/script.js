@@ -101,8 +101,7 @@ document.querySelectorAll('.toast-alert').forEach(toastAlert => {
     // }, 150);
 });
 
-
-const inputsText = document.querySelectorAll('input[type=text]') ?? false;
+const inputsText = document.querySelectorAll('input[type=text], input[type="number"]') ?? false;
 
 if (inputsText) {
     inputsText.forEach( (input) => {

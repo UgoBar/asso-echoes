@@ -37,15 +37,6 @@ class PodcastController extends BaseController
         ]);
     }
 
-    #[Route('/admin/flash', name: 'back_flash')]
-    public function addSeveralFlash(): \Symfony\Component\HttpFoundation\RedirectResponse
-    {
-        $this->addFlash("danger", "Oupsy");
-        $this->addFlash("success", "Le caca au pipi");
-        $this->addFlash("success", "L'ordre des bannières a bien été modifié");
-        return $this->redirectToRoute('back_podcasts');
-    }
-
     #[Route('/admin/podcast/ajout', name: 'back_add_podcast')]
     #[Route('/admin/podcast/edit/{id}', name: 'back_edit_podcast')]
     public function form(Request $request, Podcast $podcast = null): Response
@@ -76,12 +67,9 @@ class PodcastController extends BaseController
             $this->save($media);
             // Then record Podcast with previously created Media
             $podcast->setMedia($media);
-            $this->save($podcast);
 
             $state = $isEdit ? 'modifié' : 'ajouté';
-
-            $this->addFlash("success", 'Le podcast "'. $podcast .'" a bien été ' . $state);
-            return $this->redirectToRoute('back_podcasts');
+            return $this->save($podcast, true, 'back_podcasts', 'Le podcast "'. $podcast .'" a bien été ' . $state);
         }
 
         return $this->render('back/podcast/form.html.twig', [

@@ -1,0 +1,65 @@
+{% extends 'back_base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .banner-card figure {
+            height: 262px;
+        }
+        .banner-card figure img {
+            object-fit: contain;
+        }
+        .banner-card .card-body {
+            padding: 0 2em 1em 2em;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="row ms-0 w-100">
+        <a class="btn bg-gradient-primary mb-4" style="width: fit-content" href="{{ path('back_add_number') }}">
+            <i class="material-icons pe-2">add</i>Ajouter un chiffre clef
+        </a>
+    </div>
+
+    {% if numbers %}
+        <form action="" method="post">
+            <div class="row ms-0 no-gutter w-100">
+                {% for number in numbers %}
+                    <div class="col-xs-12 col-md-6 col-xl-3 me-4 mb-4" id="number-{{ number.id }}">
+                        <div class="banner-card">
+                            <figure>
+                                <img src="{{ asset('img/' ~ number.media.picture) }}" alt="{{ number.media.alt }}">
+                                <div class="card-actions">
+                                    <a class="btn btn-secondary action-btn" href="{{ path('back_edit_number', { 'id': number.id }) }}">
+                                        <i class="material-icons" aria-hidden="true">edit</i>
+                                    </a>
+                                    <span class="btn btn-danger"
+                                          onclick="deleteElem({{ number.id }}, 'Number', 'number-{{ number.id }}', 'Tu es sur le point de supprimer le chiffre clef <b>{{ number|e('js') }}</b>')"
+                                    >
+                                        <i class="material-icons" aria-hidden="true">delete</i>
+                                    </span>
+                                </div>
+                            </figure>
+                            <div class="card-body">
+                                <h4 class="text-center">{{ number.title }}</h4>
+                                <select class="form-select" name="number-{{ number.id }}-position">
+                                    <option value="1" {{ number.position == 1 ? 'selected' : '' }}>1</option>
+                                    <option value="2" {{ number.position == 2 ? 'selected' : '' }}>2</option>
+                                    <option value="3" {{ number.position == 3 ? 'selected' : '' }}>3</option>
+                                    <option value="3" {{ number.position == 4 ? 'selected' : '' }}>4</option>
+                                    <option value="3" {{ number.position == 5 ? 'selected' : '' }}>5</option>
+                                    <option value="3" {{ number.position == 6 ? 'selected' : '' }}>6</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="submit" name="order" class="btn btn-secondary">
+                <i class="material-icons pe-2">sync_alt</i>Changer l'ordre
+            </button>
+        </form>
+    {% endif %}
+
+{% endblock %}

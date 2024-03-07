@@ -32,16 +32,16 @@
     </section>
 
     <section class="color-section">
-        <div class="d-flex align-items-center mb-3">
+        <div class="d-flex align-items-center">
             <h4 class="mb-0">Couleur -</h4><span class="ms-2">{{ mainColor.color }}</span>
         </div>
+        <small class="mb-3">Cliquer sur la couleur ouvre le color-picker</small>
         {{ form_start(form, {'attr': {'class': 'flex-form'}}) }}
         <div class="colorpicker form-group">
             {{ form_widget(form.color, {'attr': { 'class':'coloris', 'value': color }}) }}
         </div>
         <button class="btn btn-outline-dark py-0 px-2 ms-lg-3" type="submit" style="text-transform: unset;">Changer la couleur</button>
         {{ form_end(form) }}
-        <small>Couleur non mise à jour ? <a href="" onclick="window.location.reload();">Recharger</a></small>
     </section>
 {% endblock %}
 

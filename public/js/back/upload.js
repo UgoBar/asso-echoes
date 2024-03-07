@@ -58,7 +58,7 @@ function ekUpload(){
         // console.log(fileType);
         let imageName = file.name;
 
-        let isGood = (/\.(?=gif|jpg|png|pdf|jpeg)/gi).test(imageName);
+        let isGood = (/\.(?=gif|jpg|png|pdf|jpeg|svg)/gi).test(imageName);
         if (isGood) {
             document.getElementById('response').classList.remove("hidden");
             document.getElementById('notimage').classList.add("hidden");
@@ -73,7 +73,7 @@ function ekUpload(){
             document.getElementById('notimage').classList.remove("hidden");
             document.getElementById('start').classList.remove("hidden");
             document.getElementById('response').classList.add("hidden");
-            document.getElementById("file-upload-form").reset();
+            // document.querySelector('form')
         }
     }
 

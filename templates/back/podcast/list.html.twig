@@ -29,7 +29,7 @@
                             </figure>
                             <div class="card-body">
                                 <h4 class="text-center">{{ podcast.title }}</h4>
-                                <select id="podcast-{{ podcast.id }}" class="form-select" name="podcast-{{ podcast.id }}-position">
+                                <select class="form-select" name="podcast-{{ podcast.id }}-position">
                                     <option value="1" {{ podcast.position == 1 ? 'selected' : '' }}>1</option>
                                     <option value="2" {{ podcast.position == 2 ? 'selected' : '' }}>2</option>
                                     <option value="3" {{ podcast.position == 3 ? 'selected' : '' }}>3</option>

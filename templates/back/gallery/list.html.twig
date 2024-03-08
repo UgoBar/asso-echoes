@@ -1,0 +1,124 @@
+{% extends 'back_base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        figure {
+            margin-bottom: 0;
+            height: 200px;
+        }
+        figure img {
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            height: 100%;
+            object-fit: cover;
+            width: 100%;
+        }
+        .card-and-title {
+            margin-right: 2em;
+            margin-bottom: 2em;
+            width: fit-content;
+        }
+        .card-and-title .title {
+            display: block;
+            text-align: center;
+            margin-top: 1em;
+        }
+        .picture-card {
+            background-color: #fff;
+            position: relative;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            border-radius: 20px;
+            text-align: center;
+            width: 300px;
+        }
+        .picture-card .type {
+            position: absolute;
+            left: 5px;
+            top: 5px;
+            background-color: white;
+            color: var(--bs-primary);
+            width: 30px;
+            height: 30px;
+            border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .picture-footer {
+            display: flex;
+        }
+        .picture-footer > * {
+            width: 50% !important;
+            margin-bottom: 0;
+            border-radius: 0;
+            justify-content: center;
+        }
+        .picture-footer a {
+            border-bottom-left-radius: 20px;
+            border-right: 1px solid #b0b0b0 !important;
+        }
+        .picture-footer a:hover {
+            color: #7b7992 !important;
+        }
+        .picture-footer span {
+            border-bottom-right-radius: 20px;
+        }
+        .picture-footer span:hover {
+            color: #df2121 !important;
+        }
+        @media screen and (max-width: 600px) {
+            #pictures {
+                justify-content: center;
+            }
+            .card-and-title {
+                margin-right: unset;
+                margin-bottom: 1em;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="row ms-0 w-100">
+        <a class="btn bg-gradient-primary mb-4" style="width: fit-content" href="{{ path('back_add_gallery') }}">
+            <i class="material-icons pe-2">add</i>Ajouter une photo
+        </a>
+    </div>
+
+    {% if gallery %}
+        <div class="row ms-0 no-gutter w-100 mt-4" id="pictures">
+            {% for picture in gallery %}
+                <div class="card-and-title" id="picture-{{ picture.id }}">
+                    <div class="picture-card">
+                        <div class="type">
+                            {% if picture.type is null %}
+                                <i class="material-icons" aria-hidden="true">question_mark</i>
+                            {% elseif picture.type == constant('App\\Entity\\Gallery::TYPE_SQUARE') %}
+                                <i class="material-icons" aria-hidden="true">crop_square</i>
+                            {% elseif picture.type == constant('App\\Entity\\Gallery::TYPE_WIDE') %}
+                                <i class="material-icons" aria-hidden="true">crop_16_9</i>
+                            {% elseif picture.type == constant('App\\Entity\\Gallery::TYPE_TALL') %}
+                                <i class="material-icons" aria-hidden="true">crop_portrait</i>
+                            {% endif %}
+                        </div>
+                        <figure>
+                            <img src="{{  vich_uploader_asset(picture.media, 'imageFile') }}" alt="{{ picture.media.alt }}">
+                        </figure>
+                        <div class="picture-footer">
+                            <a class="btn text-secondary action-btn" href="{{ path('back_edit_gallery', { 'id': picture.id }) }}">
+                                <i class="material-icons" aria-hidden="true">edit</i>
+                            </a>
+                            <span class="btn text-danger" onclick="deleteElem({{ picture.id }}, 'Gallery', 'picture-{{ picture.id }}', 'Tu es sur le point de supprimer la photo <b>{{ picture|e('js') }}</b>')">
+                                <i class="material-icons" aria-hidden="true">delete</i>
+                            </span>
+                        </div>
+                    </div>
+                    <span class="title">{{ picture.title }}</span>
+                </div>
+
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock %}

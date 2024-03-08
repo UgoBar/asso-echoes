@@ -6,10 +6,6 @@
         <i class="material-icons pe-2">keyboard_backspace</i>Retour à la liste
     </a>
 
-    {% for error in form_errors(form) %}
-        <div class="form-error">{{ error.message }}</div>
-    {% endfor %}
-
     {{ form_start(form, {'attr': {'class': 'flex-form', 'id': 'file-upload-form'}}) }}
 
     {% include 'widgets/upload_card.html.twig' with {card_title: 'Artwork', label_for: 'podcast_media_imageFile_file', property: media, alt: form.media.alt, imageFile: form.media.imageFile} %}

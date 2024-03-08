@@ -5,6 +5,7 @@ namespace App\Controller\Back;
 use App\Controller\BaseController;
 use App\Entity\Podcast;
 use App\Form\PodcastType;
+use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,6 +35,9 @@ class PodcastController extends BaseController
         ]);
     }
 
+    /**
+     * @throws EntityNotFoundException
+     */
     #[Route('/admin/podcast/ajout', name: 'back_add_podcast')]
     #[Route('/admin/podcast/edit/{id}', name: 'back_edit_podcast')]
     public function form(Request $request, Podcast $podcast = null): Response

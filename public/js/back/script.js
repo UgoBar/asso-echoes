@@ -8,6 +8,7 @@ function deleteElem(entityId, entityName, elemId, textWarning) {
         cancelButtonColor: '#929292',
         confirmButtonText: 'Supprimer',
         cancelButtonText: 'Annuler',
+        reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
             fetch(window.deleteElemRoute, {

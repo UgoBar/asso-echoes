@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\Gallery;
+use App\Entity\Media;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
+class GalleryType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('credit', null, [
+                'label' => 'Crédit'
+            ])
+            ->add('title', TextType::class, [
+                'label' => 'Titre',
+                'constraints' => new NotBlank(['message' => 'Le titre ne peut pas être vide'])
+            ])
+            ->add('type', ChoiceType::class, [
+                'label' => false,
+                'choices' => array_flip(Gallery::getListTypes()),
+                'choice_translation_domain' => false,
+                'multiple' => false,
+                'placeholder' => 'Affichage de type',
+                'required' => false,
+            ])
+            ->add('media', MediaType::class, [
+                'label' => false
+            ])
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Gallery::class,
+        ]);
+    }
+}

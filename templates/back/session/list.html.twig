@@ -112,38 +112,36 @@
     </div>
 
     {% if sessions %}
-        <form action="" method="post">
-            <div class="row ms-0 no-gutter w-100" id="sessions">
-                {% for monthName, sessions in sessionsByMonth %}
-                    <div class="session-heading">
-                        <hr>
-                        <p class="month-name">{{ monthName }}</p>
-                    </div>
-                    {% for session in sessions %}
-                        <div class="session" id="session-{{ session.id }}">
-                            <span class="session-month-year">{{ session.date|date('Y') }}</span>
-                            <div class="session-date-day">
-                                <span class="date-day">{{ session.date|date('d') }} / {{ session.date|date('m') }}</span>
-                            </div>
-                            <div class="session-content">
-                                <span class="session-title">{{ session.title }}</span>
-                                <span class="session-location">
-                                <i class="icon-pin text-primary"></i> {{ session.location }}
-                            </span>
-                            </div>
-                            <div class="session-footer">
-                                <a class="btn text-secondary action-btn" href="{{ path('back_edit_session', { 'id': session.id }) }}">
-                                    <i class="material-icons" aria-hidden="true">edit</i>
-                                </a>
-                                <span class="btn text-danger" onclick="deleteElem({{ session.id }}, 'Session', 'session-{{ session.id }}', 'Tu es sur le point de supprimer l\'atelier <b>{{ session|e('js') }}</b>')">
-                                    <i class="material-icons" aria-hidden="true">delete</i>
-                                </span>
-                            </div>
+        <div class="row ms-0 no-gutter w-100" id="sessions">
+            {% for monthName, sessions in sessionsByMonth %}
+                <div class="session-heading">
+                    <hr>
+                    <p class="month-name">{{ monthName }}</p>
+                </div>
+                {% for session in sessions %}
+                    <div class="session" id="session-{{ session.id }}">
+                        <span class="session-month-year">{{ session.date|date('Y') }}</span>
+                        <div class="session-date-day">
+                            <span class="date-day">{{ session.date|date('d') }} / {{ session.date|date('m') }}</span>
                         </div>
-                    {% endfor %}
+                        <div class="session-content">
+                            <span class="session-title">{{ session.title }}</span>
+                            <span class="session-location">
+                            <i class="icon-pin text-primary"></i> {{ session.location }}
+                        </span>
+                        </div>
+                        <div class="session-footer">
+                            <a class="btn text-secondary action-btn" href="{{ path('back_edit_session', { 'id': session.id }) }}">
+                                <i class="material-icons" aria-hidden="true">edit</i>
+                            </a>
+                            <span class="btn text-danger" onclick="deleteElem({{ session.id }}, 'Session', 'session-{{ session.id }}', 'Tu es sur le point de supprimer l\'atelier <b>{{ session|e('js') }}</b>')">
+                                <i class="material-icons" aria-hidden="true">delete</i>
+                            </span>
+                        </div>
+                    </div>
                 {% endfor %}
-            </div>
-        </form>
+            {% endfor %}
+        </div>
     {% endif %}
 
 {% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'back_base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .breadcrump-header {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('back_memorybox') }}" class="btn btn-secondary mb-4 d-block mx-auto mt-5">
+        <i class="material-icons pe-2">keyboard_backspace</i>Retour
+    </a>
+
+    {{ form_start(form, {'attr': {'class': 'justify-form', 'id': 'file-upload-form'}}) }}
+
+    {% include 'widgets/upload_card.html.twig' with {
+        card_title: 'Bannière Desktop', label_for: 'memorybox_banner_banner_imageFile_file', property: banner, alt: form.banner.alt, imageFile: form.banner.imageFile
+    } %}
+
+    <button type="submit" class="btn btn-success">
+        <span class="material-icons pe-2">edit</span> Mettre à jour
+    </button>
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/back/upload.js') }}"></script>
+{% endblock %}
+

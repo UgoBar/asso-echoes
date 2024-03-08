@@ -1,0 +1,85 @@
+{% extends 'back_base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/back/dashboard.css') }}" rel="stylesheet" />
+    <style>
+        .logos figure img {
+            object-fit: cover;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <section class="logos mb-5">
+
+        <figure class="logo-black">
+            {% if memorybox.banner is not null %}
+                <img src="{{  vich_uploader_asset(memorybox.banner, 'imageFile') }}" alt="" class="rounded-img">
+            {% else %}
+                <img src="{{ asset('img/back/no-banner.png') }}" alt="" class="rounded-img">
+            {% endif %}
+            <figcaption class="logo-title">Bannière desktop</figcaption>
+            <a href="{{ path('back_memorybox_banner') }}" class="edit-logo"><span class="material-icons">edit</span></a>
+        </figure>
+    </section>
+
+    {{ form_start(form, {'attr': {'class': 'pb-5', 'id': 'file-upload-form'}}) }}
+
+    <div class="d-flex flex-wrap">
+        <div class="half-input">
+            <div class="card p-4 mb-4">
+                <h6 class="text-uppercase pink font-weight-bolder mb-3">Informations générales</h6>
+                {{ form_row(form.title, {
+                    'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+                    'label_attr':{'class':'form-label'},
+                    'row_attr': {'class':'input-group input-group-outline mb-3'},
+                }) }}
+                <div class="form-error">
+                    {{ form_errors(form.title) }}
+                </div>
+                {{ form_row(form.subtitle, {
+                    'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+                    'label_attr':{'class':'form-label'},
+                    'row_attr': {'class':'input-group input-group-outline mb-3'}
+                }) }}
+            </div>
+
+            {% include 'widgets/upload_card.html.twig' with {
+                card_title: "Image de l'article", label_for: 'memorybox_media_imageFile_file', customClass: '', property: media, alt: form.media.alt, imageFile: form.media.imageFile
+            } %}
+
+        </div>
+        <div class="ms-md-4 half-input">
+            <div class="card p-4 mb-4">
+                <h6 class="text-uppercase pink font-weight-bolder mb-3">Paragraphe 1</h6>
+                {{ form_row(form.firstText, {
+                    'attr': {'class':'form-group ps-3'},
+                    'row_attr': {'class':'form-control mb-3'}
+                }) }}
+            </div>
+
+            <div class="card p-4 mb-4">
+                <h6 class="text-uppercase pink font-weight-bolder mb-3">Paragraphe 2</h6>
+                {{ form_row(form.secondText, {
+                    'attr': {'class':'form-group ps-3'},
+                    'row_attr': {'class':'form-control mb-3'}
+                }) }}
+            </div>
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        <span class="material-icons pe-2">edit</span> Mettre à jour
+    </button>
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/back/upload.js') }}"></script>
+{% endblock %}

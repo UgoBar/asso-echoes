@@ -2,16 +2,15 @@
 
 namespace App\Form;
 
-use App\Entity\Number;
-use App\Entity\Podcast;
+use App\Entity\Memorybox;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class NumberType extends AbstractType
+class MemoryboxType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -20,12 +19,15 @@ class NumberType extends AbstractType
                 'label' => 'Titre',
                 'constraints' => new NotBlank(['message' => 'Le titre ne peut pas être vide'])
             ])
-            ->add('number', IntegerType::class, [
-                'label' => 'Chiffre',
-                'constraints' => new NotBlank(['message' => 'Le chiffre ne peut pas être vide'])
+            ->add('subtitle', TextType::class, [
+                'label' => 'Sous-titre'
             ])
-            ->add('position', IntegerType::class, [
-                'label' => 'Afficher la chiffre en position',
+            ->add('firstText', TextareaType::class, [
+                'label' => false,
+                'required' => false
+            ])
+            ->add('secondText', TextareaType::class, [
+                'label' => false,
                 'required' => false
             ])
             ->add('media', MediaType::class, [
@@ -37,7 +39,7 @@ class NumberType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Number::class,
+            'data_class' => Memorybox::class,
         ]);
     }
 }

@@ -3,10 +3,8 @@
 namespace App\Controller\Back;
 
 use App\Controller\BaseController;
-use App\Entity\Asso;
 use App\Entity\Media;
 use App\Entity\Radiobox;
-use App\Form\AssoType;
 use App\Form\RadioboxBannerType;
 use App\Form\RadioboxMobileBannerType;
 use App\Form\RadioboxType;
@@ -84,7 +82,7 @@ class RadioboxController extends BaseController
             // Then record Radiobox with previously created Banner
             $radiobox->setBanner($banner);
 
-            return $this->save($radiobox, true, 'back_radiobox', 'La version desktop de la bannière de la page radiobox a été mise à jour');
+            return $this->save($radiobox, true, 'back_radiobox', 'La version desktop de la bannière de la page <b>radiobox</b> a été mise à jour');
         }
 
         return $this->render('back/radiobox/banner.html.twig', [

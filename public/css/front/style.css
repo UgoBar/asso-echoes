@@ -1119,6 +1119,7 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
     color: #888;
     margin-top: 6px;
     line-height: 1.5;
+    padding-right: 1em;
 }
 
 .toast__close {

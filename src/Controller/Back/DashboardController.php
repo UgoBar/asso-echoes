@@ -5,10 +5,7 @@ namespace App\Controller\Back;
 use App\Controller\BaseController;
 use App\Entity\LogoBlack;
 use App\Entity\LogoWhite;
-use App\Entity\Media;
-use App\Entity\Podcast;
 use App\Entity\Site;
-use App\Entity\User;
 use App\Form\LogoBlackType;
 use App\Form\LogoWhiteType;
 use App\Form\SiteType;
@@ -19,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends BaseController
 {
-    // https://stackoverflow.com/questions/54117732/how-to-define-global-variables-for-twig-templates-with-values-coming-from-the-db
 
     #[Route('/admin', name: 'back_dashboard')]
     public function index(Request $request, MainColorService $colorService): Response

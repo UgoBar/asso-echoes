@@ -2,12 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\Radiobox;
+use App\Entity\Memorybox;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RadioboxBannerType extends AbstractType
+class MemoryboxBannerType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -21,7 +21,7 @@ class RadioboxBannerType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Radiobox::class,
+            'data_class' => Memorybox::class,
         ]);
     }
 }

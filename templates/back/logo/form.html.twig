@@ -21,14 +21,10 @@
         <i class="material-icons pe-2">keyboard_backspace</i>Retour au dashboard
     </a>
 
-    {% for error in form_errors(form) %}
-        <div class="form-error">{{ error.message }}</div>
-    {% endfor %}
-
     {{ form_start(form, {'attr': {'class': 'justify-form', 'id': 'file-upload-form'}}) }}
 
     {% set label = title == 'Logo noir' ? 'logo_black_media_imageFile_file' : 'logo_white_media_imageFile_file' %}
-    {% include 'widgets/upload_card.html.twig' with {card_title: title, label_for: label} %}
+    {% include 'widgets/upload_card.html.twig' with {card_title: title, label_for: label, property: media, alt: form.media.alt, imageFile: form.media.imageFile} %}
 
     <button type="submit" class="btn btn-success">
         <span class="material-icons pe-2">edit</span>{{ editMode ? 'Modifier' : 'Ajouter' }}

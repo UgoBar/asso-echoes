@@ -44,12 +44,9 @@
                             <div class="card-body">
                                 <h4 class="text-center">{{ number.title }}</h4>
                                 <select class="form-select" name="number-{{ number.id }}-position">
-                                    <option value="1" {{ number.position == 1 ? 'selected' : '' }}>1</option>
-                                    <option value="2" {{ number.position == 2 ? 'selected' : '' }}>2</option>
-                                    <option value="3" {{ number.position == 3 ? 'selected' : '' }}>3</option>
-                                    <option value="3" {{ number.position == 4 ? 'selected' : '' }}>4</option>
-                                    <option value="3" {{ number.position == 5 ? 'selected' : '' }}>5</option>
-                                    <option value="3" {{ number.position == 6 ? 'selected' : '' }}>6</option>
+                                    {% for i in 1..numbers|length %}
+                                        <option value="{{ i }}" {{ i == number.position ? 'selected' : '' }}>{{ i }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                         </div>

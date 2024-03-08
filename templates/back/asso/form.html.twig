@@ -4,7 +4,7 @@
 
     {{ form_start(form, {'attr': {'class': 'flex-form', 'id': 'file-upload-form'}}) }}
 
-    {% include 'widgets/upload_card.html.twig' with {card_title: 'Image', label_for: 'asso_media_imageFile_file'} %}
+    {% include 'widgets/upload_card.html.twig' with {card_title: 'Image', label_for: 'asso_media_imageFile_file', property: media, alt: form.media.alt, imageFile: form.media.imageFile} %}
 
     <div class="col-lg-6 col-12 ms-lg-4">
         <div class="card p-4 mb-4">

@@ -4,6 +4,7 @@
 function ekUpload(){
     function Init() {
 
+        const dropZones   = document.querySelectorAll('.drop-zone');
         let fileSelect    = document.querySelector('input[type=file]'),
             fileDrag      = document.getElementById('fileDrag'),
             submitButton  = document.querySelector('input[type=submit]');
@@ -22,7 +23,6 @@ function ekUpload(){
 
     function fileDragHover(e) {
         let fileDrag = document.getElementById('file-drag');
-
         e.stopPropagation();
         e.preventDefault();
     }
@@ -36,9 +36,31 @@ function ekUpload(){
 
         // Process all File objects
         for (let i = 0, f; f = files[i]; i++) {
+            // Prevent further processing if file is too large
+            if (!checkFileSize(f)) {
+                return;
+            }
+
+            // Update input value
+            const input = document.querySelector('input[type=file]');
+            input.files = files; // Set the FileList object to the input
+
             parseFile(f);
             uploadFile(f);
         }
+    }
+
+    function checkFileSize(file) {
+        const fileSizeLimit = 2097152; // In Octets (2 MB)
+
+        if (file.size > fileSizeLimit) {
+            Swal.fire({
+                icon: "error",
+                text: `Fichier trop volumineux (${convertOctetInMo(file.size)} Mo). Taille max : 2 Mo`,
+            });
+            return false; // Indicate file size exceeded
+        }
+        return true; // Indicate file size is within limit
     }
 
     // Output
@@ -55,7 +77,6 @@ function ekUpload(){
         );
 
         // let fileType = file.type;
-        // console.log(fileType);
         let imageName = file.name;
 
         let isGood = (/\.(?=gif|jpg|png|pdf|jpeg|svg)/gi).test(imageName);
@@ -80,18 +101,14 @@ function ekUpload(){
     function uploadFile(file) {
 
         let xhr = new XMLHttpRequest(),
-            fileSizeLimit = 1024; // In MB
+            fileSizeLimit = 2097152; // In Octet
         if (xhr.upload) {
-            // Check if file is less than x MB
-            if (file.size <= fileSizeLimit * 1024 * 1024) {
-                // Start upload
-                xhr.open('POST', document.getElementById('file-upload-form').action, true);
-                xhr.setRequestHeader('X-File-Name', file.name);
-                xhr.setRequestHeader('X-File-Size', file.size);
-                xhr.setRequestHeader('Content-Type', 'multipart/form-data');
-                xhr.send(file);
-            } else {
-                output('Please upload a smaller file (< ' + fileSizeLimit + ' MB).');
+            // Check if file is less than size limit
+            if (file.size > fileSizeLimit) {
+                Swal.fire({
+                    icon: "error",
+                    text: `Fichier trop volumineux (${convertOctetInMo(file.size)} Mo). Taille max : 2 Mo`,
+                });
             }
         }
     }
@@ -104,6 +121,10 @@ function ekUpload(){
     }
 }
 ekUpload();
+
+function convertOctetInMo(octets) {
+    return (octets / 1024 / 1024).toFixed(1);
+}
 /**************
  * END UPLOAD *
  **************/

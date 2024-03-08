@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <a href="{{ path('back_podcasts') }}" class="btn btn-secondary mb-4">
+    <a href="{{ path('back_team_members') }}" class="btn btn-secondary mb-4">
         <i class="material-icons pe-2">keyboard_backspace</i>Retour à la liste
     </a>
 
@@ -12,24 +12,27 @@
 
     {{ form_start(form, {'attr': {'class': 'flex-form', 'id': 'file-upload-form'}}) }}
 
-    {% include 'widgets/upload_card.html.twig' with {card_title: 'Artwork', label_for: 'podcast_media_imageFile_file', property: media, alt: form.media.alt, imageFile: form.media.imageFile} %}
+    {% include 'widgets/upload_card.html.twig' with {card_title: 'Photo', label_for: 'team_member_media_imageFile_file', property: media, alt: form.media.alt, imageFile: form.media.imageFile} %}
 
     <div class="col-lg-6 col-12 ms-lg-4">
         <div class="card p-4 mb-4">
             <h6 class="text-uppercase pink font-weight-bolder mb-3">Informations générales</h6>
-            {{ form_row(form.title, {
+            {{ form_row(form.fullName, {
                 'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
                 'label_attr':{'class':'form-label'},
                 'row_attr': {'class':'input-group input-group-outline mb-3'},
             }) }}
             <div class="form-error">
-                {{ form_errors(form.title) }}
+                {{ form_errors(form.fullName) }}
             </div>
-            {{ form_row(form.subtitle, {
+            {{ form_row(form.title, {
                 'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
                 'label_attr':{'class':'form-label'},
                 'row_attr': {'class':'input-group input-group-outline mb-3'}
             }) }}
+            <div class="form-error">
+                {{ form_errors(form.title) }}
+            </div>
             {{ form_row(form.position, {
                 'attr': {'class':'form-control'},
                 'label_attr': {'class':'form-label'},

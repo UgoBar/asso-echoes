@@ -75,6 +75,9 @@ class Media
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\OneToMany(mappedBy: 'mobileBanner', targetEntity: Radiobox::class)]
+    private Collection $mobileBanners;
+
     public function __construct()
     {
         $this->podcasts = new ArrayCollection();
@@ -92,6 +95,7 @@ class Media
         $this->rents = new ArrayCollection();
         $this->organizes = new ArrayCollection();
         $this->contacts = new ArrayCollection();
+        $this->mobileBanners = new ArrayCollection();
     }
 
 
@@ -601,6 +605,36 @@ class Media
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Radiobox>
+     */
+    public function getMobileBanners(): Collection
+    {
+        return $this->mobileBanners;
+    }
+
+    public function addMobileBanner(Radiobox $mobileBanner): static
+    {
+        if (!$this->mobileBanners->contains($mobileBanner)) {
+            $this->mobileBanners->add($mobileBanner);
+            $mobileBanner->setMobileBanner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMobileBanner(Radiobox $mobileBanner): static
+    {
+        if ($this->mobileBanners->removeElement($mobileBanner)) {
+            // set the owning side to null (unless already changed)
+            if ($mobileBanner->getMobileBanner() === $this) {
+                $mobileBanner->setMobileBanner(null);
+            }
+        }
 
         return $this;
     }

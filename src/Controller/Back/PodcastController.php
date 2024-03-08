@@ -3,11 +3,8 @@
 namespace App\Controller\Back;
 
 use App\Controller\BaseController;
-use App\Entity\Media;
 use App\Entity\Podcast;
-use App\Entity\User;
 use App\Form\PodcastType;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

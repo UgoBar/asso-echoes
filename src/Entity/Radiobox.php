@@ -32,6 +32,9 @@ class Radiobox
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $secondText = null;
 
+    #[ORM\ManyToOne(inversedBy: 'mobileBanners')]
+    private ?Media $mobileBanner = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -93,6 +96,18 @@ class Radiobox
     public function setSecondText(?string $secondText): static
     {
         $this->secondText = $secondText;
+
+        return $this;
+    }
+
+    public function getMobileBanner(): ?Media
+    {
+        return $this->mobileBanner;
+    }
+
+    public function setMobileBanner(?Media $mobileBanner): static
+    {
+        $this->mobileBanner = $mobileBanner;
 
         return $this;
     }

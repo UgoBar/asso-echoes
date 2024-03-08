@@ -1,0 +1,38 @@
+{% extends 'back_base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .breadcrump-header {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('back_radiobox') }}" class="btn btn-secondary mb-4 d-block mx-auto mt-5">
+        <i class="material-icons pe-2">keyboard_backspace</i>Retour
+    </a>
+
+    {{ form_start(form, {'attr': {'class': 'justify-form', 'id': 'file-upload-form'}}) }}
+
+    {% if title == 'desktop_banner' %}
+        {% include 'widgets/upload_card.html.twig' with {card_title: 'Bannière Desktop', label_for: 'radiobox_banner_banner_imageFile_file', property: banner, alt: form.banner.alt, imageFile: form.banner.imageFile} %}
+    {% else %}
+        {% include 'widgets/upload_card.html.twig' with {card_title: 'Bannière mobile', label_for: 'radiobox_mobile_banner_mobileBanner_imageFile_file', property: mobileBanner, alt: form.mobileBanner.alt, imageFile: form.mobileBanner.imageFile} %}
+    {% endif %}
+
+    <button type="submit" class="btn btn-success">
+        <span class="material-icons pe-2">edit</span> Mettre à jour
+    </button>
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/back/upload.js') }}"></script>
+{% endblock %}
+

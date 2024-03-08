@@ -3,30 +3,30 @@
 namespace App\Form;
 
 use App\Entity\Media;
-use App\Entity\Podcast;
+use App\Entity\TeamMember;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class PodcastType extends AbstractType
+class TeamMemberType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('subtitle', TextType::class, [
-                'label' => 'Sous-titre'
+            ->add('fullName', TextType::class, [
+                'label' => 'Nom complet',
+                'constraints' => new NotBlank(['message' => 'Le nom complet ne peut pas être vide'])
             ])
             ->add('title', TextType::class, [
                 'label' => 'Titre',
                 'constraints' => new NotBlank(['message' => 'Le titre ne peut pas être vide'])
             ])
             ->add('position', IntegerType::class, [
-                'label' => 'Afficher le podcast en position',
+                'label' => 'Afficher le/la membre en position',
                 'required' => false
             ])
             ->add('media', MediaType::class, [
@@ -38,7 +38,7 @@ class PodcastType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Podcast::class,
+            'data_class' => TeamMember::class,
         ]);
     }
 }

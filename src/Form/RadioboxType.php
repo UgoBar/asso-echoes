@@ -3,30 +3,33 @@
 namespace App\Form;
 
 use App\Entity\Media;
-use App\Entity\Podcast;
+use App\Entity\Radiobox;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class PodcastType extends AbstractType
+class RadioboxType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('subtitle', TextType::class, [
-                'label' => 'Sous-titre'
-            ])
             ->add('title', TextType::class, [
                 'label' => 'Titre',
                 'constraints' => new NotBlank(['message' => 'Le titre ne peut pas être vide'])
             ])
-            ->add('position', IntegerType::class, [
-                'label' => 'Afficher le podcast en position',
+            ->add('subtitle', TextType::class, [
+                'label' => 'Sous-titre'
+            ])
+            ->add('firstText', TextareaType::class, [
+                'label' => false,
+                'required' => false
+            ])
+            ->add('secondText', TextareaType::class, [
+                'label' => false,
                 'required' => false
             ])
             ->add('media', MediaType::class, [
@@ -38,7 +41,7 @@ class PodcastType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Podcast::class,
+            'data_class' => Radiobox::class,
         ]);
     }
 }

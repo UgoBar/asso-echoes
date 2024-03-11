@@ -64,9 +64,8 @@ class DashboardController extends BaseController
             $this->save($media);
             // Then record Podcast with previously created Media
             $logoBlack->setMedia($media);
-            $this->save($logoBlack);
 
-            $this->save($logoBlack, true, 'back_dashboard', 'Le logo noir a bien été ' . $state);
+            return $this->save($logoBlack, true, 'back_dashboard', 'Le logo noir a bien été ' . $state);
         }
 
         return $this->render('back/logo/form.html.twig', [
@@ -102,7 +101,7 @@ class DashboardController extends BaseController
             $this->save($media);
             // Then record Podcast with previously created Media
             $logo->setMedia($media);
-            $this->save($logo, true, 'back_dashboard', 'Le logo blanc a bien été ' . $state);
+            return $this->save($logo, true, 'back_dashboard', 'Le logo blanc a bien été ' . $state);
         }
 
         return $this->render('back/logo/form.html.twig', [

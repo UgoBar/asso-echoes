@@ -16,6 +16,9 @@ class Site
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $color = null;
 
+    #[ORM\ManyToOne]
+    private ?Media $pressReview = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +32,18 @@ class Site
     public function setColor(?string $color): static
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    public function getPressReview(): ?Media
+    {
+        return $this->pressReview;
+    }
+
+    public function setPressReview(?Media $pressReview): static
+    {
+        $this->pressReview = $pressReview;
 
         return $this;
     }

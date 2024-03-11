@@ -255,6 +255,10 @@ input[type=number] {
     display: none;
     opacity: 0;
 }
+.vich-file {
+    display: none;
+    opacity: 0;
+}
 #file-upload-btn {
     margin-top: 2em;
     width: 100%;

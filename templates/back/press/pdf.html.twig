@@ -1,0 +1,53 @@
+{% extends 'back_base.html.twig' %}
+
+{% block body %}
+
+    <a href="{{ path('back_edit_press', { 'id': press.id }) }}" class="btn btn-secondary mb-4 d-block mx-auto mt-5">
+        <i class="material-icons pe-2">keyboard_backspace</i>Retour au dashboard
+    </a>
+
+    {{ form_start(form, {'attr': {'class': 'justify-form', 'id': 'file-upload-form'}}) }}
+
+    <div class="'col-lg-6 col-12'" id="fileDrag">
+        <div class="card p-4 mb-4">
+            <h6 class="text-uppercase pink font-weight-bolder mb-3">Fichier PDF</h6>
+            {{ form_row(form.pdf.alt, {
+                'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+                'label_attr':{'class':'form-label'},
+                'row_attr': {'class':'input-group input-group-outline'}
+            }) }}
+            <small class="text-secondary">Le <b>alt</b> sert à l'audiodescription des images pour les non-voyants.</small>
+            {{ form_row(form.pdf.imageFile) }}
+            <label for="press_pdf_pdf_imageFile_file">
+                <span id="file-upload-btn" class="btn btn-primary justify-content-center">
+                    <i class="material-icons text-white pe-2" aria-hidden="true">download_for_offline</i>Drag or clic
+                </span>
+                <p class="text-secondary text-center">Taille max : <b>2 Mo</b></p>
+                <h6 class="text-center">{{ pdf.picture }}</h6>
+                <div class="position-relative">
+                    <div id="start" style="left: 0; top: 0; opacity: 0; position: absolute;">
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                        <div></div>
+                        <span id="file-upload-btn" class="btn btn-primary"></span>
+                        <div id="notimage" class="hidden"></div>
+                    </div>
+                    <div id="response" class="hidden">
+                        <div id="messages" class="pink"></div>
+                    </div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        <span class="material-icons pe-2">edit</span>Mettre à jour
+    </button>
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/back/upload.js') }}"></script>
+{% endblock %}

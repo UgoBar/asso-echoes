@@ -109,15 +109,26 @@ if (inputsText) {
         if(input.value) {
             input.parentNode.classList.add('is-filled');
         }
-    })
+    });
 }
 
 document.querySelectorAll('input[type="date"]').forEach(input => {
     input.parentNode.classList.add('is-filled');
-})
+});
 
 document.querySelectorAll('.input-group').forEach(group => {
     let errorToRemove = group.querySelector('ul')
     if (errorToRemove)
         errorToRemove.remove();
+});
+
+document.querySelectorAll('.nav-item').forEach(navItem => {
+    let link = navItem.querySelector('a');
+    if (link && link.classList.contains('bg-gradient-primary')) {
+        let top = link.offsetTop;
+        document.getElementById('sidenav-collapse-main').scrollTo({
+            top: top - 200,
+            behavior: "smooth",
+        })
+    }
 })

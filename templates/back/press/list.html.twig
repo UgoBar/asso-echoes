@@ -1,0 +1,48 @@
+{% extends 'back_base.html.twig' %}
+
+{% block body %}
+    <div class="row ms-0 w-100">
+        <a class="btn bg-gradient-primary mb-4" style="width: fit-content" href="{{ path('back_add_press') }}">
+            <i class="material-icons pe-2">add</i>Ajouter un item de presse
+        </a>
+    </div>
+
+    {% if pressItems %}
+        <form action="" method="post">
+            <div class="row ms-0 no-gutter w-100">
+{#                <h6 class="text-uppercase pink font-weight-bolder mb-2">Page d'accueil</h6>#}
+                {% for press in pressItems %}
+                    <div class="col-xs-12 col-md-6 col-xl-3 me-4 mb-4" id="press-{{ press.id }}">
+                        <div class="banner-card">
+                            <figure>
+                                <img src="{{ asset('img/' ~ press.media.picture) }}" alt="{{ press.media.alt }}">
+                                <div class="card-actions">
+                                    <a class="btn btn-secondary action-btn" href="{{ path('back_edit_press', { 'id': press.id }) }}">
+                                        <i class="material-icons" aria-hidden="true">edit</i>
+                                    </a>
+                                    <span class="btn btn-danger"
+                                          onclick="deleteElem({{ press.id }}, 'Press', 'press-{{ press.id }}', 'Tu es sur le point de supprimer l\'item de presse {{ press|e('js') }}')"
+                                    >
+                                        <i class="material-icons" aria-hidden="true">delete</i>
+                                    </span>
+                                </div>
+                            </figure>
+                            <div class="card-body">
+                                <h4 class="text-center">{{ press.title }}</h4>
+                                <select class="form-select" name="press-{{ press.id }}-position">
+                                    {% for i in 1..pressItems|length %}
+                                        <option value="{{ i }}" {{ i == press.position ? 'selected' : '' }}>{{ i }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="submit" name="order" class="btn btn-secondary">
+                <i class="material-icons pe-2">sync_alt</i>Changer l'ordre
+            </button>
+        </form>
+    {% endif %}
+
+{% endblock %}

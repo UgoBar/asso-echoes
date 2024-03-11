@@ -27,6 +27,17 @@ class Press
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $link = null;
 
+    #[ORM\Column(type: Types::SMALLINT)]
+    private ?int $position = null;
+
+    #[ORM\ManyToOne(cascade: ["all"])]
+    private ?media $pdf = null;
+
+    public function __toString()
+    {
+        return $this->title;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -64,6 +75,30 @@ class Press
     public function setLink(?string $link): static
     {
         $this->link = $link;
+
+        return $this;
+    }
+
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(int $position): static
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    public function getPdf(): ?media
+    {
+        return $this->pdf;
+    }
+
+    public function setPdf(?media $pdf): static
+    {
+        $this->pdf = $pdf;
 
         return $this;
     }

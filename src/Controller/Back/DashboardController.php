@@ -5,10 +5,12 @@ namespace App\Controller\Back;
 use App\Controller\BaseController;
 use App\Entity\LogoBlack;
 use App\Entity\LogoWhite;
+use App\Entity\Media;
 use App\Entity\Site;
 use App\Form\LogoBlackType;
 use App\Form\LogoWhiteType;
-use App\Form\SiteType;
+use App\Form\Site\SiteColorType;
+use App\Form\Site\SitePressType;
 use App\Service\MainColorService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,12 +26,27 @@ class DashboardController extends BaseController
         $logoWhite = count($this->getRepo(LogoWhite::class)->findAll()) > 0 ? $this->getRepo(LogoWhite::class)->findAll()[0] : null;
         $site      = count($this->getRepo(Site::class)->findAll()) > 0 ? $this->getRepo(Site::class)->findAll()[0] : new Site();
         $color = $colorService->getColor();
+        $pressReview = $site->getPressReview() ?? new Media();
 
         // Manage colorpicker form
-        $form = $this->createForm(SiteType::class, $site);
+        $form = $this->createForm(SiteColorType::class, $site);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             return $this->save($site, true, 'back_dashboard', 'La couleur principale a été modifiée');
+        }
+
+        // Manager press review form
+        $pressForm = $this->createForm(SitePressType::class, $site);
+        $pressForm->handleRequest($request);
+        if ($pressForm->isSubmitted() && $pressForm->isValid()) {
+            $data = $form->getData();
+            // First record Media
+            $pressReview->setImageFile($data->getPressReview()->getImageFile());
+            $pressReview->setAlt($data->getPressReview()->getAlt());
+            $this->save($pressReview);
+            // Then record Press item with previously created Media
+            $site->setPressReview($pressReview);
+            return $this->save($site, true, 'back_dashboard', 'La revue de presse : <b>' . $site->getPressReview()->getPicture() . '</b> a bien été mise à jour.');
         }
 
         return $this->render('back/dashboard.html.twig', [
@@ -38,6 +55,8 @@ class DashboardController extends BaseController
             'logoBlack' => $logoBlack,
             'logoWhite' => $logoWhite,
             'form' => $form->createView(),
+            'pressForm' => $pressForm->createView(),
+            'pressReview' => $pressReview,
             'color' => $color
         ]);
     }

@@ -242,10 +242,14 @@
         </div>
     </nav>
     <!-- End Navbar -->
+
     <div class="mx-4">
         {% block body %}{% endblock %}
     </div>
 </main>
+
+<div class="overlay"></div>
+<div id="modals-wrapper"></div>
 
 <a href="{{ path('front_home') }}" target="_blank" class="btn btn-small btn-black" id="website-link"><span class="material-icons pe-2">open_in_new</span><span class="link-text">Voir le site</span></a>
 

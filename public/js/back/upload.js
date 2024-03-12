@@ -72,22 +72,32 @@ function ekUpload(){
 
     function parseFile(file) {
 
-        output(
-            '<strong>' + encodeURI(file.name) + '</strong>'
-        );
-
-        // let fileType = file.type;
-        let imageName = file.name;
-
-        let isGood = (/\.(?=gif|jpg|png|pdf|jpeg|svg)/gi).test(imageName);
+        let isGood = (/\.(?=gif|jpg|png|pdf|jpeg|svg)/gi).test(file.name);
         if (isGood) {
             document.getElementById('response').classList.remove("hidden");
             document.getElementById('notimage').classList.add("hidden");
-            // Thumbnail Preview
-            document.getElementById('file-image').classList.remove("hidden");
-            //document.getElementById('file-image').style.height="200px";
-            document.getElementById('file-image').style.width="100%";
-            document.getElementById('file-image').src = URL.createObjectURL(file);
+
+            if (document.getElementById('file-image')) {
+                // Thumbnail Preview
+                document.getElementById('file-image').classList.remove("hidden");
+                document.getElementById('file-image').style.height="auto";
+                document.getElementById('file-image').style.objectFit="cover";
+                document.getElementById('file-image').style.width="100%";
+                document.getElementById('file-image').src = URL.createObjectURL(file);
+
+                output(
+                    '<strong>' + encodeURI(file.name) + '</strong>'
+                );
+            }
+
+            if (file.type === "application/pdf" && document.getElementById('previewPdf')) {
+                document.querySelector('#previewPdf embed').src = URL.createObjectURL(file);
+                output(
+                    '<span class="text-center text-primary text-hover_underline" data-modal-id="previewPdf"><strong>' + encodeURI(file.name) + '</strong></span>'
+                );
+                window.initPdfModal(true);
+            }
+
         }
         else {
             document.getElementById('file-image').classList.add("hidden");
@@ -124,6 +134,41 @@ ekUpload();
 
 function convertOctetInMo(octets) {
     return (octets / 1024 / 1024).toFixed(1);
+}
+
+window.initPdfModal = (fromUpload = false) => {
+
+    if (fromUpload === true) {
+        document.getElementById('modals-wrapper').appendChild(document.getElementById('previewPdf'));
+    }
+
+   let openPdfModalBtn = document.querySelectorAll('[data-modal-id="previewPdf"]');
+    openPdfModalBtn.forEach(pdfModal => {
+       let modal = document.getElementById(pdfModal.dataset.modalId);
+       pdfModal.addEventListener('click', () => openCloseModal(modal, document.querySelector('.overlay')));
+   })
+
+   window.openCloseModal = (modal, overlay) => {
+       modal.classList.toggle('active');
+       overlay.classList.toggle('active');
+       modal.querySelector('.modal-content').classList.toggle('active');
+       let closeBtn = modal.querySelector(".close-layout-modal");
+
+       // Click on close btn ? close modal
+       closeBtn.onclick = function() {
+           openCloseModal(modal, overlay)
+       }
+       // Click outside modal ? close modal
+       modal.addEventListener('click', (e) => {
+           if (e.target === modal) {
+               openCloseModal(modal, overlay)
+           }
+       });
+   }
+}
+
+if (document.getElementById('previewPdf')) {
+    window.initPdfModal();
 }
 /**************
  * END UPLOAD *

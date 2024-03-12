@@ -152,7 +152,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     window.openCloseModal = (modal, overlay) => {
-        console.log('open close');
         modal.classList.toggle('active');
         overlay.classList.toggle('active');
         modal.querySelector('.modal-content').classList.toggle('active');

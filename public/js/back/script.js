@@ -102,6 +102,7 @@ document.querySelectorAll('.toast-alert').forEach(toastAlert => {
     // }, 150);
 });
 
+// INPUT UI
 const inputsText = document.querySelectorAll('input[type=text], input[type="number"]') ?? false;
 
 if (inputsText) {
@@ -121,7 +122,9 @@ document.querySelectorAll('.input-group').forEach(group => {
     if (errorToRemove)
         errorToRemove.remove();
 });
+// -- END INPUT UI
 
+// SCROLL TO NAV ACTIVE
 document.querySelectorAll('.nav-item').forEach(navItem => {
     let link = navItem.querySelector('a');
     if (link && link.classList.contains('bg-gradient-primary')) {
@@ -132,3 +135,4 @@ document.querySelectorAll('.nav-item').forEach(navItem => {
         })
     }
 })
+// -- END SCROLL TO NAV ACTIVE

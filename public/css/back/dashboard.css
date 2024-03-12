@@ -78,6 +78,11 @@
         align-items: center;
     }
     .color-section {
-        text-align: center;
+        /*text-align: center;*/
+        justify-content: center;
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 2em;
+        margin-top: 3em;
     }
 }

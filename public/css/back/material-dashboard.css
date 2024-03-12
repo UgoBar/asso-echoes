@@ -2886,7 +2886,7 @@ textarea.form-control-lg {
   line-height: 1.5rem;
   color: #495057;
   background-color: transparent;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23EC407A ' stroke-linecap='round' stroke-linejoin='round' stroke-width='4' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23FF6600 ' stroke-linecap='round' stroke-linejoin='round' stroke-width='4' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: 98% 50%;
   background-size: 16px 12px;
@@ -2894,6 +2894,7 @@ textarea.form-control-lg {
   border-radius: 0.375rem;
   transition: 0.2s ease;
   appearance: none;
+  cursor: pointer;
 }
 
 @media (prefers-reduced-motion: reduce) {

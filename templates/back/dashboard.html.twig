@@ -8,41 +8,58 @@
 
 {% block body %}
 
-    <section class="logos mb-5">
-        <h4 class="mb-4 mt-3 w-100 page-subtitle">Logos</h4>
-        <figure class="logo-black">
-            {% if logoBlack is not null %}
-                <img src="{{  vich_uploader_asset(logoBlack.media, 'imageFile') }}" alt="" class="rounded-img">
-            {% else %}
-                <img src="{{ asset('img/back/no-logo-black.png') }}" alt="" class="rounded-img">
-            {% endif %}
-            <figcaption class="logo-title">Logo noir</figcaption>
-            <a href="{{ logoBlack is not null ? path('back_logo_black_edit', { 'id': logoBlack.id }) : path('back_logo_black_new') }}" class="edit-logo"><span class="material-icons">edit</span></a>
-        </figure>
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <section class="logos mb-5">
+                <h4 class="mb-4 mt-3 w-100 page-subtitle">Logos</h4>
+                <figure class="logo-black">
+                    {% if logoBlack is not null %}
+                        <img src="{{  vich_uploader_asset(logoBlack.media, 'imageFile') }}" alt="" class="rounded-img">
+                    {% else %}
+                        <img src="{{ asset('img/back/no-logo-black.png') }}" alt="" class="rounded-img">
+                    {% endif %}
+                    <figcaption class="logo-title">Logo noir</figcaption>
+                    <a href="{{ logoBlack is not null ? path('back_logo_black_edit', { 'id': logoBlack.id }) : path('back_logo_black_new') }}" class="edit-logo"><span class="material-icons">edit</span></a>
+                </figure>
 
-        <figure class="logo-white">
-            {% if logoWhite is not null %}
-                <img src="{{  vich_uploader_asset(logoWhite.media, 'imageFile') }}" alt="{{ logoWhite.media.alt }}" class="rounded-img">
-            {% else %}
-                <img src="{{ asset('img/back/no-logo-white.png') }}" alt="" class="rounded-img">
-            {% endif %}
-            <figcaption class="logo-title">Logo blanc</figcaption>
-            <a href="{{ logoWhite is not null ? path('back_logo_white_edit', { 'id': logoWhite.id }) : path('back_logo_white_new') }}" class="edit-logo"><span class="material-icons">edit</span></a>
-        </figure>
-    </section>
+                <figure class="logo-white">
+                    {% if logoWhite is not null %}
+                        <img src="{{  vich_uploader_asset(logoWhite.media, 'imageFile') }}" alt="{{ logoWhite.media.alt }}" class="rounded-img">
+                    {% else %}
+                        <img src="{{ asset('img/back/no-logo-white.png') }}" alt="" class="rounded-img">
+                    {% endif %}
+                    <figcaption class="logo-title">Logo blanc</figcaption>
+                    <a href="{{ logoWhite is not null ? path('back_logo_white_edit', { 'id': logoWhite.id }) : path('back_logo_white_new') }}" class="edit-logo"><span class="material-icons">edit</span></a>
+                </figure>
+            </section>
 
-    <section class="color-section">
-        <div class="d-flex align-items-center">
-            <h4 class="mb-0 page-subtitle">Couleur </h4><span class="ms-2">({{ mainColor.color }})</span>
+            <section class="color-section">
+                <div class="d-flex align-items-center">
+                    <h4 class="mb-0 page-subtitle">Couleur </h4><span class="ms-2">({{ mainColor.color }})</span>
+                </div>
+                <small class="mb-3">Cliquer sur la couleur ouvre le color-picker</small>
+                {{ form_start(form, {'attr': {'class': 'flex-form'}}) }}
+                <div class="colorpicker form-group">
+                    {{ form_widget(form.color, {'attr': { 'class':'coloris', 'value': color }}) }}
+                </div>
+                <button class="btn btn-outline-dark py-0 px-2 ms-lg-3" type="submit" style="text-transform: unset;">
+                    <span class="material-icons pe-2">format_color_fill</span>
+                    Changer la couleur
+                </button>
+                {{ form_end(form) }}
+            </section>
         </div>
-        <small class="mb-3">Cliquer sur la couleur ouvre le color-picker</small>
-        {{ form_start(form, {'attr': {'class': 'flex-form'}}) }}
-        <div class="colorpicker form-group">
-            {{ form_widget(form.color, {'attr': { 'class':'coloris', 'value': color }}) }}
+
+        <div class="col-12 col-lg-6 mt-lg-0 mt-4" id="fileDrag">
+            <h4 class="mb-0 page-subtitle mb-3">Revue de presse</h4>
+            {{ form_start(pressForm, {'attr': {'class': '', 'id': 'file-upload-form'}}) }}
+            {% include 'widgets/pdf_upload_card.html.twig' with {
+                label_for: 'site_press_pressReview_imageFile_file', pdfName: pressReview.picture, alt: pressForm.pressReview.alt, imageFile: pressForm.pressReview.imageFile, formCard: true
+            } %}
+            {{ form_end(pressForm) }}
         </div>
-        <button class="btn btn-outline-dark py-0 px-2 ms-lg-3" type="submit" style="text-transform: unset;">Changer la couleur</button>
-        {{ form_end(form) }}
-    </section>
+    </div>
+
 {% endblock %}
 
 
@@ -50,7 +67,7 @@
     {{ parent() }}
 
     <script src="{{ asset('js/back/coloris.min.js') }}"></script>
-
+    <script src="{{ asset('js/back/upload.js') }}"></script>
     <script>
         Coloris({
             themeMode: 'dark',

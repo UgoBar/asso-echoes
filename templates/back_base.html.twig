@@ -126,7 +126,7 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-white font-weight-bolder opacity-8">Ateliers</h6>
             </li>
             <li class="nav-item">
-                <a class="{{ nav == 'testimonials' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white"  href="{{ path('back_memorybox') }}">
+                <a class="{{ nav == 'memorybox' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white"  href="{{ path('back_memorybox') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">elderly</i>
                     </div>
@@ -155,7 +155,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="{{ nav == 'rent' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white" href="#">
+                <a class="{{ nav == 'rent' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white" href="{{ path('back_rent') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">handshake</i>
                     </div>
@@ -163,7 +163,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="{{ nav == 'organize' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white" href="#">
+                <a class="{{ nav == 'organize' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white" href="{{ path('back_organize') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">calendar_month</i>
                     </div>
@@ -184,7 +184,7 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-white font-weight-bolder opacity-8">Contact</h6>
             </li>
             <li class="nav-item">
-                <a class="{{ nav == 'contact' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white " href="#">
+                <a class="{{ nav == 'contact' ? 'bg-gradient-primary fw-bold' : '' }} nav-link text-white " href="{{ path('back_contact') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">call</i>
                     </div>

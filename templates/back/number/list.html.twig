@@ -12,6 +12,17 @@
         .banner-card .card-body {
             padding: 0 2em 1em 2em;
         }
+        .number {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 100%;
+            margin-right: 10px;
+        }
     </style>
 {% endblock %}
 
@@ -42,7 +53,7 @@
                                 </div>
                             </figure>
                             <div class="card-body">
-                                <h4 class="text-center">{{ number.title }}</h4>
+                                <h4 class="d-flex align-items-center justify-content-center my-4"><span class="fw-bold number">{{ number.number }}</span> {{ number.title }}</h4>
                                 <select class="form-select" name="number-{{ number.id }}-position">
                                     {% for i in 1..numbers|length %}
                                         <option value="{{ i }}" {{ i == number.position ? 'selected' : '' }}>{{ i }}</option>

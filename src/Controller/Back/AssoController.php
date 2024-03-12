@@ -39,7 +39,7 @@ class AssoController extends BaseController
             $this->save($media);
             // Then record Podcast with previously created Media
             $asso->setMedia($media);
-            return $this->save($asso, true, 'back_asso', 'Les infos de la page association ont été mises à jour');
+            return $this->save($asso, true, 'back_asso', 'Les infos de la page <b>association</b> ont été mises à jour');
         }
 
         return $this->render('back/asso/form.html.twig', [

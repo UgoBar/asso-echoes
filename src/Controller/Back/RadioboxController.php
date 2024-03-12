@@ -41,7 +41,7 @@ class RadioboxController extends BaseController
 
             // Then record Radiobox with previously created Media
             $radiobox->setMedia($media);
-            return $this->save($radiobox, true, 'back_radiobox', 'Les infos de la page radiobox ont été mises à jour');
+            return $this->save($radiobox, true, 'back_radiobox', 'Les infos de la page <b>radiobox</b> ont été mises à jour');
         }
 
         return $this->render('back/radiobox/form.html.twig', [
@@ -82,7 +82,7 @@ class RadioboxController extends BaseController
             // Then record Radiobox with previously created Banner
             $radiobox->setBanner($banner);
 
-            return $this->save($radiobox, true, 'back_radiobox', 'La version desktop de la bannière de la page <b>radiobox</b> a été mise à jour');
+            return $this->save($radiobox, true, 'back_radiobox', 'La <b>version desktop</b> de la bannière de la page <b>radiobox</b> a été mise à jour');
         }
 
         return $this->render('back/radiobox/banner.html.twig', [
@@ -123,7 +123,7 @@ class RadioboxController extends BaseController
             // Then record Radiobox with previously created Mobile Banner
             $radiobox->setMobileBanner($mobileBanner);
 
-            return $this->save($radiobox, true, 'back_radiobox', 'La version mobile de La bannière mobile de la page radiobox a été mise à jour');
+            return $this->save($radiobox, true, 'back_radiobox', 'La <b>version mobile</b> de La bannière mobile de la page <b>radiobox</b> a été mise à jour');
         }
 
         return $this->render('back/radiobox/banner.html.twig', [

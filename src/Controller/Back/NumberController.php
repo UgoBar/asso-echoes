@@ -66,7 +66,7 @@ class NumberController extends BaseController
             $number->setMedia($media);
 
             $state = $isEdit ? 'modifié' : 'ajouté';
-            return $this->save($number, true, 'back_numbers', 'Le chiffre "'. $number .'" a bien été ' . $state);
+            return $this->save($number, true, 'back_numbers', 'Le chiffre <b>'. $number .'</b> a bien été ' . $state);
         }
 
         return $this->render('back/number/form.html.twig', [

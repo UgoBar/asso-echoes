@@ -70,7 +70,7 @@ class PodcastController extends BaseController
             $podcast->setMedia($media);
 
             $state = $isEdit ? 'modifié' : 'ajouté';
-            return $this->save($podcast, true, 'back_podcasts', 'Le podcast "'. $podcast .'" a bien été ' . $state);
+            return $this->save($podcast, true, 'back_podcasts', 'Le podcast <b>'. $podcast .'</b> a bien été ' . $state);
         }
 
         return $this->render('back/podcast/form.html.twig', [

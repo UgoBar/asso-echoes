@@ -23,7 +23,7 @@ class TeamController extends BaseController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            return $this->save($teamInfo, true, 'back_team_info', 'Les infos de la page équipe ont été mises à jour');
+            return $this->save($teamInfo, true, 'back_team_info', 'Les infos de la page <b>équipe</b> ont été mises à jour');
         }
 
         return $this->render('back/team/info.html.twig', [
@@ -87,7 +87,7 @@ class TeamController extends BaseController
             $member->setMedia($media);
 
             $state = $isEdit ? 'modifié.e' : 'ajouté.e';
-            return $this->save($member, true, 'back_team_members', $member->getFullName() .'" a bien été ' . $state);
+            return $this->save($member, true, 'back_team_members', '<b>' . $member->getFullName() .'</b> a bien été ' . $state);
         }
 
         return $this->render('back/team/member_form.html.twig', [

@@ -48,7 +48,7 @@ class SessionController extends BaseController
 
         if($form->isSubmitted() && $form->isValid()) {
             $state = $isEdit ? 'modifié' : 'ajouté';
-            return $this->save($session, true, 'back_sessions', 'L\'atelier "'. $session .'" a bien été ' . $state);
+            return $this->save($session, true, 'back_sessions', 'L\'atelier <b>'. $session .'</b> a bien été ' . $state);
         }
 
         return $this->render('back/session/form.html.twig', [

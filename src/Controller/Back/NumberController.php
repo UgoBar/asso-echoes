@@ -54,7 +54,7 @@ class NumberController extends BaseController
         $form = $this->createForm(NumberType::class, $number);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
 

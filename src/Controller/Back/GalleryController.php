@@ -39,7 +39,7 @@ class GalleryController extends BaseController
         $form = $this->createForm(GalleryType::class, $gallery);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $state = $isEdit ? 'modifiée' : 'ajoutée';
             return $this->save($gallery, true, 'back_gallery', 'La photo <b>'. $gallery .'</b> a bien été ' . $state);
         }

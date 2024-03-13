@@ -43,6 +43,18 @@ class Partner
         return $this;
     }
 
+    const TYPE_FINANCIAL   = 1;
+    const TYPE_COLLABORATE = 2;
+    public static function getListTypes($type = null): array|string
+    {
+        $types = [
+            self::TYPE_FINANCIAL   => 'Financeur',
+            self::TYPE_COLLABORATE   => 'Collaborateur',
+        ];
+
+        return $type === null ? $types : $types[$type];
+    }
+
     public function getType(): ?int
     {
         return $this->type;

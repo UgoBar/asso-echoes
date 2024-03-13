@@ -56,7 +56,7 @@ class PressController extends BaseController
         $form = $this->createForm(PressType::class, $pressItem);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
 
@@ -92,7 +92,7 @@ class PressController extends BaseController
         $form = $this->createForm(PressPdfType::class, $press);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
             // First record Media

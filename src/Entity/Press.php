@@ -33,11 +33,6 @@ class Press
     #[ORM\ManyToOne(cascade: ["all"])]
     private ?media $pdf = null;
 
-    public function __toString()
-    {
-        return $this->title;
-    }
-
     public function getId(): ?int
     {
         return $this->id;

@@ -1,0 +1,222 @@
+{% extends 'back_base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .input-group.input-group-outline.is-focused .form-label, .input-group.input-group-outline.is-filled .form-label {
+            background-color: #e5e5e5;
+        }
+        .form-select {
+            width: 60px;
+            height: 60px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            padding: 5px 0;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: white;
+            border-radius: 100%;
+            border-width: 7px;
+            background-image: unset;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 4px;
+        }
+        .session-heading {
+            position: relative;
+        }
+        .type {
+            padding: 3px 17px;
+            background-color: var(--dark);
+            color: white;
+            width: fit-content;
+            display: block;
+            position: absolute;
+            top: 16px;
+            border-radius: 0 0 20px 20px;
+        }
+        hr {
+            border-bottom: 1px solid var(--dark);
+            margin-bottom: 3em;
+        }
+        figure {
+            margin-bottom: 0;
+            height: 200px;
+        }
+        figure img {
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            height: 100%;
+            object-fit: contain;
+            width: 100%;
+        }
+        .card-and-title {
+            margin-right: 2em;
+            margin-bottom: 2em;
+            width: fit-content;
+        }
+        .card-and-title .title {
+            display: block;
+            text-align: center;
+            margin-top: 1em;
+        }
+        .picture-card {
+            background-color: #fff;
+            position: relative;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            border-radius: 20px;
+            text-align: center;
+            width: 300px;
+        }
+        .picture-card .type {
+            position: absolute;
+            left: 5px;
+            top: 5px;
+            background-color: white;
+            color: var(--bs-primary);
+            width: 30px;
+            height: 30px;
+            border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .picture-footer {
+            display: flex;
+            border-top: 1px solid #b0b0b0 !important;
+        }
+        .picture-footer > * {
+            width: 50% !important;
+            margin-bottom: 0;
+            border-radius: 0;
+            justify-content: center;
+        }
+        .picture-footer a {
+            border-bottom-left-radius: 20px;
+            border-right: 1px solid #b0b0b0 !important;
+        }
+        .picture-footer a:hover {
+            color: #7b7992 !important;
+        }
+        .picture-footer span {
+            border-bottom-right-radius: 20px;
+        }
+        .picture-footer span:hover {
+            color: #df2121 !important;
+        }
+        @media screen and (max-width: 600px) {
+            .partners {
+                justify-content: center;
+            }
+            .card-and-title {
+                margin-right: unset;
+                margin-bottom: 1em;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="row ms-0">
+        <a class="btn bg-gradient-primary mb-5" style="width: fit-content" href="{{ path('back_add_partner') }}">
+            <i class="material-icons pe-2">add</i>Ajouter un partenaire
+        </a>
+    </div>
+
+    <!-- form -->
+    {{ form_start(form, {'attr': {'class': 'flex-form', 'id': 'file-upload-form'}}) }}
+        {{ form_row(form.title, {
+            'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+            'label_attr':{'class':'form-label'},
+            'row_attr': {'class':'input-group input-group-outline mb-3 w-100 w-lg-30 w-xxl-20'},
+        }) }}
+
+        {{ form_row(form.subtitle, {
+            'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+            'label_attr':{'class':'form-label'},
+            'row_attr': {'class':'input-group input-group-outline mb-3 w-100 w-lg-40 mx-0 mx-lg-3'}
+        }) }}
+        <button type="submit" class="btn btn-outline-dark">
+            <span class="material-icons pe-2">edit</span> Mettre à jour
+        </button>
+    {{ form_end(form) }}
+    <div class="form-error">
+        {{ form_errors(form.title) }}
+    </div>
+    <!-- / form -->
+
+    {% if financialPartners %}
+        <form action="" method="POST">
+            <div class="row ms-0 no-gutter w-100 partners">
+                <div class="session-heading">
+                    <hr>
+                    <p class="type">Financeurs</p>
+                </div>
+                {% for partner in financialPartners %}
+                    <div class="card-and-title" id="partner-{{ partner.id }}">
+                        <div class="picture-card">
+                            <figure>
+                                <img src="{{  vich_uploader_asset(partner.media, 'imageFile') }}" alt="{{ partner.media.alt }}">
+                            </figure>
+                            <div class="picture-footer">
+                                <a class="btn text-secondary action-btn" href="{{ path('back_edit_partner', { 'id': partner.id }) }}">
+                                    <i class="material-icons" aria-hidden="true">edit</i>
+                                </a>
+                                <span class="btn text-danger" onclick="deleteElem({{ partner.id }}, 'Partner', 'partner-{{ partner.id }}', 'Tu es sur le point de supprimer le partenaire <b>{{ partner|e('js') }}</b>')">
+                                <i class="material-icons" aria-hidden="true">delete</i>
+                            </span>
+                            </div>
+                            <select class="form-select" name="partner-{{ partner.id }}-position">
+                                {% for i in 1..financialPartners|length %}
+                                    <option value="{{ i }}" {{ i == partner.position ? 'selected' : '' }}>{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <span class="title">{{ partner }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="submit" name="financial-order" class="btn btn-secondary">
+                <i class="material-icons pe-2">sync_alt</i>Changer l'ordre
+            </button>
+        </form>
+    {% endif %}
+
+    {% if collaboratorPartners %}
+        <form action="" method="POST" class="pb-5">
+            <div class="row ms-0 no-gutter w-100 partners">
+                <div class="session-heading">
+                    <hr>
+                    <p class="type">Collaborateurs</p>
+                </div>
+                {% for partner in collaboratorPartners %}
+                    <div class="card-and-title" id="partner-{{ partner.id }}">
+                        <div class="picture-card">
+                            <figure>
+                                <img src="{{  vich_uploader_asset(partner.media, 'imageFile') }}" alt="{{ partner.media.alt }}">
+                            </figure>
+                            <div class="picture-footer">
+                                <a class="btn text-secondary action-btn" href="{{ path('back_edit_partner', { 'id': partner.id }) }}">
+                                    <i class="material-icons" aria-hidden="true">edit</i>
+                                </a>
+                                <span class="btn text-danger" onclick="deleteElem({{ partner.id }}, 'Partner', 'partner-{{ partner.id }}', 'Tu es sur le point de supprimer le partenaire <b>{{ partner|e('js') }}</b>')">
+                                <i class="material-icons" aria-hidden="true">delete</i>
+                            </span>
+                            </div>
+                            <select class="form-select" name="partner-{{ partner.id }}-position">
+                                {% for i in 1..collaboratorPartners|length %}
+                                    <option value="{{ i }}" {{ i == partner.position ? 'selected' : '' }}>{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <span class="title">{{ partner }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="submit" name="collaborator-order" class="btn btn-secondary">
+                <i class="material-icons pe-2">sync_alt</i>Changer l'ordre
+            </button>
+        </form>
+    {% endif %}
+
+{% endblock %}

@@ -9,7 +9,6 @@ trait TitleTrait
     #[ORM\Column(length: 255)]
     private ?string $title;
 
-
     public function getTitle(): string
     {
         return $this->title;
@@ -20,5 +19,10 @@ trait TitleTrait
         $this->title = $title;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 }

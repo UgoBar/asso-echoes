@@ -33,7 +33,7 @@ class ContactController extends BaseController
         $form = $this->createForm(RentType::class, $rent);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
 
@@ -72,7 +72,7 @@ class ContactController extends BaseController
         $form = $this->createForm(OrganizeType::class, $organize);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
 
@@ -112,7 +112,7 @@ class ContactController extends BaseController
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
 

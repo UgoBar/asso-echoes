@@ -37,15 +37,7 @@ class Gallery
             self::TYPE_SQUARE => 'Carré'
         ];
 
-        if ($type === null)
-            return $types;
-
-        return $types[$type];
-    }
-
-    public function __toString()
-    {
-        return $this->title;
+        return $type === null ? $types : $types[$type];
     }
 
     public function getId(): ?int

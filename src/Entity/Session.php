@@ -23,11 +23,6 @@ class Session
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $location = null;
 
-    public function __toString()
-    {
-        return $this->title;
-    }
-
     public function getId(): ?int
     {
         return $this->id;

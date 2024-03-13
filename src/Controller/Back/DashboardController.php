@@ -73,7 +73,7 @@ class DashboardController extends BaseController
         $form = $this->createForm(LogoBlackType::class, $logoBlack);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
 
@@ -110,7 +110,7 @@ class DashboardController extends BaseController
         $form = $this->createForm(LogoWhiteType::class, $logo);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
 

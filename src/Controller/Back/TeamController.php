@@ -22,7 +22,7 @@ class TeamController extends BaseController
         $form = $this->createForm(TeamInfoType::class, $teamInfo);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             return $this->save($teamInfo, true, 'back_team_info', 'Les infos de la page <b>équipe</b> ont été mises à jour');
         }
 
@@ -75,7 +75,7 @@ class TeamController extends BaseController
         $form = $this->createForm(TeamMemberType::class, $member);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
 

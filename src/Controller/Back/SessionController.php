@@ -46,7 +46,7 @@ class SessionController extends BaseController
         $form = $this->createForm(SessionType::class, $session);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $state = $isEdit ? 'modifié' : 'ajouté';
             return $this->save($session, true, 'back_sessions', 'L\'atelier <b>'. $session .'</b> a bien été ' . $state);
         }

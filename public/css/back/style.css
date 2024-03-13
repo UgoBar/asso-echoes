@@ -358,6 +358,10 @@ input[type=number] {
     width: 80%;
 }
 
+#site_color_color {
+    cursor: pointer;
+}
+
 /*.mobile-header-btn {*/
 /*    display: none;*/
 /*    transition: transform 0.3s ease-in-out;*/

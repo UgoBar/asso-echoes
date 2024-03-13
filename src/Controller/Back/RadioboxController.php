@@ -30,7 +30,7 @@ class RadioboxController extends BaseController
         $form = $this->createForm(RadioboxType::class, $radiobox);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
 
@@ -70,7 +70,7 @@ class RadioboxController extends BaseController
         $form = $this->createForm(RadioboxBannerType::class, $radiobox);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
 
@@ -111,7 +111,7 @@ class RadioboxController extends BaseController
         $form = $this->createForm(RadioboxMobileBannerType::class, $radiobox);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
 

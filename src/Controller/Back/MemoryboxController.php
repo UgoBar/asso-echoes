@@ -29,7 +29,7 @@ class MemoryboxController extends BaseController
         $form = $this->createForm(MemoryboxType::class, $memorybox);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             // First record Media
             $media->setImageFile($data->getMedia()->getImageFile());
@@ -66,7 +66,7 @@ class MemoryboxController extends BaseController
         $form = $this->createForm(MemoryboxBannerType::class, $memorybox);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
             $banner->setImageFile($data->getBanner()->getImageFile());

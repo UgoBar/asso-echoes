@@ -29,7 +29,7 @@ class AssoController extends BaseController
         $form = $this->createForm(AssoType::class, $asso);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
 

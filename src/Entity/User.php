@@ -27,6 +27,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    private ?string $confirmPassword = null;
+
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 
@@ -123,6 +125,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastname(string $lastname): static
     {
         $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getConfirmPassword(): ?string
+    {
+        return $this->confirmPassword;
+    }
+
+    public function setConfirmPassword(string $password): self
+    {
+        $this->confirmPassword = $password;
 
         return $this;
     }

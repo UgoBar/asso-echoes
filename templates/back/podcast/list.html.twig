@@ -15,7 +15,7 @@
                     <div class="col-xs-12 col-md-6 col-xl-3 me-4 mb-4" id="podcast-{{ podcast.id }}">
                         <div class="banner-card">
                             <figure>
-                                <img src="{{ asset('img/' ~ podcast.media.picture) }}" alt="{{ podcast.media.alt }}">
+                                <img src="{{ vich_uploader_asset(podcast.media, 'imageFile') }}" alt="{{ podcast.media.alt }}">
                                 <div class="card-actions">
                                     <a class="btn btn-secondary action-btn" href="{{ path('back_edit_podcast', { 'id': podcast.id }) }}">
                                         <i class="material-icons" aria-hidden="true">edit</i>

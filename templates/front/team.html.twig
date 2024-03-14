@@ -14,49 +14,27 @@
 
         <section id="team">
             <div class="container">
-                <h1 class="text-center">Le conseil d'administration</h1>
+                <h1 class="text-center">{{ teamInfo.title }}</h1>
 
-                <p class="text-center">Le conseil d'administration est composé de 3 membres élus par l'assemblée générale. Il se réunit au moins 3 fois par an.</p>
+                {% if teamInfo.subtitle %}
+                    <p class="text-center">{{ teamInfo.subtitle }}</p>
+                {% endif %}
 
                 <section id="team-members">
-                    <div class="team-member reveal-type">
-                        <figure class="member-photo">
-                            <img src="{{ asset('img/team/echoes-barbara-rouveyrol.png') }}" alt="">
-{#                            <figcaption class="member-info">#}
-{#                                <div class="member-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae voluptate repellendus magni illo ea animi?</div>#}
-{#                            </figcaption>#}
-                        </figure>
-                        <div class="member-name-role">
-                            <span class="member-role">Présidente</span>
-                            <div class="member-name">Barbara Rouveyrol</div>
-                        </div>
-                    </div>
 
-                    <div class="team-member reveal-type">
-                        <figure class="member-photo">
-                            <img src="{{ asset('img/team/echoes-natacha-cousin.jpg') }}" alt="">
-{#                            <figcaption class="member-info">#}
-{#                                <div class="member-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae voluptate repellendus magni illo ea animi?</div>#}
-{#                            </figcaption>#}
-                        </figure>
-                        <div class="member-name-role">
-                            <span class="member-role">Trésorière</span>
-                            <div class="member-name">Natacha Cousin</div>
-                        </div>
-                    </div>
-
-                    <div class="team-member reveal-type">
-                        <figure class="member-photo">
-                            <img src="{{ asset('img/team/echoes-benoit-laisney.jpg') }}" alt="">
-{#                            <figcaption class="member-info">#}
-{#                                <div class="member-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae voluptate repellendus magni illo ea animi?</div>#}
-{#                            </figcaption>#}
-                        </figure>
-                        <div class="member-name-role">
-                            <span class="member-role">Administrateur</span>
-                            <div class="member-name">Benoit Laisney</div>
-                        </div>
-                    </div>
+                    {% if teamMembers %}
+                        {% for team in teamMembers %}
+                            <div class="team-member reveal-type">
+                                <figure class="member-photo">
+                                    <img src="{{ vich_uploader_asset(team.media, 'imageFile') }}" alt="{{ team.media.alt }}">
+                                </figure>
+                                <div class="member-name-role">
+                                    <span class="member-role">{{ team.title }}</span>
+                                    <div class="member-name">{{ team.fullName }}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                 </section>
 
                 <section class="card-links reveal-type">

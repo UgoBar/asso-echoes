@@ -40,7 +40,7 @@
                     <div class="col-xs-12 col-md-6 col-xl-3 me-4 mb-4" id="number-{{ number.id }}">
                         <div class="banner-card">
                             <figure>
-                                <img src="{{ asset('img/' ~ number.media.picture) }}" alt="{{ number.media.alt }}">
+                                <img src="{{ vich_uploader_asset(number.media, 'imageFile') }}" alt="{{ number.media.alt }}">
                                 <div class="card-actions">
                                     <a class="btn btn-secondary action-btn" href="{{ path('back_edit_number', { 'id': number.id }) }}">
                                         <i class="material-icons" aria-hidden="true">edit</i>

@@ -2,6 +2,7 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     globals:
         mainColor: '@App\Service\MainColorService'
+        mainLogo: '@App\Service\MainLogoService'
 
 when@test:
     twig:

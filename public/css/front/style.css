@@ -594,7 +594,6 @@ article p {
     padding: 2em 2em 3em 2em;
 }
 #radiobox .hero-banner {
-    background-image: url("../../img/radiobox-echoes-making-waves.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -742,7 +741,7 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
     }
 
     #radiobox .hero-banner {
-        background-image: unset;
+        background-image: unset !important;
         height: unset;
     }
     #radiobox .hero-banner img {

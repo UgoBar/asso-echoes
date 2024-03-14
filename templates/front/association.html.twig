@@ -17,17 +17,11 @@
             <div class="container">
 
                 <figure class="logo">
-                    <img src="{{ asset('img/logo-asso-echoes.png') }}" alt="Logo de l'association Echoes" class="reveal-type">
+                    <img class="reveal-type" src="{{ vich_uploader_asset(asso.media, 'imageFile') }}" alt="{{ asso.media.alt }}" />
                 </figure>
 
                 <article>
-                    <h3>Objet, article 2 des statuts associatifs :</h3>
-                    <p><em>« L’association Echoes a pour objet de promouvoir la culture sous toutes ses formes à travers divers projets d’intérêt général. Ayant pour vocation d'œuvrer pour toutes et tous dans un esprit d’inclusion et de solidarité, l’association porte une attention particulière aux publics les plus fragiles en marge de l’accès à la culture. L’association s’inscrit dans les principes de l'Économie Solidaire et Sociale (ESS). »</em></p>
-
-                    <h3>Les origines du projet</h3>
-                    <p>L’association trouve son origine en 2021 sur les bancs de l’université Aix-Marseille, au sein du master de Direction de Projets et d’Établissements Culturels. Les cours sont passés, nos diplômes ont été obtenus, mais notre envie de s’investir dans des projets porteurs de sens à impact positif, elle, s’est amplifiée !</p>
-                    <p>Après la crise sanitaire, il était encore plus évident de lier notre projet culturel à un projet solidaire. Les restrictions sanitaires se sont multipliées pour préserver la santé de nos aîné·es, mais ces mesures de confinement ont renforcé leur isolement. Touché·es par cette situation, notre décision était prise : notre premier projet devait être à destination des seniors ! Nous partageons la conviction que la culture doit être accessible pour tous·tes, et qu’elle est un merveilleux vecteur de lien social.</p>
-
+                    {{ asso.text | raw }}
                     <a href="{{ path('front_team') }}" data-njs-href="{{ path('front_team') }}" class="main-btn"><i class="icon-next"></i> Découvrez l'équipe</a>
                 </article>
             </div>

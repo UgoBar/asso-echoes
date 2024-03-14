@@ -116,7 +116,7 @@
 
         <header>
             <div id="echoes-logo">
-                <a href="{{ path('front_home') }}" data-njs-href="{{ path('front_home') }}"><img src="{{ asset('img/logo-asso-echoes.png') }}" alt="Logo de Echoes"></a>
+                <a href="{{ path('front_home') }}" data-njs-href="{{ path('front_home') }}"><img src="{{ vich_uploader_asset(mainLogo.logo, 'imageFile') }}" alt="{{ mainLogo.logo.alt }}" /></a>
             </div>
             <div class="toggle-menu">
                 <div id="burger" class="burger">

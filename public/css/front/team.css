@@ -12,7 +12,7 @@ h1 {
 .team-member {
     overflow: hidden;
     position: relative;
-    margin: 0 4px;
+    margin: 4px;
     width: calc(100% / 3 - 8px);
 }
 

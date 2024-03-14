@@ -10,6 +10,10 @@
             <div class="alert alert-danger">Email ou mot de passe invalide</div>
         {% endif %}
 
+        {% for message in app.session.flashbag.get('success') %}
+            <div class="login-btn success">{{ message }}</div>
+        {% endfor %}
+
         <form method="POST" class="form login">
 
             <div class="form__field">
@@ -40,7 +44,7 @@
 
         </form>
 
-        <a class="text-center" href="">Mot de passe oublié ?</a>
+        <a class="text-center" href="{{ path('app_forgot_pass') }}">Mot de passe oublié ?</a>
 
     </div>
 

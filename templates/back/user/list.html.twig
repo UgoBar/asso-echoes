@@ -19,7 +19,7 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                             <tr>
-                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Nom</th>
+                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-5">Nom</th>
                                 <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Email</th>
                                 <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Role</th>
                                 <th class="text-secondary opacity-7"></th>
@@ -27,9 +27,9 @@
                             </thead>
                             <tbody>
                             {% for user in users %}
-                                <tr id="user-{{ user.id }}">
-                                    <td>
-                                        <h6 class="mb-0 text-sm ps-3 text-uppercase">{{ user.firstname }} {{ user.lastname }}</h6>
+                                <tr id="user-{{ user.id }}" >
+                                    <td class="ps-0">
+                                        <h6 class="mb-0 text-sm ps-5 text-uppercase">{{ user.firstname }} {{ user.lastname }}</h6>
                                     </td>
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ user.email }}</p>
@@ -37,10 +37,13 @@
                                     <td>
                                         <p class="mb-0 text-xs font-weight-bold">{{ user.roles|join(', ') }}</p>
                                     </td>
-                                    <td class="align-middle">
-                                        <span class="btn text-danger" onclick="deleteElem({{ user.id }}, 'User', 'user-{{ user.id }}', 'Tu es sur le point de supprimer l\'utilisateur <b>{{ user.firstname }}</b>')">
+                                    <td class="align-middle d-flex">
+                                        <span class="btn text-danger mb-0 px-3" onclick="deleteElem({{ user.id }}, 'User', 'user-{{ user.id }}', 'Tu es sur le point de supprimer l\'utilisateur <b>{{ user.firstname }}</b>')">
                                             <i class="material-icons" aria-hidden="true">delete</i>
                                         </span>
+                                        {% if user.id == app.user.id %}
+                                            <a class="btn text-secondary mb-0 px-3" href="{{ path('update_user_password', {'id': user.id}) }}"><i class="material-icons">manage_accounts</i></a>
+                                        {% endif %}
                                     </td>
                                 </tr>
                             {% endfor %}

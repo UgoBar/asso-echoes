@@ -1,0 +1,63 @@
+{% extends 'security/base_security.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        form {
+            padding-top: 1em;
+            padding-bottom: 1em;
+        }
+        h1 {
+            margin: 0;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <div class="grid">
+
+        <img src="{{ asset('img/logo-asso-echoes-blanc.png') }}" alt="Logo de l'association Echoes">
+        <h1>Mot de passe oublié</h1>
+
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+
+        {{ form_start(form, {'attr': {'class': 'form login'}}) }}
+
+        <div class="form__field">
+            <label for="username">
+                <i class="fas fa-user"></i>
+                <span class="hidden">Email</span>
+            </label>
+            {{ form_widget(form.email, {'attr': {'class': 'form__input', 'placeholder': 'Email'}}) }}
+        </div>
+
+        <div class="form__field">
+            <label for="password">
+                <i class="fas fa-lock"></i>
+                <span class="hidden">Password</span>
+            </label>
+            {{ form_widget(form.password, {'attr': {'class': 'form__input', 'placeholder': 'Mot de passe'}}) }}
+        </div>
+
+        <div class="form__field">
+            <label for="password">
+                <i class="fas fa-lock"></i>
+                <span class="hidden">Confirm Password</span>
+            </label>
+            {{ form_widget(form.confirmPassword, {'attr': {'class': 'form__input', 'placeholder': 'Confirmer le mot de passe'}}) }}
+        </div>
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+        <div class="form__field">
+            <input type="submit" value="Réinitialiser">
+        </div>
+
+        {{ form_end(form) }}
+
+    </div>
+
+{% endblock %}

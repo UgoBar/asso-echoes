@@ -79,7 +79,7 @@ class UserController extends BaseController
 
         return $this->render('back/user/update_password.html.twig', [
             'nav' => 'user',
-            'title' => 'Modifier le mot de passe',
+            'title' => 'Modifier ton mot de passe',
             'form' => $form->createView(),
             'error' => $passwordError
         ]);

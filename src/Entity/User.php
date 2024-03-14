@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -34,6 +35,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $token = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $tokenDiesAt = null;
 
     public function getId(): ?int
     {
@@ -137,6 +144,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setConfirmPassword(string $password): self
     {
         $this->confirmPassword = $password;
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): static
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    public function getTokenDiesAt(): ?\DateTimeInterface
+    {
+        return $this->tokenDiesAt;
+    }
+
+    public function setTokenDiesAt(?\DateTimeInterface $tokenDiesAt): static
+    {
+        $this->tokenDiesAt = $tokenDiesAt;
 
         return $this;
     }

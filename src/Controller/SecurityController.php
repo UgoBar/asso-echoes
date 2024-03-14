@@ -76,7 +76,7 @@ class SecurityController extends BaseController
             $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
             $headers .= 'X-Mailer: PHP/' . phpversion();
 
-            $urlResetPass = $this->generateUrl('app_reset_pass', ['token' => $hexaToken]);
+            $urlResetPass = $request->getSchemeAndHttpHost() . $this->generateUrl('app_reset_pass', ['token' => $hexaToken]);
             $msg = '<html><body>';
             $msg .= "Pour réinitialiser ton mot de passe cliques sur ce lien (valable 30 minutes) : $urlResetPass";
             $msg .= '</body></html>';

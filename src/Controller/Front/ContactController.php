@@ -90,8 +90,8 @@ class ContactController extends AbstractController
         }
 
         // Send mail
-        // $mailTo  = 'association.echoes@gmail.com';
-        $mailTo  = 'ugo17190@gmail.com';
+         $mailTo  = 'association.echoes@gmail.com';
+//        $mailTo  = 'ugo17190@gmail.com';
 
         $headers  = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'From: Association Echoes <contact@association-echoes.fr>'."\r\n";

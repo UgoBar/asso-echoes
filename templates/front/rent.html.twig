@@ -8,42 +8,44 @@
 
 {% block main %}
 
-    <navigate-js>
+    {% if rent %}
+        <navigate-js>
 
-        <link rel="stylesheet" href="{{ asset('css/front/contact.css') }}" data-njs>
+            <link rel="stylesheet" href="{{ asset('css/front/contact.css') }}" data-njs>
 
-        <section id="rent">
-            <div class="image-and-bg">
-                <div class="img" style="background-image: url('{{ asset('img/workshop/association-echoes-radiobox-1.JPG') }}')"></div>
-            </div>
-            <div class="form-section reveal-type">
-                <h1>Louer notre radiobox</h1>
-                <p>Vous êtes une association ou un·e indépendant·e de la radio basé·es à Marseille ou ses alentours ? Nous mettons notre radiobox en location à des prix solidaires afin de soutenir la création de projets sonores.
-                    Pour nous parler de votre projet, connaitre la grille tarifaire et les disponibilités de la radiobox, contactez-nous !
-                </p>
+            <section id="rent">
+                <div class="image-and-bg">
+                    <div class="img" style="background-image: url('{{ vich_uploader_asset(rent.media, 'imageFile') }}')"></div>
+                </div>
+                <div class="form-section reveal-type">
+                    <h1>{{ rent.title }}</h1>
+                    {% if rent.text %}
+                        <div>{{ rent.text | raw }}</div>
+                    {% endif %}
 
-                <form method="POST">
-                    <div class='field required'>
-                        <input class='text-input' id='name' name='name' required type='text' placeholder="Raison sociale">
-                    </div>
-                    <div class='field required'>
-                        <input class='text-input' id='email' name='email' required type='text' placeholder="Email">
-                    </div>
-                    <div class='field required'>
-                        <textarea class='textarea' cols='50' id='message' name='message' rows='4' placeholder="Votre message"></textarea>
-                    </div>
-                    <input type="submit" value="Envoyer" class="main-btn">
-                </form>
-            </div>
-        </section>
+                    <form method="POST">
+                        <div class='field required'>
+                            <input class='text-input' id='name' name='name' required type='text' placeholder="Raison sociale">
+                        </div>
+                        <div class='field required'>
+                            <input class='text-input' id='email' name='email' required type='text' placeholder="Email">
+                        </div>
+                        <div class='field required'>
+                            <textarea class='textarea' cols='50' id='message' name='message' rows='4' placeholder="Votre message"></textarea>
+                        </div>
+                        <input type="submit" value="Envoyer" class="main-btn">
+                    </form>
+                </div>
+            </section>
 
-        <script data-njs>
-            if (document.querySelector('navigate-js').classList.contains('njs-page-loaded')) {
-                console.log('page contact loaded');
-            }
-        </script>
+            <script data-njs>
+                if (document.querySelector('navigate-js').classList.contains('njs-page-loaded')) {
+                    console.log('page contact loaded');
+                }
+            </script>
 
-    </navigate-js>
+        </navigate-js>
+    {% endif %}
 {% endblock %}
 
 {% block javascripts %}

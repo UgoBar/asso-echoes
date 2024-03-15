@@ -18,7 +18,7 @@
     {{ form_start(form, {'attr': {'class': 'justify-form', 'id': 'file-upload-form'}}) }}
 
     {% include 'widgets/upload_card.html.twig' with {
-        card_title: 'Bannière Desktop', label_for: 'memorybox_banner_banner_imageFile_file', property: banner, alt: form.banner.alt, imageFile: form.banner.imageFile
+        card_title: 'Bannière', label_for: 'memorybox_banner_banner_imageFile_file', property: banner, alt: form.banner.alt, imageFile: form.banner.imageFile
     } %}
 
     <button type="submit" class="btn btn-success">

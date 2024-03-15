@@ -2,7 +2,10 @@
 
 namespace App\Controller\Front;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Controller\BaseController;
+use App\Entity\Contact;
+use App\Entity\Organize;
+use App\Entity\Rent;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,25 +16,28 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Mailjet\Client;
 use Mailjet\Resources;
 
-class ContactController extends AbstractController
+class ContactController extends BaseController
 {
-
     #[Route('/contact', name: 'front_contact')]
     public function index(Request $request, ValidatorInterface $validator): Response
     {
+        $contact = $this->getRepo(Contact::class)->findAll()[0];
+
         if ($request->isMethod('POST')) {
             $data = $request->request->all();
             $this->sendEmail($validator, $data);
         }
 
         return $this->render('front/contact.html.twig', [
-            'controller_name' => 'NewsController',
+            'contact' => $contact,
         ]);
     }
 
     #[Route('/location-radiobox', name: 'front_rent')]
     public function rent(Request $request, ValidatorInterface $validator): Response
     {
+        $rent = $this->getRepo(Rent::class)->findAll()[0];
+
         if ($request->isMethod('POST')) {
             $data = $request->request->all();
             $data['subject'] = 'Location de la radiobox';
@@ -39,13 +45,15 @@ class ContactController extends AbstractController
         }
 
         return $this->render('front/rent.html.twig', [
-            'controller_name' => 'NewsController',
+            'rent' => $rent,
         ]);
     }
 
     #[Route('/organiser-atelier', name: 'front_organize')]
     public function organize(Request $request, ValidatorInterface $validator): Response
     {
+        $organize = $this->getRepo(Organize::class)->findAll()[0];
+
         if ($request->isMethod('POST')) {
             $data = $request->request->all();
             $data['subject'] = 'Organiser un atelier';
@@ -53,7 +61,7 @@ class ContactController extends AbstractController
         }
 
         return $this->render('front/organize.html.twig', [
-            'controller_name' => 'NewsController',
+            'organize' => $organize,
         ]);
     }
 

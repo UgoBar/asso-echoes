@@ -10,7 +10,7 @@
 
     <div class="'col-lg-6 col-12'" id="fileDrag">
         {% include 'widgets/pdf_upload_card.html.twig' with {
-            label_for: 'press_pdf_pdf_imageFile_file', pdfName: pdf.picture, alt: form.pdf.alt, imageFile: form.pdf.imageFile
+            label_for: 'press_pdf_pdf_imageFile_file', pdfName: pdf.picture, alt: form.pdf.alt, imageFileInput: form.pdf.imageFile, entity: pdf,
         } %}
     </div>
 

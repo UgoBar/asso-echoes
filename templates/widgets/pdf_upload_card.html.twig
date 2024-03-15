@@ -15,7 +15,7 @@
         'row_attr': {'class':'input-group input-group-outline'}
     }) }}
     <small class="text-secondary">Le <b>alt</b> sert à l'audiodescription des images pour les non-voyants.</small>
-    {{ form_row(imageFile) }}
+    {{ form_row(imageFileInput) }}
     <label for="{{ label_for }}">
         <span id="file-upload-btn" class="btn btn-primary justify-content-center">
             <i class="material-icons text-white pe-2" aria-hidden="true">description</i>Drag or clic
@@ -33,13 +33,14 @@
     <div id="response" class="hidden">
         <div id="messages" class="text-primary"></div>
     </div>
-    <span class="text-center text-hover_underline" data-modal-id="previewPdf"><strong>{{ pdfName }}</strong></span>
+    <span id="pdf-name" class="text-center text-hover_underline" data-modal-id="previewPdf"><strong>{{ pdfName }}</strong></span>
 </div>
 
 <!-- Modal Preview PDF -->
 <div id="previewPdf" class="layout-modal">
     <div class="modal-content">
         <span class="close-layout-modal">&times;</span>
-        <embed src="{{ asset('img/press_review/la_provence.pdf') }}" width="100%" height="90%" type="application/pdf"/>
+        <embed src="{{ vich_uploader_asset(entity) }}" width="100%" height="90%" type="application/pdf"/>
+{#        <embed src="{{ asset('assets/uploads/' ~ pdfName) }}" width="100%" height="90%" type="application/pdf"/>#}
     </div>
 </div>

@@ -16,27 +16,30 @@
 
             <div class="container">
 
-                <h1 class="text-center">Nos partenaires</h1>
-                <p class="text-center">Ils font partie de l’impact positif !</p>
+                <h1 class="text-center">{{ partnerGlobal.title }}</h1>
+                <p class="text-center">{{ partnerGlobal.subtitle }}</p>
 
                 <section class="financial-partners">
                     <h2 class="section-title">Les financeurs</h2>
                     <div class="logos">
-                        <figure class="reveal-type"><img src="{{ asset('img/partners/logo_FDVA.png') }}" alt="Logo de la FDVA"><figcaption>FDVA</figcaption></figure>
-                        <figure class="reveal-type"><img src="{{ asset('img/partners/logo_bouche_rhone.png') }}" alt="Logo des bouches du rhone"><figcaption>Bouches du Rhone</figcaption></figure>
-                        <figure class="reveal-type"><img src="{{ asset('img/partners/ensemble_provence_2023.png') }}" alt="Logo ensemble en provence"><figcaption>Ensemble en Provence</figcaption></figure>
-                        <figure class="reveal-type"><img src="{{ asset('img/partners/logo_departement_13.png') }}" alt="Logo du département 13"><figcaption>Conférence des financeurs</figcaption></figure>
+                        {% for partner in financialPartners %}
+                            <figure class="reveal-type">
+                                <img src="{{ vich_uploader_asset(partner.media, 'imageFile') }}" alt="{{ partner.media.alt }}">
+                                <figcaption>{{ partner.title }}</figcaption>
+                            </figure>
+                        {% endfor %}
                     </div>
                 </section>
 
                 <section class="collaborative-partners">
                     <h2 class="section-title">Nous avons collaboré</h2>
                     <div class="logos">
-                        <figure class="reveal-type"><img src="{{ asset('img/partners/stakkato.png') }}" alt="Logo de Stakkato"><figcaption>L'agence Stakkato</figcaption></figure>
-                        <figure class="reveal-type"><img src="{{ asset('img/partners/logo_chaire.png') }}" alt="Logo de la Chaire"><figcaption>Chaire OTACC</figcaption></figure>
-                        <figure class="reveal-type"><img src="{{ asset('img/partners/logo_gtp.png') }}" alt="Logo du Grand Théâtre de Provence "><figcaption>Grand Théâtre de Provence</figcaption></figure>
-                        <figure class="reveal-type"><img src="{{ asset('img/partners/logo_6mic.png') }}" alt="Logo du 6mic"><figcaption>6mic</figcaption></figure>
-                        <figure class="reveal-type"><img src="{{ asset('img/partners/logo_aixquis_noir.png') }}" alt="Logo de Aixqui"><figcaption>Aix'Qui ?</figcaption></figure>
+                        {% for partner in collaboratorPartners %}
+                            <figure class="reveal-type">
+                                <img src="{{ vich_uploader_asset(partner.media, 'imageFile') }}" alt="{{ partner.media.alt }}">
+                                <figcaption>{{ partner.title }}</figcaption>
+                            </figure>
+                        {% endfor %}
                     </div>
                 </section>
             </div>

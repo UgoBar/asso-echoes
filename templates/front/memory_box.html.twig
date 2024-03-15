@@ -12,36 +12,35 @@
 
         <div id="memory">
 
-            <div class="hero-banner got-title" style="background-image: url('{{ asset('img/workshop/asso-echoes-photo-radiobox.jpg') }}')">
-                <img src="{{ asset('img/workshop/asso-echoes-photo-radiobox.jpg') }}" alt="Photo de la radiobox" class="d-none">
-                <h1 class="mt-0 reveal-type">La boîte à souvenirs</h1>
+            <div class="hero-banner got-title" style="background-image: url('{{ vich_uploader_asset(memorybox.banner, 'imageFile') }}')">
+                <img src="{{ vich_uploader_asset(memorybox.banner, 'imageFile') }}" alt="{{ memorybox.banner.alt }}" class="d-none">
+                <h1 class="mt-0 reveal-type">{{ memorybox.title }}</h1>
             </div>
 
             <article class="container">
 
-                <p class="text-center"><em>“La boîte à souvenirs” est un projet de mise en place d’ateliers radiophoniques et de création de podcasts audios avec des personnes âgées.</em></p>
+                {% if memorybox.subtitle %}
+                    <p class="text-center"><em>{{ memorybox.subtitle }}</em></p>
+                {% endif %}
 
                 <div class="image-and-text">
 
-                    <img src="{{ asset('img/workshop/echoes-photo-atelier-ehpad.jpg') }}" alt="Photo d'un atelier radio en ehpad" class="reveal-type">
+                    {% if memorybox.banner %}
+                        <img src="{{ vich_uploader_asset(memorybox.media, 'imageFile') }}" alt="{{ memorybox.media.alt }}" class="reveal-type">
+                    {% endif %}
 
-                    <div class="text reveal-type">
-                        <h3 >Les ateliers</h3>
-                        <p>Conduit par des animatrices radio professionnelles, nos ateliers sont guidés par la thématique du souvenir qui se décline sous plusieurs prismes. Les ponts entre passé, présent et futur se tissent au fil des échanges.</p>
-                        <p>Les ateliers peuvent être composés de plusieurs activités, ce qui les rendent très modulables : discussion libre, débat, interview, récit personnel, écoute de musique, chant, création de fiction collective … Les participant·es sont invités à co-créer les futurs ateliers en proposant des sujets et thématiques qu’ils souhaitent aborder.</p>
-                    </div>
+                    {% if memorybox.firstText %}
+                        <div class="text reveal-type">
+                            {{ memorybox.firstText | raw }}
+                        </div>
+                    {% endif %}
                 </div>
 
-                <article class="reveal-type">
-                    <h3>Pourquoi la radio ?</h3>
-                    <p>L'outil radiophonique s’avère très pertinent dans des lieux isolés où l'accès à la parole n'est pas suffisante. La radio est également un objet représentatif pour les seniors, habitué.es à l'écouter depuis toujours. Le cadre “ritualisé” de la radio avec les micros et les casques, crée une ambiance où la parole et l’écoute sont centrales. Si nous avons choisi de travailler avec ce médium, c’est dans le but d’instaurer ces conditions d’échanges bienveillants contribuant à une libération de la parole, un cercle où les personnes se sentent écoutées. C'est aussi un support valorisant pour les seniors : se concentrer sur la voix permet d'oublier les difficultés physiques.</p>
-                </article>
-
-                <article class="reveal-type">
-                    <h3>Les podcasts :</h3>
-                    <p>Les enregistrements réalisés au cours des ateliers donnent lieu au montage de podcasts. Ce support peut contribuer à l’amélioration de l’estime de soi des personnes âgées et permet de faire entendre leur voix dans l’espace public. L'objectif est de donner aux seniors une place où exprimer leurs désirs et leur créativité, partager leurs visions et faire entendre leurs voix. Avec la diffusion des podcasts, nous souhaitons participer à un changement de regard sur les stéréotypes liés à ce public, leurs lieux de vie et d’accompagnement.
-                    </p>
-                </article>
+                {% if memorybox.secondText %}
+                    <div class="reveal-type">
+                        {{ memorybox.secondText | raw }}
+                    </div>
+                {% endif %}
             </article>
 
         </div>

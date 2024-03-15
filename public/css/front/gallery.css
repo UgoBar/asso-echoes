@@ -56,12 +56,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     opacity: 0;
     cursor: pointer;
     transition: .3s ease-in-out;
 }
 #gallery figure:hover figcaption {
     opacity: 1;
+}
+#gallery figure figcaption small {
+    font-size: 12px;
+    padding-top: 5px;
 }
 
 

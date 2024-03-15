@@ -8,40 +8,44 @@
 
 {% block main %}
 
-    <navigate-js>
+    {% if organize %}
+        <navigate-js>
 
-        <link rel="stylesheet" href="{{ asset('css/front/contact.css') }}" data-njs>
+            <link rel="stylesheet" href="{{ asset('css/front/contact.css') }}" data-njs>
 
-        <section id="organize">
-            <div class="image-and-bg">
-                <div class="img" style="background-image: url('{{ asset('img/workshop/echoes-photo-atelier.jpg') }}')"></div>
-            </div>
-            <div class="form-section reveal-type">
-                <h1>Organiser un atelier</h1>
-                <p>Vous souhaitez accueillir un cycle d’atelier radio sur-mesure dans votre établissement afin de créer du lien social et de valoriser la parole de votre public ? Contactez-nous pour imaginer ensemble le projet qui vous convient !</p>
+            <section id="organize">
+                <div class="image-and-bg">
+                    <div class="img" style="background-image: url('{{ vich_uploader_asset(organize.media, 'imageFile') }}')"></div>
+                </div>
+                <div class="form-section reveal-type">
+                    <h1>{{ organize.title }}</h1>
+                    {% if organize.text %}
+                        <div>{{ organize.text | raw }}</div>
+                    {% endif %}
 
-                <form method="POST">
-                    <div class='field required'>
-                        <input class='text-input' id='name' name='name' required type='text' placeholder="Nom complet">
-                    </div>
-                    <div class='field required'>
-                        <input class='text-input' id='email' name='email' required type='text' placeholder="Email">
-                    </div>
-                    <div class='field required'>
-                        <textarea class='textarea' cols='50' id='message' name='message' rows='4' placeholder="Votre message"></textarea>
-                    </div>
-                    <input type="submit" value="Envoyer" class="main-btn">
-                </form>
-            </div>
-        </section>
+                    <form method="POST">
+                        <div class='field required'>
+                            <input class='text-input' id='name' name='name' required type='text' placeholder="Nom complet">
+                        </div>
+                        <div class='field required'>
+                            <input class='text-input' id='email' name='email' required type='text' placeholder="Email">
+                        </div>
+                        <div class='field required'>
+                            <textarea class='textarea' cols='50' id='message' name='message' rows='4' placeholder="Votre message"></textarea>
+                        </div>
+                        <input type="submit" value="Envoyer" class="main-btn">
+                    </form>
+                </div>
+            </section>
 
-        <script data-njs>
-            if (document.querySelector('navigate-js').classList.contains('njs-page-loaded')) {
-                console.log('page contact loaded');
-            }
-        </script>
+            <script data-njs>
+                if (document.querySelector('navigate-js').classList.contains('njs-page-loaded')) {
+                    console.log('page contact loaded');
+                }
+            </script>
 
-    </navigate-js>
+        </navigate-js>
+    {% endif %}
 {% endblock %}
 
 {% block javascripts %}

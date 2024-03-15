@@ -2,17 +2,20 @@
 
 namespace App\Controller\Front;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Controller\BaseController;
+use App\Entity\Gallery;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class GalleryController extends AbstractController
+class GalleryController extends BaseController
 {
     #[Route('/gallerie', name: 'front_gallery')]
     public function index(): Response
     {
+        $pictures = $this->getRepo(Gallery::class)->findAll();
+
         return $this->render('front/gallery.html.twig', [
-            'controller_name' => 'NewsController',
+            'pictures' => $pictures,
         ]);
     }
 }

@@ -35,7 +35,7 @@
 
             <section class="color-section">
                 <div class="d-flex align-items-center">
-                    <h4 class="mb-0 page-subtitle">Couleur </h4><span class="ms-2">({{ mainColor.color }})</span>
+                    <h4 class="mb-0 page-subtitle">Couleur </h4><span class="ms-2">({{ siteVars.color }})</span>
                 </div>
                 <small class="mb-3">Cliquer sur la couleur ouvre le color-picker</small>
                 {{ form_start(form, {'attr': {'class': 'flex-form'}}) }}
@@ -85,7 +85,12 @@
             <h4 class="mb-0 page-subtitle mb-3">Revue de presse</h4>
             {{ form_start(pressForm, {'attr': {'class': '', 'id': 'file-upload-form'}}) }}
             {% include 'widgets/pdf_upload_card.html.twig' with {
-                label_for: 'site_press_pressReview_imageFile_file', pdfName: pressReview.picture, alt: pressForm.pressReview.alt, imageFile: pressForm.pressReview.imageFile, formCard: true
+                label_for: 'site_press_pressReview_imageFile_file',
+                pdfName: pressReview.picture,
+                entity: pressReview,
+                alt: pressForm.pressReview.alt,
+                imageFileInput: pressForm.pressReview.imageFile,
+                formCard: true
             } %}
             {{ form_end(pressForm) }}
         </div>

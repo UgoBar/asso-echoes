@@ -92,6 +92,7 @@ function ekUpload(){
 
             if (file.type === "application/pdf" && document.getElementById('previewPdf')) {
                 document.querySelector('#previewPdf embed').src = URL.createObjectURL(file);
+                document.getElementById('pdf-name').remove();
                 output(
                     '<span class="text-center text-primary text-hover_underline" data-modal-id="previewPdf"><strong>' + encodeURI(file.name) + '</strong></span>'
                 );

@@ -10,40 +10,31 @@
 
         <div class="gallery-overlay"></div>
 
-        <div id="gallery" class="container">
-            <figure class="wide" data-title="Photo 1" style="background-image: url('{{ asset('img/gallery/echoes-la-boite-a-souvenirs-radio-en-EHPAD-1.jpeg') }}')">
-                <img class="hide-image" src="{{ asset('img/gallery/echoes-la-boite-a-souvenirs-radio-en-EHPAD-1.jpeg') }}" alt="Photo 1">
-                <figcaption>Photo 1</figcaption>
-            </figure>
-            <figure class="tall" data-title="Photo 2" style="background-image: url('{{ asset('img/gallery/echoes-la-boite-a-souvenirs-radio-en-EHPAD-2.JPG') }}')">
-                <img class="hide-image" src="{{ asset('img/gallery/echoes-la-boite-a-souvenirs-radio-en-EHPAD-2.JPG') }}" alt="Photo 2">
-                <figcaption>Photo 2</figcaption>
-            </figure>
-            <figure class="square" data-title="Photo 4" style="background-image: url('{{ asset('img/gallery/echoes-la-boite-a-souvenirs-radio-en-EHPAD-4.JPG') }}')">
-                <img class="hide-image" src="{{ asset('img/gallery/echoes-la-boite-a-souvenirs-radio-en-EHPAD-4.JPG') }}" alt="Photo 4">
-                <figcaption>Photo 4</figcaption>
-            </figure>
-            <figure class="wide" data-title="Photo 5" style="background-image: url('{{ asset('img/gallery/echoes-la-boite-a-souvenirs-radio-en-EHPAD-5.jpg') }}')">
-                <img class="hide-image" src="{{ asset('img/gallery/echoes-la-boite-a-souvenirs-radio-en-EHPAD-5.jpg') }}" alt="Photo 5">
-                <figcaption>Photo 5</figcaption>
-            </figure>
-            <figure class="tall" data-title="Photo 6" style="background-image: url('{{ asset('img/gallery/echoes-la-boite-a-souvenirs-radio-en-EHPAD-6.jpg') }}')">
-                <img class="hide-image" src="{{ asset('img/gallery/echoes-la-boite-a-souvenirs-radio-en-EHPAD-6.jpg') }}" alt="Photo 6">
-                <figcaption>Photo 6</figcaption>
-            </figure>
-            <figure class="tall" data-title="Photo 7" style="background-image: url('{{ asset('img/gallery/echoes-la-boite-a-souvenirs-radio-en-EHPAD-7.jpg') }}')">
-                <img class="hide-image" src="{{ asset('img/gallery/echoes-la-boite-a-souvenirs-radio-en-EHPAD-7.jpg') }}" alt="Photo 7">
-                <figcaption>Photo 7</figcaption>
-            </figure>
-            <figure class="square" data-title="Photo 8" style="background-image: url('{{ asset('img/gallery/echoes-la-boite-a-souvenirs-radio-en-EHPAD-8.JPG') }}')">
-                <img class="hide-image" src="{{ asset('img/gallery/echoes-la-boite-a-souvenirs-radio-en-EHPAD-8.JPG') }}" alt="Photo 8">
-                <figcaption>Photo 8</figcaption>
-            </figure>
-            <figure class="wide" data-title="Photo 9" style="background-image: url('{{ asset('img/gallery/echoes-la-boite-a-souvenirs-radio-en-EHPAD-9.jpg') }}')">
-                <img class="hide-image" src="{{ asset('img/gallery/echoes-la-boite-a-souvenirs-radio-en-EHPAD-9.jpg') }}" alt="Photo 9">
-                <figcaption>Photo 9</figcaption>
-            </figure>
-        </div>
+        {% if pictures %}
+            <div id="gallery" class="container">
+                {% for picture in pictures %}
+
+                    {% set figureClass = '' %}
+                    {% if picture.type is null or picture.type == 'wide' %}
+                        {% set figureClass = 'wide' %}
+                    {% elseif picture.type == constant('App\\Entity\\Gallery::TYPE_SQUARE') %}
+                        {% set figureClass = 'square' %}
+                    {% elseif picture.type == constant('App\\Entity\\Gallery::TYPE_TALL') %}
+                        {% set figureClass = 'tall' %}
+                    {% endif %}
+
+                    <figure class="{{ figureClass }}" data-title="{{ picture.title }}" style="background-image: url('{{ vich_uploader_asset(picture.media, 'imageFile') }}')">
+                        <img class="hide-image" src="{{ vich_uploader_asset(picture.media, 'imageFile') }}" alt="{{ picture.media.alt }}">
+                        <figcaption class="d-flex flex-column">
+                            <span>{{ picture.title }}</span>
+                            {% if picture.credit %}
+                                <small class="credits">© {{ picture.credit }}</small>
+                            {% endif %}
+                        </figcaption>
+                    </figure>
+                {% endfor %}
+            </div>
+        {% endif %}
 
         <div class="gallery-modal">
             <div class="modal-content">

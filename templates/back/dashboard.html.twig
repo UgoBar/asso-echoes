@@ -48,6 +48,37 @@
                 </button>
                 {{ form_end(form) }}
             </section>
+
+            <section class="link-section">
+
+                <h4 class="mb-3 mt-4 page-subtitle">Liens </h4>
+
+                {{ form_start(linkForm, {'attr': {'class': 'flex-form'}}) }}
+
+                {{ form_row(linkForm.adhesion, {
+                    'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+                    'label_attr':{'class':'form-label'},
+                    'row_attr': {'class':'input-group input-group-outline mb-3'},
+                }) }}
+
+                {{ form_row(linkForm.donation, {
+                    'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+                    'label_attr':{'class':'form-label'},
+                    'row_attr': {'class':'input-group input-group-outline mb-3'},
+                }) }}
+
+                {{ form_row(linkForm.podcastLink, {
+                    'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+                    'label_attr':{'class':'form-label'},
+                    'row_attr': {'class':'input-group input-group-outline mb-3'},
+                }) }}
+
+                <button class="btn btn-outline-dark py-0 px-2" type="submit" style="text-transform: unset;">
+                    <span class="material-icons pe-2">edit</span>
+                    Mettre à jour
+                </button>
+                {{ form_end(linkForm) }}
+            </section>
         </div>
 
         <div class="col-12 col-lg-6 mt-lg-0 mt-4" id="fileDrag">

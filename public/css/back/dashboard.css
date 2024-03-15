@@ -62,6 +62,16 @@
     background-color: #1c1c1c;
 }
 
+.link-section .input-group.input-group-outline.is-focused .form-label, .link-section .input-group.input-group-outline.is-filled .form-label {
+    background-color: #e5e5e5;
+}
+
+#pdf-form .btn-outline-dark {
+    font-size: 12px;
+    font-weight: 800;
+    padding: 5px 10px;
+}
+
 @media screen and (max-width: 600px) {
     h4 {
         text-align: center;

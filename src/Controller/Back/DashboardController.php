@@ -10,8 +10,9 @@ use App\Entity\Site;
 use App\Form\LogoBlackType;
 use App\Form\LogoWhiteType;
 use App\Form\Site\SiteColorType;
+use App\Form\Site\SiteLinkType;
 use App\Form\Site\SitePressType;
-use App\Service\MainColorService;
+use App\Service\SiteVarsService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,12 +21,12 @@ class DashboardController extends BaseController
 {
 
     #[Route('/admin', name: 'back_dashboard')]
-    public function index(Request $request, MainColorService $colorService): Response
+    public function index(Request $request, SiteVarsService $siteVarsService): Response
     {
         $logoBlack = count($this->getRepo(LogoBlack::class)->findAll()) > 0 ? $this->getRepo(LogoBlack::class)->findAll()[0] : null;
         $logoWhite = count($this->getRepo(LogoWhite::class)->findAll()) > 0 ? $this->getRepo(LogoWhite::class)->findAll()[0] : null;
         $site      = count($this->getRepo(Site::class)->findAll()) > 0 ? $this->getRepo(Site::class)->findAll()[0] : new Site();
-        $color = $colorService->getColor();
+        $color = $siteVarsService->getColor();
         $pressReview = $site->getPressReview() ?? new Media();
 
         // Manage colorpicker form
@@ -33,6 +34,13 @@ class DashboardController extends BaseController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             return $this->save($site, true, 'back_dashboard', 'La couleur principale a été modifiée');
+        }
+
+        // Manage links form
+        $linkForm = $this->createForm(SiteLinkType::class, $site);
+        $linkForm->handleRequest($request);
+        if ($linkForm->isSubmitted() && $linkForm->isValid()) {
+            return $this->save($site, true, 'back_dashboard', 'Les liens ont été modifiés');
         }
 
         // Manager press review form
@@ -56,6 +64,7 @@ class DashboardController extends BaseController
             'logoWhite' => $logoWhite,
             'form' => $form->createView(),
             'pressForm' => $pressForm->createView(),
+            'linkForm' => $linkForm->createView(),
             'pressReview' => $pressReview,
             'color' => $color
         ]);

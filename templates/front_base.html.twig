@@ -47,7 +47,7 @@
             <style>
 
                 :root {
-                    --primary: {{ mainColor.color }};
+                    --primary: {{ siteVars.color }};
                 }
 
                 @font-face {
@@ -116,7 +116,7 @@
 
         <header>
             <div id="echoes-logo">
-                <a href="{{ path('front_home') }}" data-njs-href="{{ path('front_home') }}"><img src="{{ vich_uploader_asset(mainLogo.logo, 'imageFile') }}" alt="{{ mainLogo.logo.alt }}" /></a>
+                <a href="{{ path('front_home') }}" data-njs-href="{{ path('front_home') }}"><img src="{{ vich_uploader_asset(siteVars.logo, 'imageFile') }}" alt="{{ siteVars.logo.alt }}" /></a>
             </div>
             <div class="toggle-menu">
                 <div id="burger" class="burger">
@@ -210,7 +210,7 @@
                     </div>
                 </nav>
                 <aside>
-                    <a class="btn btn-rect btn-black" href="https://www.helloasso.com/associations/echoes/adhesions/cotisation-annuelle-a-l-association-echoes" target="_blank"><i class="icon-charity"></i> Devenir adhérent</a>
+                    <a class="btn btn-rect btn-black" href="{{ siteVars.adhesionLink }}" target="_blank"><i class="icon-charity"></i> Devenir adhérent</a>
                     <button class="btn btn-rect btn-black" data-modal-id="newsletter-modal" onclick="burgerTime()"><i class="icon-broadcast"></i> Inscription newsletter</button>
                     <a class="btn btn-rect btn-black" href="{{ path('front_organize') }}" data-njs-href="{{ path('front_organize') }}"><i class="icon-headset"></i> Organiser un atelier</a>
                     <a class="btn btn-rect btn-black" href="{{ path('front_rent') }}" data-njs-href="{{ path('front_rent') }}"><i class="icon-radio" aria-hidden="true"></i> Louer notre radiobox</a>
@@ -222,14 +222,14 @@
             <div id="hello-asso-modal" class="layout-modal">
                 <div class="modal-content">
                     <span class="close-layout-modal">&times;</span>
-                    <iframe id="haWidget" allowtransparency="true" scrolling="auto" src="https://www.helloasso.com/associations/echoes/formulaires/1/widget" style="width: 100%; height: 750px; border: none;"></iframe>
+                    <iframe id="haWidget" allowtransparency="true" scrolling="auto" src="{{ siteVars.donationLink }}" style="width: 100%; height: 750px; border: none;"></iframe>
                 </div>
             </div>
 
             <div id="podcast-modal" class="layout-modal">
                 <div class="modal-content">
                     <span class="close-layout-modal">&times;</span>
-                    <script defer data-format="playlist" data-pId="6427" src="https://players.podcastics.com/podcastics/player.js"></script>
+                    <script defer data-format="playlist" data-pId="6427" src="{{ siteVars.podcastLink }}"></script>
                 </div>
             </div>
 

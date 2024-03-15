@@ -19,6 +19,15 @@ class Site
     #[ORM\ManyToOne]
     private ?Media $pressReview = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $adhesion = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $donation = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $podcastLink = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +53,42 @@ class Site
     public function setPressReview(?Media $pressReview): static
     {
         $this->pressReview = $pressReview;
+
+        return $this;
+    }
+
+    public function getAdhesion(): ?string
+    {
+        return $this->adhesion;
+    }
+
+    public function setAdhesion(?string $adhesion): static
+    {
+        $this->adhesion = $adhesion;
+
+        return $this;
+    }
+
+    public function getDonation(): ?string
+    {
+        return $this->donation;
+    }
+
+    public function setDonation(?string $donation): static
+    {
+        $this->donation = $donation;
+
+        return $this;
+    }
+
+    public function getPodcastLink(): ?string
+    {
+        return $this->podcastLink;
+    }
+
+    public function setPodcastLink(?string $podcastLink): static
+    {
+        $this->podcastLink = $podcastLink;
 
         return $this;
     }

@@ -1,5 +1,14 @@
 {% extends 'back_base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        #file-image {
+            background-color: black;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
 
     <a href="{{ path('back_numbers') }}" class="btn btn-secondary mb-4">

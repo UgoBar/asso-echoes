@@ -125,7 +125,9 @@
                 {% if numbers %}
                     {% for number in numbers %}
                         <div class="insight reveal-type">
-                            <div class="insight-icon"><i class="icon-radiobox" aria-hidden="true"></i></div>
+                            <div class="insight-icon">
+                                <img src="{{ vich_uploader_asset(number.media, 'imageFile') }}" alt="{{ number.media.alt }}">
+                            </div>
                             <div class="insight-title">{{ number.title }}</div>
                             <div class="count" data-end="{{ number.number }}" data-second-duration="1"></div>
                         </div>

@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\LogoBlack;
+use App\Entity\LogoWhite;
 use App\Entity\Media;
 use App\Entity\Site;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,6 +29,15 @@ class SiteVarsService
         $logoBlack = count($this->entityManager->getRepository(LogoBlack::class)->findAll()) > 0 ? $this->entityManager->getRepository(LogoBlack::class)->findAll()[0] : null;
         if ($logoBlack && $logoBlack->getMedia())
             return $logoBlack->getMedia();
+
+        return false;
+    }
+
+    public function getWhiteLogo(): Media|false
+    {
+        $logoWhite = count($this->entityManager->getRepository(LogoWhite::class)->findAll()) > 0 ? $this->entityManager->getRepository(LogoWhite::class)->findAll()[0] : null;
+        if ($logoWhite && $logoWhite->getMedia())
+            return $logoWhite->getMedia();
 
         return false;
     }

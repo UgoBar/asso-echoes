@@ -618,6 +618,10 @@ input[type="text"], input[type="email"], textarea {
     transition: .2s ease-in-out;
 }
 
+.insight-icon img {
+    width: 70%;
+}
+
 form .main-btn:hover, form .main-btn:focus {
     outline: none;
     border-color: white;

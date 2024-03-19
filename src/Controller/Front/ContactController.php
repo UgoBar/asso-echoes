@@ -71,6 +71,10 @@ class ContactController extends BaseController
         $constraints = new Assert\Collection([
             'name' => [
                 new Assert\NotBlank(null, 'Le nom doit être renseigné'),
+                new Assert\Regex([
+                    'pattern' => '/^[a-zA-Z0-9-_ ]+$/',
+                    'message' => 'Le nom ne doit contenir que des lettres, chiffres, tirets et espaces.',
+                ]),
             ],
             'email' => [
                 new Assert\NotBlank(null, 'L\'email doit être renseigné'),
@@ -78,6 +82,10 @@ class ContactController extends BaseController
             ],
             'subject' => [
                 new Assert\NotBlank(null, 'Le sujet doit être renseigné'),
+                new Assert\Regex([
+                    'pattern' => '/^[^<>;=#{}%^*()\/]+$/',
+                    'message' => 'Le sujet ne doit pas contenir de caractères spéciaux.',
+                ]),
             ],
             'message' => [
                 new Assert\NotBlank(),
@@ -97,17 +105,20 @@ class ContactController extends BaseController
             return $this->redirectToRoute('front_contact');
         }
 
-        // Send mail
-         $mailTo  = 'association.echoes@gmail.com';
-//        $mailTo  = 'ugo17190@gmail.com';
+        // Sanitize data
+        $name = htmlspecialchars($data['name']);
+        $subject = $name . ' - ' .htmlspecialchars($data['subject']);
+        $message = htmlspecialchars($data['message']);
 
+        // Send mail
+        $mailTo  = 'association.echoes@gmail.com';
         $headers  = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'From: Association Echoes <contact@association-echoes.fr>'."\r\n";
         $headers .= 'Reply-To: '. $data['email']."\r\n";
         $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
         $headers .= 'X-Mailer: PHP/' . phpversion();
 
-        mail($mailTo, $data['subject'], $data['message'], $headers);
+        mail($mailTo, $subject, $message, $headers);
 
         $this->addFlash('success', 'Votre email a bien été envoyé ! Nous vous répondrons dans les plus brefs délais.');
         return $this->redirectToRoute('front_contact');

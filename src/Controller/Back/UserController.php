@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends BaseController
@@ -58,6 +59,10 @@ class UserController extends BaseController
     #[Route('/admin/user/{id}/update-password', 'update_user_password')]
     public function updatePassword(Request $request, User $user): RedirectResponse|Response
     {
+        if ($user !== $this->getUser()) {
+            throw new \Exception('Cet utilisateur ne vous appartient pas', 401);
+        }
+
         $passwordError = false;
 
         $form = $this->createForm(UserPasswordType::class, $user);

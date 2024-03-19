@@ -18,7 +18,7 @@
         <meta property="og:type" content="website">
         <meta property="og:title" content="Association Echoes">
         <meta property="og:description" content="L’association Echoes a pour but de promouvoir des projets culturels et solidaires luttant contre l’isolement, à travers la production de podcasts radio avec des seniors dans la métropole d’Aix-Marseille.">
-        <meta property="og:image" content="{{ asset('img/logo-asso-echoes.png') }}">
+        <meta property="og:image" content="{{ vich_uploader_asset(siteVars.logo, 'imageFile') }}">
 
         <!-- Twitter Meta Tags -->
         <meta property="twitter:url" content="https://www.kaizenmouse.com/">
@@ -26,7 +26,7 @@
         <meta name="twitter:title" content="Association Echoes">
         <meta property="twitter:domain" content="kaizenmouse.com">
         <meta name="twitter:description" content="L’association Echoes a pour but de promouvoir des projets culturels et solidaires luttant contre l’isolement, à travers la production de podcasts radio avec des seniors dans la métropole d’Aix-Marseille.">
-        <meta name="twitter:image" content="{{ asset('img/logo-asso-echoes.png') }}">
+        <meta name="twitter:image" content="{{ vich_uploader_asset(siteVars.logo, 'imageFile') }}">
 
         <!-- GOOGLE FONTS -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -146,7 +146,7 @@
             <div id="menu-top">
                 <nav>
                     <div class="menu-list logo">
-                        <a href="{{ path('front_home') }}" data-njs-href="{{ path('front_home') }}"><img src="{{ asset('img/logo-asso-echoes.png') }}" alt="Logo de Echoes"></a>
+                        <a href="{{ path('front_home') }}" data-njs-href="{{ path('front_home') }}"><img src="{{ vich_uploader_asset(siteVars.logo, 'imageFile') }}" alt="{{ siteVars.logo.alt }}"></a>
                     </div>
                     <div class="menu-list-wrapper">
                         <div class="menu-list">

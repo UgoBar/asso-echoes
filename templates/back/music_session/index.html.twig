@@ -1,0 +1,89 @@
+{% extends 'back_base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .banner-card figure {
+            height: 200px !important;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <div class="row ms-0 w-100">
+        <a class="btn bg-gradient-primary mb-4" style="width: fit-content" href="{{ path('back_add_music_detail') }}">
+            <i class="material-icons pe-2">add</i>Ajouter une rencontre
+        </a>
+    </div>
+
+    {% if details %}
+        <form action="" method="post">
+            <div class="row ms-0 no-gutter w-100">
+                {#                <h6 class="text-uppercase pink font-weight-bolder mb-2">Page d'accueil</h6>#}
+                {% for detail in details %}
+                    <div class="col-xs-12 col-md-6 col-xl-3 me-4 mb-4" id="detail-{{ detail.id }}">
+                        <div class="banner-card">
+                            <figure>
+                                {% if detail.musicDetailPictures|length > 0 %}
+                                    {% for picture in detail.musicDetailPictures %}
+                                        {% if loop.index == 0 %}
+                                            <img src="{{ vich_uploader_asset(picture.media, 'imageFile') }}" alt="{{ picture.media.alt }}">
+                                        {% endif %}
+                                        {% if picture.isFavorite %}
+                                            <img src="{{ vich_uploader_asset(picture.media, 'imageFile') }}" alt="{{ picture.media.alt }}">
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                <div class="card-actions">
+                                    <a class="btn btn-secondary action-btn" href="{{ path('back_edit_music_detail', { 'id': detail.id }) }}">
+                                        <i class="material-icons" aria-hidden="true">edit</i>
+                                    </a>
+                                    <span class="btn btn-danger"
+                                          onclick="deleteElem({{ detail.id }}, 'MusicDetail', 'detail-{{ detail.id }}', 'Tu es sur le point de supprimer la rencontre <b>{{ detail|e('js') }}</b>')"
+                                    >
+                                        <i class="material-icons" aria-hidden="true">delete</i>
+                                    </span>
+                                </div>
+                            </figure>
+                            <div class="card-body">
+                                <h4 class="text-center">{{ detail.title }}</h4>
+                                <select class="form-select" name="detail-{{ detail.id }}-position">
+                                    {% for i in 1..details|length %}
+                                        <option value="{{ i }}" {{ i == detail.position ? 'selected' : '' }}>{{ i }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="submit" name="order" class="btn btn-secondary">
+                <i class="material-icons pe-2">sync_alt</i>Changer l'ordre
+            </button>
+        </form>
+    {% endif %}
+
+    {{ form_start(form, {'attr': {'class': 'flex-form', 'id': 'file-upload-form'}}) }}
+
+    <div class="col-lg-6 col-12">
+        <div class="card p-4 mb-4">
+            <h6 class="text-uppercase pink font-weight-bolder mb-3">Description</h6>
+            {{ form_row(form.description, {
+                'attr': {'class':'form-group ps-3'},
+                'row_attr': {'class':'form-control mb-3'}
+            }) }}
+        <button type="submit" class="btn btn-success mb-0">
+            <span class="material-icons pe-2">edit</span> Mettre à jour
+        </button>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/back/upload.js') }}"></script>
+{% endblock %}

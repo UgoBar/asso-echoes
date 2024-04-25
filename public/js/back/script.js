@@ -43,8 +43,6 @@ function deleteElem(entityId, entityName, elemId, textWarning) {
 function toastFn({ title = "", message = "", type = "info", duration = 3000 }) {
     const main = document.getElementById("toast");
 
-    console.log(duration)
-
     if (main) {
         const toast = document.createElement("div");
 
@@ -68,7 +66,6 @@ function toastFn({ title = "", message = "", type = "info", duration = 3000 }) {
             error: "error"
         };
         const icon = icons[type];
-        console.log(icon, type)
         const delay = (duration / 1000).toFixed(2);
 
         toast.classList.add("toast", `toast--${type}`, 'show');

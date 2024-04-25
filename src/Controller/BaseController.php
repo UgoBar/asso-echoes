@@ -27,8 +27,8 @@ class BaseController extends AbstractController
 
     public function save($entity, bool $withRedirect = false, string $route = '', string $flashMsg = ''): true|\Symfony\Component\HttpFoundation\RedirectResponse
     {
-        $this->entityManager->persist($entity);
-        $this->entityManager->flush($entity);
+        $this->em()->persist($entity);
+        $this->em()->flush($entity);
 
         if ($withRedirect) {
             $this->addFlash("success", $flashMsg);

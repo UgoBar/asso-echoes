@@ -1,0 +1,249 @@
+{% extends 'back_base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        select {
+            padding-left: 10px !important;
+        }
+        input[type="number"] {
+            width: 100% !important;
+        }
+        #pictures {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 2em;
+        }
+        .rounded-img-and-cta {
+            margin-right: 2em;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <div class="row ms-0 mb-4">
+        <a href="{{ path('back_music_session') }}" class="btn btn-secondary me-4">
+            <i class="material-icons pe-2">keyboard_backspace</i>Retour
+        </a>
+        {% if isEdit %}
+            <a class="btn bg-gradient-primary" style="width: fit-content" href="{{ path('back_add_music_detail_picture', {'id': musicDetail.id}) }}">
+                <i class="material-icons pe-2">add</i>Ajouter une photo
+            </a>
+        {% endif %}
+        <div class="d-block ps-0">
+            {% if not isEdit %}
+                <small>Pour ajouter des photos il faut d'abord enregistrer la rencontre</small>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if pictures|length > 0 %}
+        <div id="pictures" data-detail-id="{{ musicDetail.id }}">
+            {% for picture in pictures %}
+                <div class="rounded-img-and-cta" id="picture-{{ picture.id }}" data-picture-id="{{ picture.id }}">
+                    <figure class="rounded-img">
+                        <img src="{{ vich_uploader_asset(picture.media, 'imageFile') }}" alt="{{ picture.media.alt }}">
+                    </figure>
+                    <div class="ctas">
+                        <span class="cta material-icons {{ picture.isFavorite ? 'text-warning' : 'set-favorite' }}">star</span>
+                        <span class="cta text-danger" onclick="deleteElem({{ picture.id }}, 'MusicDetailPicture', 'picture-{{ picture.id }}', 'Attention, la suppression est irréversible')">
+                        <i class="material-icons" aria-hidden="true">delete</i>
+                    </span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {{ form_start(form, {'attr': {'class': 'flex-form', 'id': 'file-upload-form'}}) }}
+
+    <div class="col-12">
+        <div class="card p-4 mb-4">
+            <h6 class="text-uppercase pink font-weight-bolder mb-3">Infos générales</h6>
+
+            <div class="row">
+                <div class="col-12 col-xl-4">
+                    {{ form_row(form.title, {
+                        'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+                        'label_attr':{'class':'form-label'},
+                        'row_attr': {'class':'input-group input-group-outline mb-3'},
+                    }) }}
+                </div>
+
+                <div class="col-12 col-xl-4">
+                    {{ form_row(form.date, {
+                        'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+                        'label_attr':{'class':'form-label'},
+                        'row_attr': {'class':'input-group input-group-outline mb-3'},
+                    }) }}
+                </div>
+
+                <div class="col-12 col-xl-4">
+                    {{ form_row(form.location, {
+                        'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+                        'label_attr':{'class':'form-label'},
+                        'row_attr': {'class':'input-group input-group-outline mb-3'},
+                    }) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-xl-4"><div class="form-error">{{ form_errors(form.title) }}</div></div>
+                <div class="col-12 col-xl-4"></div>
+                <div class="col-12 col-xl-4"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-xl-4">
+                    {{ form_row(form.artist, {
+                        'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+                        'label_attr':{'class':'form-label'},
+                        'row_attr': {'class':'input-group input-group-outline mb-3'},
+                    }) }}
+                </div>
+
+                <div class="col-12 col-xl-4">
+                    {{ form_row(form.collaborator, {
+                        'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+                        'label_attr':{'class':'form-label'},
+                        'row_attr': {'class':'input-group input-group-outline mb-3'},
+                    }) }}
+                </div>
+
+                <div class="col-12 col-xl-4">
+                    <div class="d-flex align-items-center">
+                        <div class="col-10">
+                            {{ form_row(form.youtubeLink, {
+                                'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+                                'label_attr':{'class':'form-label'},
+                                'row_attr': {'class':'input-group input-group-outline mb-3'},
+                            }) }}
+                        </div>
+                        <div class="col-2 mb-2 ps-2 cursor-pointer" data-modal-id="youtubeHelper">
+                            <span class="material-icons ps-2">help</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-xl-4"><div class="form-error">{{ form_errors(form.artist) }}</div></div>
+                <div class="col-12 col-xl-4"></div>
+                <div class="col-12 col-xl-4"></div>
+            </div>
+
+            {{ form_row(form.description, {
+                'attr': {'class':'form-group ps-3'},
+                'row_attr': {'class':'form-control mb-3'}
+            }) }}
+
+            <div class="row">
+                <div class="col-12 col-xl-4">
+                    {{ form_row(form.position, {
+                        'attr': {'class':'form-control'},
+                        'label_attr': {'class':'form-label'},
+                        'row_attr': {'class':'mb-3'}
+                    }) }}
+                </div>
+                <div class="col-12 col-md-6">
+                    {{ form_row(form.podcast, {
+                        'attr': {'class':'form-select select'},
+                        'label_attr': {'class': 'form-label select-label'},
+                        'row_attr': {'class':'mb-3'}
+                    }) }}
+                </div>
+            </div>
+
+
+            <div class="d-flex flex-wrap">
+                <div class="half-input">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success mb-4">
+        <span class="material-icons pe-2">edit</span> Enregistrer
+    </button>
+
+    <!-- Modal Preview YouTube Helper -->
+    <div id="youtubeHelper" class="layout-modal">
+        <div class="modal-content">
+            <span class="close-layout-modal position-absolute" style="right: 16px;color: #fff;font-size: 50px;top: 5px;">&times;</span>
+            <img src="{{ asset('img/back/helper-youtube.png') }}" alt="Helper YouTube" style="border-radius: 10px">
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+
+        const favCtas = document.querySelectorAll('.set-favorite');
+        const detailId = document.getElementById('pictures').dataset.detailId;
+        if (favCtas.length > 0) {
+            favCtas.forEach(cta => {
+                cta.addEventListener('click', () => { setFavorite(cta, cta.closest('.rounded-img-and-cta').dataset.pictureId, detailId) });
+            });
+        }
+
+        function setFavorite(cta, pictureId, detailId) {
+            fetch("/admin/music/detail/picture/set-favorite", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    pictureId: pictureId,
+                    detailId: detailId
+                }),
+                async: true
+            })
+                .then(response => response.json())
+                .then(data => {
+                    Swal.fire(
+                        'C\'est fait !',
+                        'Nouvelle photo mise en avant',
+                        'success'
+                    );
+                    // Replace fav color
+                    document.querySelector('.cta.text-warning').classList.remove('text-warning');
+                    cta.classList.add('text-warning');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        document.getElementById('modals-wrapper').appendChild(document.getElementById('youtubeHelper'));
+
+        let openPdfModalBtn = document.querySelectorAll('[data-modal-id="youtubeHelper"]');
+        openPdfModalBtn.forEach(pdfModal => {
+            let modal = document.getElementById(pdfModal.dataset.modalId);
+            pdfModal.addEventListener('click', () => openCloseModal(modal, document.querySelector('.overlay')));
+        })
+
+        window.openCloseModal = (modal, overlay) => {
+            modal.classList.toggle('active');
+            overlay.classList.toggle('active');
+            modal.querySelector('.modal-content').classList.toggle('active');
+            let closeBtn = modal.querySelector(".close-layout-modal");
+
+            // Click on close btn ? close modal
+            closeBtn.onclick = function() {
+                openCloseModal(modal, overlay)
+            }
+            // Click outside modal ? close modal
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    openCloseModal(modal, overlay)
+                }
+            });
+        }
+    </script>
+{% endblock %}

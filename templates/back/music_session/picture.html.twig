@@ -1,0 +1,33 @@
+{% extends 'back_base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .breadcrump-header {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('back_dashboard') }}" class="btn btn-secondary mb-4 d-block mx-auto mt-5">
+        <i class="material-icons pe-2">keyboard_backspace</i>Retour au dashboard
+    </a>
+
+    {{ form_start(form, {'attr': {'class': 'justify-form', 'id': 'file-upload-form'}}) }}
+
+    {% include 'widgets/upload_card.html.twig' with {card_title: title, label_for: 'music_detail_picture_media_imageFile_file', property: media, alt: form.media.alt, imageFile: form.media.imageFile} %}
+
+    <button type="submit" class="btn btn-success">
+        <span class="material-icons pe-2">edit</span>{{ 'Ajouter' }}
+    </button>
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/back/upload.js') }}"></script>
+{% endblock %}

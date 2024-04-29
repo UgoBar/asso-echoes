@@ -141,7 +141,8 @@ class MusicSessionController extends BaseController
     }
 
     #[Route('/admin/music/detail/picture/set-favorite', name: 'back_music_detail_picture_set_favorite')]
-    public function setFavorite(Request $request) {
+    public function setFavorite(Request $request): JsonResponse
+    {
         // Deserialize the json content
         $data = json_decode($request->getContent(), true);
 

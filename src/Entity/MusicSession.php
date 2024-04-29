@@ -22,6 +22,9 @@ class MusicSession
     #[ORM\OneToMany(mappedBy: 'musicSession', targetEntity: MusicDetail::class)]
     private Collection $musicDetails;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $title = null;
+
     public function __construct()
     {
         $this->musicDetails = new ArrayCollection();
@@ -70,6 +73,18 @@ class MusicSession
                 $musicDetail->setMusicSession(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(?string $title): static
+    {
+        $this->title = $title;
 
         return $this;
     }

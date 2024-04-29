@@ -55,10 +55,11 @@
                                 </select>
                             </div>
                         </div>
+
                     </div>
                 {% endfor %}
             </div>
-            <button type="submit" name="order" class="btn btn-secondary">
+            <button type="submit" name="order" class="btn btn-secondary mb-5">
                 <i class="material-icons pe-2">sync_alt</i>Changer l'ordre
             </button>
         </form>
@@ -66,9 +67,18 @@
 
     {{ form_start(form, {'attr': {'class': 'flex-form', 'id': 'file-upload-form'}}) }}
 
-    <div class="col-lg-6 col-12">
+    <div class="col-12">
         <div class="card p-4 mb-4">
-            <h6 class="text-uppercase pink font-weight-bolder mb-3">Description</h6>
+
+            <div class="col-12 col-md-4 mt-3">
+                {{ form_row(form.title, {
+                    'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+                    'label_attr':{'class':'form-label'},
+                    'row_attr': {'class':'input-group input-group-outline mb-3'},
+                }) }}
+            </div>
+
+            <h6 class="text-uppercase pink font-weight-bolder mb-1 mt-3">Description</h6>
             {{ form_row(form.description, {
                 'attr': {'class':'form-group ps-3'},
                 'row_attr': {'class':'form-control mb-3'}

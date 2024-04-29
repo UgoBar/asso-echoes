@@ -1,0 +1,105 @@
+{% extends 'front_base.html.twig' %}
+
+{% block title %}{{ session.title }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block main %}
+
+    <navigate-js>
+
+        <link rel="stylesheet" href="{{ asset('css/front/music.css') }}" data-njs>
+
+        <section id="music-session">
+
+            <!-- Swiper -->
+            <div class="swiper picture-swiper">
+                <div class="swiper-wrapper">
+                    {% if pictures|length > 0 %}
+                        {% for picture in pictures %}
+                            <div class="swiper-slide">
+                                <figure>
+                                    <img src="{{ vich_uploader_asset(picture.media, 'imageFile') }}" alt="{{ picture.media.alt }}">
+                                </figure>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="picture-pagination"></div>
+            </div>
+
+            <!-- INFORMATIONS -->
+            <div class="session-infos">
+                {% if session.artist %}
+                    <div class="info">
+                        <div class="rounded-icon"><i class="icon-music_note"></i></div>
+                        <div class="title-and-designation">
+                            <span class="title">Artiste</span>
+                            <span class="designation">{{ session.artist }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if session.podcast %}
+                    <div class="info">
+                        <div class="rounded-icon"><i class="icon-broadcast"></i></div>
+                        <div class="title-and-designation">
+                            <span class="title">Podcast</span>
+                            <span class="designation">{{ session.podcast.title }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if session.collaborator %}
+                    <div class="info">
+                        <div class="rounded-icon"><i class="icon-hand_shake"></i></div>
+                        <div class="title-and-designation">
+                            <span class="title">Collaborateur</span>
+                            <span class="designation">{{ session.collaborator }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <!-- END INFORMATIONS -->
+
+            <div class="container">
+
+                <h1 class="mt-5">{{ session.title }}</h1>
+                <p class="date-and-location"><span class="date">{{ session.date }}</span> - <span class="location">{{ session.location }}</span></p>
+
+                <article>
+                    {{ session.description | raw }}
+                </article>
+            </div>
+        </section>
+
+        <script data-njs>
+            document.addEventListener('DOMContentLoaded', initSwiper);
+
+            if (document.querySelector('navigate-js').classList.contains('njs-page-loaded')) {
+                initSwiper();
+            }
+
+            function initSwiper() {
+                new Swiper(".picture-swiper", {
+                    speed: 500,
+                    // mousewheel: {
+                    //     invert: false,
+                    // },
+                    pagination: {
+                        el: ".picture-pagination",
+                        clickable: true,
+                    },
+                });
+            }
+        </script>
+
+    </navigate-js>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

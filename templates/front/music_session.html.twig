@@ -1,0 +1,100 @@
+{% extends 'front_base.html.twig' %}
+
+{% block title %}Rencontres musicales{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block main %}
+
+    <navigate-js>
+
+        <link rel="stylesheet" href="{{ asset('css/front/music.css') }}" data-njs>
+
+        <section id="music-detail">
+
+            <div class="container">
+
+                <h1 class="text-center">{{ music.title }}</h1>
+
+                <article>
+                    {{ music.description | raw }}
+                </article>
+
+                {% if sessions %}
+
+                    <h3 class="text-secondary text-center" style="font-weight: 500; font-family: 'Josefin Sans', sans-serif">Découvrez les anciennes rencontres</h3>
+                    <!-- Swiper -->
+                    <div class="swiper sessions-swiper">
+                        <div class="swiper-wrapper">
+                            {% for session in sessions %}
+                                <div class="swiper-slide">
+                                    <div class="session">
+                                        {% if session.musicDetailPictures|length > 0 %}
+                                            <figure>
+                                                {% for picture in session.musicDetailPictures %}
+                                                    {% if loop.index == 0 %}
+                                                        <img src="{{ vich_uploader_asset(picture.media, 'imageFile') }}" alt="{{ picture.media.alt }}">
+                                                    {% endif %}
+                                                    {% if picture.isFavorite %}
+                                                        <img src="{{ vich_uploader_asset(picture.media, 'imageFile') }}" alt="{{ picture.media.alt }}">
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </figure>
+                                        {% endif %}
+                                        <div class="session-content">
+                                            <span class="session-title">{{ session.title }}</span>
+                                            <span class="date">{{ session.date }}</span>
+                                            <span><i class="icon-music_note text-primary"></i> {{ session.artist }}</span>
+                                            <span><i class="icon-pin text-primary"></i> {{ session.location }}</span>
+                                            <a href="{{ path('front_music_session_detail', {'id': session.id}) }}" data-njs-href="{{ path('front_music_session_detail', {'id': session.id}) }}" class="main-btn">Découvrir</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="sessions-pagination"></div>
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+
+        <script data-njs>
+
+            document.addEventListener('DOMContentLoaded', initSwiper);
+
+            if (document.querySelector('navigate-js').classList.contains('njs-page-loaded')) {
+                initSwiper();
+            }
+
+            function initSwiper() {
+                new Swiper(".sessions-swiper", {
+                    slidesPerView: 1,
+                    spaceBetween: 30,
+                    mousewheel: {
+                        invert: false,
+                    },
+                    pagination: {
+                        el: ".sessions-pagination",
+                        clickable: true,
+                    },
+                    breakpoints: {
+                        810: {
+                            slidesPerView: 2
+                        },
+                        910: {
+                            slidesPerView: 3
+                        },
+                    }
+                });
+            }
+        </script>
+
+    </navigate-js>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

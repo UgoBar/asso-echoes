@@ -14,21 +14,25 @@
 
         <section id="music-session">
 
+            <a href="{{ path('front_music_session') }}" data-njs-href="{{ path('front_music_session') }}" class="go-back-btn">
+                <i class="icon-previous"></i> <span>Retour</span>
+            </a>
+
             <!-- Swiper -->
-            <div class="swiper picture-swiper">
-                <div class="swiper-wrapper">
-                    {% if pictures|length > 0 %}
-                        {% for picture in pictures %}
-                            <div class="swiper-slide">
-                                <figure>
-                                    <img src="{{ vich_uploader_asset(picture.media, 'imageFile') }}" alt="{{ picture.media.alt }}">
-                                </figure>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
+            {% if pictures|length > 0 %}
+                <div class="swiper picture-swiper">
+                    <div class="swiper-wrapper">
+                            {% for picture in pictures %}
+                                <div class="swiper-slide">
+                                    <figure>
+                                        <img src="{{ vich_uploader_asset(picture.media, 'imageFile') }}" alt="{{ picture.media.alt }}">
+                                    </figure>
+                                </div>
+                            {% endfor %}
+                    </div>
+                    <div class="picture-pagination"></div>
                 </div>
-                <div class="picture-pagination"></div>
-            </div>
+            {% endif %}
 
             <!-- INFORMATIONS -->
             <div class="session-infos">

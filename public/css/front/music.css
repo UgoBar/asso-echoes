@@ -106,6 +106,16 @@
     box-shadow: 0px 0px 20px rgba(252, 56, 56, 0.3);
 }
 
+a.go-back-btn {
+    position: absolute;
+    top: 21px;
+    left: 21px;
+    z-index: 100;
+    color: black;
+    background-color: #aaa;
+    border-color: #aaa;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
 #music-session figure {
     margin: 0;
     width: 100%;
@@ -208,6 +218,14 @@
 }
 
 @media screen and (max-width: 600px) {
+    a.go-back-btn {
+        padding: 7px 10px 4px 10px;
+        top: 13px;
+        left: 13px;
+    }
+    a.go-back-btn span {
+        display: none;
+    }
     #music-session figure {
         margin: 0;
         width: 100%;

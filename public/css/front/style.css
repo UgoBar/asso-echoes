@@ -138,7 +138,25 @@ navigate-js {
 .height-section:last-of-type {
     margin-bottom: 10em;
 }
-
+a.go-back-btn {
+    width: fit-content;
+     display: block;
+    padding: 7px 20px;
+    border: 2px solid var(--primary);
+    border-radius: 11px;
+    font-family: 'Josefin sans', sans serif;
+    opacity: .8;
+    transition: all .3s ease-in-out;
+}
+a.go-back-btn:hover {
+    background-color: var(--primary);
+    color: white !important;
+    opacity: 1 !important;
+    border-color: var(--primary);
+}
+a.go-back-btn i {
+    margin-right: 5px;
+}
 
 article {
     padding: 1em 0;

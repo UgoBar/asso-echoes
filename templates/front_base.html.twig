@@ -280,8 +280,8 @@
                     </div>
                     <div class="footer-right">
                         <p>Association loi 1901</p>
-                        <p>SIRET : 793032103 00038</p>
-                        <p>Ancien Chemin du Coton Rouge, 13100 Aix-en-Provence</p>
+                        <p>SIRET : {{ siteVars.siret }}</p>
+                        <p>{{ siteVars.address }}</p>
                         <div class="footer-buttons">
                             <a href="{{ path('front_contact') }}" data-njs-href="{{ path('front_contact') }}" class="main-btn">Contactez nous</a>
                             <span class="main-btn" data-modal-id="newsletter-modal">Newsletter</span>

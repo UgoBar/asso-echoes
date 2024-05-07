@@ -10,6 +10,7 @@ use App\Entity\Site;
 use App\Form\LogoBlackType;
 use App\Form\LogoWhiteType;
 use App\Form\Site\SiteColorType;
+use App\Form\Site\SiteInfosType;
 use App\Form\Site\SiteLinkType;
 use App\Form\Site\SitePressType;
 use App\Service\SiteVarsService;
@@ -57,6 +58,15 @@ class DashboardController extends BaseController
             return $this->save($site, true, 'back_dashboard', 'La revue de presse : <b>' . $site->getPressReview()->getPicture() . '</b> a bien été mise à jour.');
         }
 
+        // Manage Site General Info form
+        $siteInfos = $this->createForm(SiteInfosType::class, $site);
+        $siteInfos->handleRequest($request);
+        if ($siteInfos->isSubmitted() && $siteInfos->isValid()) {
+            return $this->save($site, true, 'back_dashboard', 'Les infos du footer sont à jour.');
+        }
+
+
+
         return $this->render('back/dashboard.html.twig', [
             'nav' => 'dashboard',
             'title' => 'Dashboard',
@@ -65,6 +75,7 @@ class DashboardController extends BaseController
             'form' => $form->createView(),
             'pressForm' => $pressForm->createView(),
             'linkForm' => $linkForm->createView(),
+            'siteInfosForm' => $siteInfos->createView(),
             'pressReview' => $pressReview,
             'color' => $color
         ]);

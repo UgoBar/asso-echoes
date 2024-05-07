@@ -15,10 +15,15 @@ class SiteVarsService
         private EntityManagerInterface $entityManager,
     ) { }
 
+    private function getSite(): Site|null
+    {
+        return count($this->entityManager->getRepository(Site::class)->findAll()) > 0 ? $this->entityManager->getRepository(Site::class)->findAll()[0] : null;
+    }
+
     public function getColor(): string
     {
-        $site = count($this->entityManager->getRepository(Site::class)->findAll()) > 0 ? $this->entityManager->getRepository(Site::class)->findAll()[0] : null;
-        if ($site !== null & $site->getColor() !== null)
+        $site = $this->getSite();
+        if ($site !== null && $site->getColor() !== null)
             return $site->getColor();
 
         return '#ff5500';
@@ -44,8 +49,8 @@ class SiteVarsService
 
     public function getAdhesionLink(): string
     {
-        $site = count($this->entityManager->getRepository(Site::class)->findAll()) > 0 ? $this->entityManager->getRepository(Site::class)->findAll()[0] : null;
-        if ($site !== null & $site->getAdhesion() !== null)
+        $site = $this->getSite();
+        if ($site !== null && $site->getAdhesion() !== null)
             return $site->getAdhesion();
 
         return '#';
@@ -53,8 +58,8 @@ class SiteVarsService
 
     public function getDonationLink(): string
     {
-        $site = count($this->entityManager->getRepository(Site::class)->findAll()) > 0 ? $this->entityManager->getRepository(Site::class)->findAll()[0] : null;
-        if ($site !== null & $site->getDonation() !== null)
+        $site = $this->getSite();
+        if ($site !== null && $site->getDonation() !== null)
             return $site->getDonation();
 
         return '#';
@@ -62,10 +67,28 @@ class SiteVarsService
 
     public function getPodcastLink(): string
     {
-        $site = count($this->entityManager->getRepository(Site::class)->findAll()) > 0 ? $this->entityManager->getRepository(Site::class)->findAll()[0] : null;
-        if ($site !== null & $site->getPodcastLink() !== null)
+        $site = $this->getSite();
+        if ($site !== null && $site->getPodcastLink() !== null)
             return $site->getPodcastLink();
 
         return '#';
+    }
+
+    public function getSiret(): string
+    {
+        $site = $this->getSite();
+        if ($site !== null && $site->getSiret() !== null)
+            return $site->getSiret();
+
+        return '';
+    }
+
+    public function getAddress(): string
+    {
+        $site = $this->getSite();
+        if ($site !== null && $site->getAddress() !== null)
+            return $site->getAddress();
+
+        return '';
     }
 }

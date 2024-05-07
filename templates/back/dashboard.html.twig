@@ -93,6 +93,27 @@
                 formCard: true
             } %}
             {{ form_end(pressForm) }}
+
+            <div class="card p-4 mb-4">
+                {{ form_start(siteInfosForm, {'attr': {'class': ''}}) }}
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h6 class="text-uppercase pink font-weight-bolder">Infos Footer</h6>
+                    <button type="submit" class="btn btn-outline-dark btn-small">
+                        <span class="material-icons pe-2">edit</span>Mettre à jour
+                    </button>
+                </div>
+                {{ form_row(siteInfosForm.siret, {
+                    'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+                    'label_attr':{'class':'form-label'},
+                    'row_attr': {'class':'input-group input-group-outline mb-3'},
+                }) }}
+                {{ form_row(siteInfosForm.address, {
+                    'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+                    'label_attr':{'class':'form-label'},
+                    'row_attr': {'class':'input-group input-group-outline mb-3'},
+                }) }}
+                {{ form_end(siteInfosForm) }}
+            </div>
         </div>
     </div>
 

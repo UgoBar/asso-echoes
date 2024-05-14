@@ -23,13 +23,13 @@ class MusicController extends BaseController
         ]);
     }
 
-    #[Route('/rencontre-musicale/{id}', name: 'front_music_session_detail')]
+    #[Route('/rencontre-musicale/{slug}', name: 'front_music_session_detail')]
     public function detail(MusicDetail $musicDetail): Response
     {
         $pictures = $this->getRepo(MusicDetailPicture::class)->findBy(['musicDetail' => $musicDetail], ['isFavorite' => 'ASC']);
 
         return $this->render('front/music_detail.html.twig', [
-            'session'  => $musicDetail,
+            'musicDetail'  => $musicDetail,
             'pictures' => $pictures
         ]);
     }

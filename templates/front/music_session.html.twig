@@ -48,7 +48,7 @@
                                             <span class="date">{{ session.date }}</span>
                                             <span><i class="icon-music_note text-primary"></i> {{ session.artist }}</span>
                                             <span><i class="icon-pin text-primary"></i> {{ session.location }}</span>
-                                            <a href="{{ path('front_music_session_detail', {'id': session.id}) }}" data-njs-href="{{ path('front_music_session_detail', {'id': session.id}) }}" class="main-btn">Découvrir</a>
+                                            <a href="{{ path('front_music_session_detail', {'slug': session.slug}) }}" data-njs-href="{{ path('front_music_session_detail', {'slug': session.slug}) }}" class="main-btn">Découvrir</a>
                                         </div>
                                     </div>
                                 </div>

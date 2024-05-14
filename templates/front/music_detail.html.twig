@@ -1,6 +1,6 @@
 {% extends 'front_base.html.twig' %}
 
-{% block title %}{{ session.title }}{% endblock %}
+{% block title %}{{ musicDetail.title }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -36,32 +36,32 @@
 
             <!-- INFORMATIONS -->
             <div class="session-infos">
-                {% if session.artist %}
+                {% if musicDetail.artist %}
                     <div class="info">
                         <div class="rounded-icon"><i class="icon-music_note"></i></div>
                         <div class="title-and-designation">
                             <span class="title">Artiste</span>
-                            <span class="designation">{{ session.artist }}</span>
+                            <span class="designation">{{ musicDetail.artist }}</span>
                         </div>
                     </div>
                 {% endif %}
 
-                {% if session.podcast %}
+                {% if musicDetail.podcast %}
                     <div class="info">
                         <div class="rounded-icon"><i class="icon-broadcast"></i></div>
                         <div class="title-and-designation">
                             <span class="title">Podcast</span>
-                            <span class="designation">{{ session.podcast.title }}</span>
+                            <span class="designation">{{ musicDetail.podcast.title }}</span>
                         </div>
                     </div>
                 {% endif %}
 
-                {% if session.collaborator %}
+                {% if musicDetail.collaborator %}
                     <div class="info">
                         <div class="rounded-icon"><i class="icon-hand_shake"></i></div>
                         <div class="title-and-designation">
                             <span class="title">Collaborateur</span>
-                            <span class="designation">{{ session.collaborator }}</span>
+                            <span class="designation">{{ musicDetail.collaborator }}</span>
                         </div>
                     </div>
                 {% endif %}
@@ -70,11 +70,15 @@
 
             <div class="container">
 
-                <h1 class="mt-5">{{ session.title }}</h1>
-                <p class="date-and-location"><span class="date">{{ session.date }}</span> - <span class="location">{{ session.location }}</span></p>
+                <h1 class="mt-5">{{ musicDetail.title }}</h1>
+                <p class="date-and-location"><span class="date">{{ musicDetail.date }}</span> - <span class="location">{{ musicDetail.location }}</span></p>
+
+                {% if musicDetail.youtubeLink is not null %}
+                    <iframe class="youtube-iframe" src="https://www.youtube.com/embed/{{ musicDetail.youtubeLink }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                {% endif %}
 
                 <article>
-                    {{ session.description | raw }}
+                    {{ musicDetail.description | raw }}
                 </article>
             </div>
         </section>

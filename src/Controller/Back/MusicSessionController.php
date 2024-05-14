@@ -46,7 +46,7 @@ class MusicSessionController extends BaseController
         return $this->render('back/music_session/index.html.twig', [
             'session' => $session,
             'details' => $details,
-            'form' => $form,
+            'form' => $form->createView(),
             'nav' => 'music_session',
             'title' => 'Page Rencontres Musicales'
         ]);

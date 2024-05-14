@@ -50,6 +50,9 @@ class MusicDetail
     #[ORM\ManyToOne]
     private ?Podcast $podcast = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $slug = null;
+
     public function __construct()
     {
         $this->musicDetailPictures = new ArrayCollection();
@@ -194,6 +197,18 @@ class MusicDetail
     public function setPodcast(?Podcast $podcast): static
     {
         $this->podcast = $podcast;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }

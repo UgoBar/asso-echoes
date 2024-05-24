@@ -106,9 +106,9 @@ class ContactController extends BaseController
         }
 
         // Sanitize data
-        $name = htmlspecialchars($data['name']);
-        $subject = $name . ' - ' .htmlspecialchars($data['subject']);
-        $message = htmlspecialchars($data['message']);
+        $name = strip_tags($data['name']);
+        $subject = $name . ' - ' .strip_tags($data['subject']);
+        $message = strip_tags($data['message']);
 
         // Send mail
         $mailTo  = 'association.echoes@gmail.com';

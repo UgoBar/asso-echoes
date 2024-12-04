@@ -78,6 +78,9 @@ class Media
     #[ORM\OneToMany(mappedBy: 'mobileBanner', targetEntity: Radiobox::class)]
     private Collection $mobileBanners;
 
+    #[ORM\OneToMany(mappedBy: 'media', targetEntity: ActivityReport::class)]
+    private Collection $activityReports;
+
     public function __construct()
     {
         $this->podcasts = new ArrayCollection();
@@ -96,6 +99,7 @@ class Media
         $this->organizes = new ArrayCollection();
         $this->contacts = new ArrayCollection();
         $this->mobileBanners = new ArrayCollection();
+        $this->activityReports = new ArrayCollection();
     }
 
 
@@ -633,6 +637,36 @@ class Media
             // set the owning side to null (unless already changed)
             if ($mobileBanner->getMobileBanner() === $this) {
                 $mobileBanner->setMobileBanner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ActivityReport>
+     */
+    public function getActivityReports(): Collection
+    {
+        return $this->activityReports;
+    }
+
+    public function addActivityReport(ActivityReport $activityReport): static
+    {
+        if (!$this->activityReports->contains($activityReport)) {
+            $this->activityReports->add($activityReport);
+            $activityReport->setMedia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActivityReport(ActivityReport $activityReport): static
+    {
+        if ($this->activityReports->removeElement($activityReport)) {
+            // set the owning side to null (unless already changed)
+            if ($activityReport->getMedia() === $this) {
+                $activityReport->setMedia(null);
             }
         }
 

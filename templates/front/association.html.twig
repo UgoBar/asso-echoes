@@ -14,8 +14,11 @@
 
         <section id="association">
 
-            <div class="container">
+            {% if activityReports|length < 1 %}
+                <div class="container">
+            {% endif %}
 
+            <div class="infos" {% if activityReports|length < 1 %}style="width: 100%;margin-right: 0;"{% endif %}>
                 <figure class="logo">
                     <img class="reveal-type" src="{{ vich_uploader_asset(asso.media, 'imageFile') }}" alt="{{ asso.media.alt }}" />
                 </figure>
@@ -25,6 +28,22 @@
                     <a href="{{ path('front_team') }}" data-njs-href="{{ path('front_team') }}" class="main-btn"><i class="icon-next"></i> Découvrez l'équipe</a>
                 </article>
             </div>
+
+            {% if activityReports|length < 1 %}
+                </div>
+            {% endif %}
+
+            {% if activityReports|length > 0 %}
+                <div class="activity-reports">
+                    <h1>Rapports d'activités</h1>
+                    <p>Retrouvez tous nos rapports d'activités téléchargeables</p>
+                    <div class="reports">
+                    {% for report in activityReports %}
+                        <a href="{{ vich_uploader_asset(report.media) }}" title="{{ report.title }}" download="" class="main-btn download"><i class="icon-download"></i>{{ report.title }}</a>
+                    {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
 
         </section>
 

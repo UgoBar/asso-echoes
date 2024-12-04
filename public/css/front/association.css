@@ -7,8 +7,29 @@ main .container {
 }
 
 #association {
-    padding-top: 2em;
+    padding: 2em 6%;
+    display: flex;
+    justify-content: space-between;
 }
+.infos {
+    width: 60%;
+    margin-right: 2em;
+}
+.activity-reports {
+    width: 40%;
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+    justify-content: center;
+}
+.activity-reports .download {
+    padding: 4px 18px;
+    font-size: 18px;
+}
+.activity-reports .download i {
+    padding-right: 5px;
+}
+
 figure.logo {
     width: 50%;
     display: block;
@@ -17,6 +38,24 @@ figure.logo {
 
 article {
     margin-bottom: 2em;
+}
+
+@media screen and (max-width: 1200px) {
+    #association {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .infos {
+        width: 100%;
+    }
+    .activity-reports {
+        width: 100%;
+        display: flex;
+        align-items: end;
+        justify-content: start;
+        text-align: start;
+        padding-top: 2em;
+    }
 }
 
 @media screen and (max-width: 1024px) {
@@ -29,7 +68,15 @@ article {
 }
 
 @media screen and (max-width: 600px) {
-
+    .reports {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .activity-reports .download {
+        padding: 4px 18px;
+        font-size: 18px;
+        width: 100%;
+    }
     figure.logo {
         width: 80%;
     }

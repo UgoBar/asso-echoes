@@ -1,0 +1,53 @@
+{% extends 'back_base.html.twig' %}
+
+{% block body %}
+
+    <div class="row ms-0 w-100">
+        <a class="btn bg-gradient-primary mb-4" style="width: fit-content" href="{{ path('back_add_report') }}">Ajouter un rapport</a>
+    </div>
+
+    {% if activityReports|length > 0 %}
+    <div class="row">
+        <div class="col-12" id="dynamic-table">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-primary shadow-primary border-radius-lg py-3" style="display: flex; align-items: baseline; justify-content: space-between">
+                        <span class="text-white ps-3 mb-0">Liste des rapports d'activités</span>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                            <tr>
+                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-5">Année</th>
+                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Titre</th>
+                                <th class="text-secondary opacity-7"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for report in activityReports %}
+                                <tr id="report-{{ report.id }}" >
+                                    <td class="ps-0">
+                                        <h6 class="mb-0 text-sm ps-5 text-uppercase">{{ report.year }}</h6>
+                                    </td>
+                                    <td>
+                                        <p class="mb-0 text-xs font-weight-bold">{{ report.title }}</p>
+                                    </td>
+                                    <td class="align-middle d-flex">
+                                        <a class="btn text-secondary mb-0 px-3" href="{{ path('back_edit_report', {'id': report.id}) }}"><i class="material-icons">edit</i></a>
+                                        <span class="btn text-danger mb-0 px-3" onclick="deleteElem({{ report.id }}, 'ActivityReport', 'report-{{ report.id }}', 'Tu es sur le point de supprimer le rapport de l\'année <b>{{ report.year }}</b>')">
+                                            <i class="material-icons" aria-hidden="true">delete</i>
+                                        </span>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

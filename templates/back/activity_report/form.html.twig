@@ -1,0 +1,52 @@
+{% extends 'back_base.html.twig' %}
+
+{% block body %}
+
+    <a href="{{ path('back_activity_reports') }}" class="btn btn-secondary mb-4">
+        <i class="material-icons pe-2">keyboard_backspace</i>Retour à la liste
+    </a>
+
+    {{ form_start(form, {'attr': {'class': 'flex-form', 'id': 'file-upload-form'}}) }}
+
+    <div class="'col-lg-6 col-12'" id="fileDrag">
+        {% include 'widgets/pdf_upload_card.html.twig' with {
+            label_for: 'activity_report_media_imageFile_file', pdfName: media.picture, alt: form.media.alt, imageFileInput: form.media.imageFile, entity: media,
+        } %}
+    </div>
+
+    <div class="col-lg-6 col-12 ms-lg-4">
+        <div class="card p-4 mb-4">
+            <h6 class="text-uppercase pink font-weight-bolder mb-3">Informations générales</h6>
+            {{ form_row(form.title, {
+                'attr': { 'class':'form-control', 'onfocus':'focused(this)', 'onfocusout':'defocused(this)' },
+                'label_attr':{'class':'form-label'},
+                'row_attr': {'class':'input-group input-group-outline mb-3'},
+            }) }}
+            <div class="form-error">
+                {{ form_errors(form.title) }}
+            </div>
+            {{ form_row(form.year, {
+                'attr': {'class':'form-control'},
+                'label_attr': {'class':'form-label'},
+                'row_attr': {'class':'mb-3'}
+            }) }}
+            <div class="form-error">
+                {{ form_errors(form.title) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-success">
+            <span class="material-icons pe-2">edit</span>{{ editMode ? 'Modifier' : 'Ajouter' }}
+        </button>
+    </div>
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/back/upload.js') }}"></script>
+{% endblock %}

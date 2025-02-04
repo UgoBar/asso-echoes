@@ -21,20 +21,27 @@ main .container {
     align-items: end;
     flex-direction: column;
     justify-content: center;
+    text-align: end;
 }
 .activity-reports .download {
     padding: 4px 18px;
     font-size: 18px;
+    width: auto;
 }
 .activity-reports .download i {
     padding-right: 5px;
 }
 
 figure.logo {
-    width: 50%;
+    width: 350px;
     display: block;
-    margin: 0 auto;
+    margin: 2em auto 0 auto;
 }
+/*figure.logo {*/
+/*    width: 50%;*/
+/*    display: block;*/
+/*    margin: 0 auto;*/
+/*}*/
 
 article {
     margin-bottom: 2em;
@@ -47,6 +54,7 @@ article {
     }
     .infos {
         width: 100%;
+        margin-right: unset;
     }
     .activity-reports {
         width: 100%;
@@ -62,9 +70,9 @@ article {
     main .container {
         width: 90%;
     }
-    figure.logo {
-        width: 70%;
-    }
+    /*figure.logo {*/
+    /*    width: 70%;*/
+    /*}*/
 }
 
 @media screen and (max-width: 600px) {

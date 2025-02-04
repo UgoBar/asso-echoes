@@ -12,6 +12,10 @@
 
         <link rel="stylesheet" href="{{ asset('css/front/association.css') }}" data-njs>
 
+        <figure class="logo">
+            <img class="reveal-type" src="{{ vich_uploader_asset(asso.media, 'imageFile') }}" alt="{{ asso.media.alt }}" />
+        </figure>
+
         <section id="association">
 
             {% if activityReports|length < 1 %}
@@ -19,9 +23,7 @@
             {% endif %}
 
             <div class="infos" {% if activityReports|length < 1 %}style="width: 100%;margin-right: 0;"{% endif %}>
-                <figure class="logo">
-                    <img class="reveal-type" src="{{ vich_uploader_asset(asso.media, 'imageFile') }}" alt="{{ asso.media.alt }}" />
-                </figure>
+
 
                 <article>
                     {{ asso.text | raw }}
